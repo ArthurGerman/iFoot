@@ -1,6 +1,6 @@
-# IFoot
+# iFoot
 
-É um projeto colaborativo que tem como objetivo trazer o caos para sociedade
+É um projeto colaborativo que tem como objetivo proporcionar funcionalidades interessantes para jogadores de futebol amador, como marcação de partidas, encontro de jogadores próximos, reserva de quadras, entre outras funções.
 
 ## Funcionalidades
 
@@ -53,9 +53,9 @@
 
 * [Arthur Germano](https://github.com/ArthurGerman/)
 * [Elder Macena](https://github.com/elder51)
-* [Gabriel Luna]()
-* [Guilherme Evaristo]()
-* [Lucas Bezerra]()
-* [Thiago Henrique]()
+* [Gabriel Luna](https://github.com/glr3-hub)
+* [Guilherme Evaristo](https://github.com/guilhermeepaz)
+* [Lucas Bezerra](https://github.com/Takemy31)
+* [Thiago Henrique](https://github.com/ThiagoH55)
 
 
