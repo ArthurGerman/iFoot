@@ -17,6 +17,6 @@
         echo "Olá $nome ! Seus dados foram cadastrados com sucesso <br>";
         echo "<button><a href='cadastra_jogador.php'>Voltar</a></button>";
     } else{
-        echo "<p style='color:red'>Requisição inválida. Não usou método POST</p>";
+        echo "<strong><p style='color:red'>Requisição inválida. Não usou método POST</p></strong>";
     }
 ?>
