@@ -9,7 +9,7 @@
     <h1>
         Cadastramento de usuário
     </h1>
-
+    
     <form action="cadastra_jogador_action.php" method="post">
 
         <label for="nome">Nome: </label>
@@ -55,14 +55,16 @@
             <option value="SE">Sergipe</option>
             <option value="TO">Tocantins</option>
         </select><br>
-
+        
         <label for="endereco">Endereço: </label>
         <input type="endereco" name="endereco" id="endereco"><br>
-
+        
         <label for="endereco">Telefone: </label>
         <input type="telefone" name="telefone" id="telefone" maxlength="11"><br>
 
         <input type="submit">
     </form>
+
+    <script src="../js/tratamento-erros_usuarios.js"></script>
 </body>
 </html>
