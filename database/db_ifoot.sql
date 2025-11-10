@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 08-Nov-2025 às 14:46
+-- Tempo de geração: 11-Nov-2025 às 00:26
 -- Versão do servidor: 10.4.27-MariaDB
 -- versão do PHP: 8.1.12
 
@@ -26,78 +26,122 @@ USE `db_ifoot`;
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `equipe`
+-- Estrutura da tabela `equipes`
 --
 
-CREATE TABLE `equipe` (
-  `id_equipe` int(11) NOT NULL,
-  `nome` varchar(50) NOT NULL,
-  `id_jogador` int(11) NOT NULL
+CREATE TABLE `equipes` (
+  `ID_EQP` int(11) NOT NULL,
+  `NOME_EQP` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `jogador`
+-- Estrutura da tabela `equipes_partidas`
 --
 
-CREATE TABLE `jogador` (
-  `id_jogador` int(11) NOT NULL,
-  `nome` varchar(255) NOT NULL,
-  `email` varchar(50) NOT NULL,
-  `CPF` varchar(11) NOT NULL,
-  `cidade` varchar(50) NOT NULL,
-  `UF` enum('AC','AL','AP','AM','BA','CE','DF','ES','GO','MA','MT','MS','MG','PA','PB','PR','PE','PI','RJ','RN','RS','RO','RR','SC','SP','SE','TO') NOT NULL,
-  `endereco` varchar(255) NOT NULL,
-  `telefone` varchar(11) NOT NULL
+CREATE TABLE `equipes_partidas` (
+  `ID_EQP_PTD` int(11) NOT NULL,
+  `ID_EQP` int(11) NOT NULL,
+  `ID_PTD` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `partida`
+-- Estrutura da tabela `jogadores`
 --
 
-CREATE TABLE `partida` (
-  `id_partida` int(11) NOT NULL,
-  `data_partida` date NOT NULL,
-  `horario_inicio` time NOT NULL,
-  `horario_fim` time NOT NULL,
-  `preco` decimal(10,0) NOT NULL,
-  `id_equipe` int(11) NOT NULL,
-  `id_quadra` int(11) NOT NULL
+CREATE TABLE `jogadores` (
+  `ID_JOG` int(11) NOT NULL,
+  `NOME_JOG` varchar(255) NOT NULL,
+  `EMAIL_JOG` varchar(50) NOT NULL,
+  `CPF_JOG` varchar(11) NOT NULL,
+  `CIDADE_JOG` varchar(50) NOT NULL,
+  `ENDERECO_JOG` varchar(255) NOT NULL,
+  `TEL_JOG` varchar(11) NOT NULL,
+  `SENHA_JOG` varchar(8) NOT NULL,
+  `ID_UF` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `proprietario`
+-- Estrutura da tabela `jogadores_equipes`
 --
 
-CREATE TABLE `proprietario` (
-  `id_proprietario` int(11) NOT NULL,
-  `nome` varchar(255) NOT NULL,
-  `email` varchar(50) NOT NULL,
-  `CPF` varchar(11) NOT NULL,
-  `cidade` varchar(50) NOT NULL,
-  `UF` enum('AC','AL','AP','AM','BA','CE','DF','ES','GO','MA','MT','MS','MG','PA','PB','PR','PE','PI','RJ','RN','RS','RO','RR','SC','SP','SE','TO') NOT NULL,
-  `endereco` varchar(255) NOT NULL,
-  `telefone` varchar(11) NOT NULL
+CREATE TABLE `jogadores_equipes` (
+  `ID_JOG_EQP` int(11) NOT NULL,
+  `ID_JOG` int(11) NOT NULL,
+  `ID_EQP` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `quadra`
+-- Estrutura da tabela `modalidades`
 --
 
-CREATE TABLE `quadra` (
-  `id_quadra` int(11) NOT NULL,
-  `endereco` varchar(255) NOT NULL,
-  `UF` enum('AC','AL','AP','AM','BA','CE','DF','ES','GO','MA','MT','MS','MG','PA','PB','PR','PE','PI','RJ','RN','RS','RO','RR','SC','SP','SE','TO') NOT NULL,
-  `cidade` varchar(50) NOT NULL,
-  `tipo_quadra` enum('CAMPO','QUADRA') NOT NULL,
-  `id_proprietario` int(11) NOT NULL
+CREATE TABLE `modalidades` (
+  `ID_MODAL` int(11) NOT NULL,
+  `NOME_MODAL` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `partidas`
+--
+
+CREATE TABLE `partidas` (
+  `ID_PTD` int(11) NOT NULL,
+  `DATA_PTD` date NOT NULL,
+  `HORARIO_INICIO_PTD` time NOT NULL,
+  `HORARIO_FIM_PTD` time NOT NULL,
+  `ID_QUAD` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `proprietarios`
+--
+
+CREATE TABLE `proprietarios` (
+  `ID_PROP` int(11) NOT NULL,
+  `NOME_PROP` varchar(255) NOT NULL,
+  `EMAIL_PROP` varchar(50) NOT NULL,
+  `CPF_PROP` varchar(11) NOT NULL,
+  `TEL_PROP` varchar(11) NOT NULL,
+  `SENHA_PROP` varchar(8) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `quadras`
+--
+
+CREATE TABLE `quadras` (
+  `ID_QUAD` int(11) NOT NULL,
+  `PRECO_HORA_QUAD` decimal(8,2) NOT NULL,
+  `ENDERECO_QUAD` varchar(255) NOT NULL,
+  `CIDADE_QUAD` varchar(50) NOT NULL,
+  `ID_PROP` int(11) NOT NULL,
+  `ID_UF` int(11) NOT NULL,
+  `ID_MODAL` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `uf`
+--
+
+CREATE TABLE `uf` (
+  `ID_UF` int(11) NOT NULL,
+  `SIGLA_UF` varchar(2) NOT NULL,
+  `NOME_UF` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -105,95 +149,163 @@ CREATE TABLE `quadra` (
 --
 
 --
--- Índices para tabela `equipe`
+-- Índices para tabela `equipes`
 --
-ALTER TABLE `equipe`
-  ADD PRIMARY KEY (`id_equipe`),
-  ADD KEY `id_jogador` (`id_jogador`);
+ALTER TABLE `equipes`
+  ADD PRIMARY KEY (`ID_EQP`);
 
 --
--- Índices para tabela `jogador`
+-- Índices para tabela `equipes_partidas`
 --
-ALTER TABLE `jogador`
-  ADD PRIMARY KEY (`id_jogador`);
+ALTER TABLE `equipes_partidas`
+  ADD PRIMARY KEY (`ID_EQP_PTD`),
+  ADD KEY `ID_EQP` (`ID_EQP`),
+  ADD KEY `ID_PTD` (`ID_PTD`);
 
 --
--- Índices para tabela `partida`
+-- Índices para tabela `jogadores`
 --
-ALTER TABLE `partida`
-  ADD PRIMARY KEY (`id_partida`),
-  ADD KEY `id_equipe` (`id_equipe`),
-  ADD KEY `id_quadra` (`id_quadra`);
+ALTER TABLE `jogadores`
+  ADD PRIMARY KEY (`ID_JOG`),
+  ADD KEY `ID_UF` (`ID_UF`);
 
 --
--- Índices para tabela `proprietario`
+-- Índices para tabela `jogadores_equipes`
 --
-ALTER TABLE `proprietario`
-  ADD PRIMARY KEY (`id_proprietario`);
+ALTER TABLE `jogadores_equipes`
+  ADD PRIMARY KEY (`ID_JOG_EQP`),
+  ADD KEY `ID_JOG` (`ID_JOG`),
+  ADD KEY `ID_EQP` (`ID_EQP`);
 
 --
--- Índices para tabela `quadra`
+-- Índices para tabela `modalidades`
 --
-ALTER TABLE `quadra`
-  ADD PRIMARY KEY (`id_quadra`),
-  ADD KEY `id_proprietario` (`id_proprietario`);
+ALTER TABLE `modalidades`
+  ADD PRIMARY KEY (`ID_MODAL`);
+
+--
+-- Índices para tabela `partidas`
+--
+ALTER TABLE `partidas`
+  ADD PRIMARY KEY (`ID_PTD`),
+  ADD KEY `ID_QUAD` (`ID_QUAD`);
+
+--
+-- Índices para tabela `proprietarios`
+--
+ALTER TABLE `proprietarios`
+  ADD PRIMARY KEY (`ID_PROP`);
+
+--
+-- Índices para tabela `quadras`
+--
+ALTER TABLE `quadras`
+  ADD PRIMARY KEY (`ID_QUAD`),
+  ADD KEY `ID_PROP` (`ID_PROP`),
+  ADD KEY `ID_UF` (`ID_UF`),
+  ADD KEY `ID_MODAL` (`ID_MODAL`);
+
+--
+-- Índices para tabela `uf`
+--
+ALTER TABLE `uf`
+  ADD PRIMARY KEY (`ID_UF`);
 
 --
 -- AUTO_INCREMENT de tabelas despejadas
 --
 
 --
--- AUTO_INCREMENT de tabela `equipe`
+-- AUTO_INCREMENT de tabela `equipes`
 --
-ALTER TABLE `equipe`
-  MODIFY `id_equipe` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `equipes`
+  MODIFY `ID_EQP` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de tabela `jogador`
+-- AUTO_INCREMENT de tabela `equipes_partidas`
 --
-ALTER TABLE `jogador`
-  MODIFY `id_jogador` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `equipes_partidas`
+  MODIFY `ID_EQP_PTD` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de tabela `partida`
+-- AUTO_INCREMENT de tabela `jogadores`
 --
-ALTER TABLE `partida`
-  MODIFY `id_partida` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `jogadores`
+  MODIFY `ID_JOG` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de tabela `proprietario`
+-- AUTO_INCREMENT de tabela `jogadores_equipes`
 --
-ALTER TABLE `proprietario`
-  MODIFY `id_proprietario` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `jogadores_equipes`
+  MODIFY `ID_JOG_EQP` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de tabela `quadra`
+-- AUTO_INCREMENT de tabela `modalidades`
 --
-ALTER TABLE `quadra`
-  MODIFY `id_quadra` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `modalidades`
+  MODIFY `ID_MODAL` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `partidas`
+--
+ALTER TABLE `partidas`
+  MODIFY `ID_PTD` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `proprietarios`
+--
+ALTER TABLE `proprietarios`
+  MODIFY `ID_PROP` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `quadras`
+--
+ALTER TABLE `quadras`
+  MODIFY `ID_QUAD` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `uf`
+--
+ALTER TABLE `uf`
+  MODIFY `ID_UF` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Restrições para despejos de tabelas
 --
 
 --
--- Limitadores para a tabela `equipe`
+-- Limitadores para a tabela `equipes_partidas`
 --
-ALTER TABLE `equipe`
-  ADD CONSTRAINT `equipe_ibfk_1` FOREIGN KEY (`id_jogador`) REFERENCES `jogador` (`id_jogador`);
+ALTER TABLE `equipes_partidas`
+  ADD CONSTRAINT `equipes_partidas_ibfk_1` FOREIGN KEY (`ID_EQP`) REFERENCES `equipes` (`ID_EQP`),
+  ADD CONSTRAINT `equipes_partidas_ibfk_2` FOREIGN KEY (`ID_PTD`) REFERENCES `partidas` (`ID_PTD`);
 
 --
--- Limitadores para a tabela `partida`
+-- Limitadores para a tabela `jogadores`
 --
-ALTER TABLE `partida`
-  ADD CONSTRAINT `partida_ibfk_1` FOREIGN KEY (`id_equipe`) REFERENCES `equipe` (`id_equipe`),
-  ADD CONSTRAINT `partida_ibfk_2` FOREIGN KEY (`id_quadra`) REFERENCES `quadra` (`id_quadra`);
+ALTER TABLE `jogadores`
+  ADD CONSTRAINT `jogadores_ibfk_1` FOREIGN KEY (`ID_UF`) REFERENCES `uf` (`ID_UF`);
 
 --
--- Limitadores para a tabela `quadra`
+-- Limitadores para a tabela `jogadores_equipes`
 --
-ALTER TABLE `quadra`
-  ADD CONSTRAINT `quadra_ibfk_1` FOREIGN KEY (`id_proprietario`) REFERENCES `proprietario` (`id_proprietario`);
+ALTER TABLE `jogadores_equipes`
+  ADD CONSTRAINT `jogadores_equipes_ibfk_1` FOREIGN KEY (`ID_JOG`) REFERENCES `jogadores` (`ID_JOG`),
+  ADD CONSTRAINT `jogadores_equipes_ibfk_2` FOREIGN KEY (`ID_EQP`) REFERENCES `equipes` (`ID_EQP`);
+
+--
+-- Limitadores para a tabela `partidas`
+--
+ALTER TABLE `partidas`
+  ADD CONSTRAINT `partidas_ibfk_1` FOREIGN KEY (`ID_QUAD`) REFERENCES `quadras` (`ID_QUAD`);
+
+--
+-- Limitadores para a tabela `quadras`
+--
+ALTER TABLE `quadras`
+  ADD CONSTRAINT `quadras_ibfk_1` FOREIGN KEY (`ID_PROP`) REFERENCES `proprietarios` (`ID_PROP`),
+  ADD CONSTRAINT `quadras_ibfk_2` FOREIGN KEY (`ID_UF`) REFERENCES `uf` (`ID_UF`),
+  ADD CONSTRAINT `quadras_ibfk_3` FOREIGN KEY (`ID_MODAL`) REFERENCES `modalidades` (`ID_MODAL`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
