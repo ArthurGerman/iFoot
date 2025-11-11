@@ -1,3 +1,23 @@
+<?php
+    require_once "../config.php";
+
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        $NOME_PROP = $_POST['NOME_PROP'];
+        $EMAIL_PROP = $_POST['EMAIL_PROP'];
+        $SENHA_PROP = $_POST['SENHA_PROP'];
+        $CPF_PROP = $_POST['CPF_PROP'];
+        $TEL_PROP = $_POST['TEL_PROP'];
+
+        $query = $pdo->prepare("INSERT INTO PROPRIETARIOS (NOME_PROP, EMAIL_PROP, SENHA_PROP, CPF_PROP, TEL_PROP) VALUES (?,?,?,?,?)");
+        $query->execute([$NOME_PROP, $EMAIL_PROP, $SENHA_PROP, $CPF_PROP, $TEL_PROP]);
+        
+
+        echo "Olá $NOME_PROP ! Seus dados foram cadastrados com sucesso <br>";
+        echo "<button><a href='../login/proprietario/login_prop.php'>Realizar login</a></button>";
+    }   else{
+
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -7,10 +27,10 @@
 </head>
 <body>
     <h1>
-        Cadastramento de usuario
+        Cadastramento de Proprietário
     </h1>
     
-    <form action="cadastra_proprietario_action.php" method="post">
+    <form action="" method="post">
 
         <label for="NOME_PROP">Nome: </label>
         <input type="text" name="NOME_PROP" id="NOME_PROP"><br>
@@ -30,6 +50,10 @@
         <input type="submit">
     </form>
 
-    <script src="../js/tratamento-erros_usuarios.js"></script>
+    <script src=""></script> <!-- O arquivo de tratamento de erro dos proprietários ainda vai ser feito-->
 </body>
 </html>
+
+<?php 
+ }
+?>

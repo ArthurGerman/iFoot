@@ -9,5 +9,17 @@
     <h1>
         Início do projeto
     </h1>
+
+    <h2>
+        Cadastro:
+    </h2>
+    <a href="./src/php/cadastro/cadastra_jogador.php">Jogador</a>
+    <a href="./src/php/cadastro/cadastra_proprietario.php">Proprietário</a>
+
+    <h2>
+        Login:
+    </h2>
+    <a href="./src/php/login/login_prop.php">Proprietário</a>
+
 </body>
 </html>
