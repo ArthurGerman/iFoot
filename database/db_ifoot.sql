@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 11-Nov-2025 às 00:26
--- Versão do servidor: 10.4.27-MariaDB
--- versão do PHP: 8.1.12
+-- Tempo de geração: 11-Nov-2025 às 01:57
+-- Versão do servidor: 10.4.32-MariaDB
+-- versão do PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -145,6 +145,39 @@ CREATE TABLE `uf` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
+-- Extraindo dados da tabela `uf`
+--
+
+INSERT INTO `uf` (`ID_UF`, `SIGLA_UF`, `NOME_UF`) VALUES
+(1, 'AC', 'Acre'),
+(2, 'AL', 'Alagoas'),
+(3, 'AP', 'Amapá'),
+(4, 'AM', 'Amazonas'),
+(5, 'BA', 'Bahia'),
+(6, 'CE', 'Ceará'),
+(7, 'DF', 'Distrito Federal'),
+(8, 'ES', 'Espírito Santo'),
+(9, 'GO', 'Goiás'),
+(10, 'MA', 'Maranhão'),
+(11, 'MT', 'Mato Grosso'),
+(12, 'MS', 'Mato Grosso do Sul'),
+(13, 'MG', 'Minas Gerais'),
+(14, 'PA', 'Pará'),
+(15, 'PB', 'Paraíba'),
+(16, 'PR', 'Paraná'),
+(17, 'PE', 'Pernambuco'),
+(18, 'PI', 'Piauí'),
+(19, 'RJ', 'Rio de Janeiro'),
+(20, 'RN', 'Rio Grande do Norte'),
+(21, 'RS', 'Rio Grande do Sul'),
+(22, 'RO', 'Rondônia'),
+(23, 'RR', 'Roraima'),
+(24, 'SC', 'Santa Catarina'),
+(25, 'SP', 'São Paulo'),
+(26, 'SE', 'Sergipe'),
+(27, 'TO', 'Tocantins');
+
+--
 -- Índices para tabelas despejadas
 --
 
@@ -267,7 +300,7 @@ ALTER TABLE `quadras`
 -- AUTO_INCREMENT de tabela `uf`
 --
 ALTER TABLE `uf`
-  MODIFY `ID_UF` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID_UF` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- Restrições para despejos de tabelas
