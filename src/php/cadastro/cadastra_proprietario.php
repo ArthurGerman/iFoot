@@ -12,19 +12,19 @@
     
     <form action="cadastra_proprietario_action.php" method="post">
 
-        <label for="nome">Nome: </label>
-        <input type="text" name="nome" id="nome"><br>
+        <label for="NOME_PROP">Nome: </label>
+        <input type="text" name="NOME_PROP" id="NOME_PROP"><br>
         
-        <label for="email">E-mail: </label>
-        <input type="email" name="email" id="email"><br>
+        <label for="EMAIL_PROP">E-mail: </label>
+        <input type="email" name="EMAIL_PROP" id="EMAIL_PROP"><br>
 
-        <label for="CPF">CPF: </label>
-        <input type="text" name="CPF" id="CPF" maxlength="11"><br>
+        <label for="SENHA_PROP">Senha: </label>
+        <input type="password" name="SENHA_PROP" id="SENHA_PROP"><br>
 
-        <label for="cidade">Cidade: </label>
-        <input type="text" name="cidade" id="cidade"><br>
+        <label for="CPF_PROP">CPF: </label>
+        <input type="text" name="CPF_PROP" id="CPF_PROP" maxlength="11"><br>
 
-        <label for="UF">UF: </label>
+        <!-- <label for="UF">UF: </label>
         <select name="UF" id="UF">
             <option value="">Selecione</option>
             <option value="AC">Acre</option>
@@ -54,13 +54,10 @@
             <option value="SP">São Paulo</option>
             <option value="SE">Sergipe</option>
             <option value="TO">Tocantins</option>
-        </select><br>
+        </select><br> -->
         
-        <label for="endereco">Endereço: </label>
-        <input type="endereco" name="endereco" id="endereco"><br>
-        
-        <label for="endereco">Telefone: </label>
-        <input type="telefone" name="telefone" id="telefone" maxlength="11"><br>
+        <label for="TEL_PROP">Telefone: </label>
+        <input type="telefone" name="TEL_PROP" id="TEL_PROP" maxlength="11"><br>
 
         <input type="submit">
     </form>

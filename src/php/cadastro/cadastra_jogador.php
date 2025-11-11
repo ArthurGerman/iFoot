@@ -12,19 +12,22 @@
     
     <form action="cadastra_jogador_action.php" method="post">
 
-        <label for="nome">Nome: </label>
-        <input type="text" name="nome" id="nome"><br>
+        <label for="NOME_JOG">Nome: </label>
+        <input type="text" name="NOME_JOG" id="NOME_JOG"><br>
         
-        <label for="email">E-mail: </label>
-        <input type="email" name="email" id="email"><br>
+        <label for="EMAIL_JOG">E-mail: </label>
+        <input type="email" name="EMAIL_JOG" id="EMAIL_JOG"><br>
 
-        <label for="CPF">CPF: </label>
-        <input type="text" name="CPF" id="CPF" maxlength="11"><br>
+        <label for="SENHA_JOG">Senha</label>
+        <input type="password" name="SENHA_JOG" id="SENHA_JOG"><br>
 
-        <label for="cidade">Cidade: </label>
-        <input type="text" name="cidade" id="cidade"><br>
+        <label for="CPF_JOG">CPF: </label>
+        <input type="text" name="CPF_JOG" id="CPF_JOG" maxlength="11"><br>
 
-        <label for="UF">UF: </label>
+        <label for="CIDADE_JOG">Cidade: </label>
+        <input type="text" name="CIDADE_JOG" id="CIDADE_JOG"><br>
+
+        <!-- <label for="UF">UF: </label>
         <select name="UF" id="UF">
             <option value="">Selecione</option>
             <option value="AC">Acre</option>
@@ -54,13 +57,13 @@
             <option value="SP">São Paulo</option>
             <option value="SE">Sergipe</option>
             <option value="TO">Tocantins</option>
-        </select><br>
+        </select><br> -->
         
-        <label for="endereco">Endereço: </label>
-        <input type="endereco" name="endereco" id="endereco"><br>
+        <label for="ENDERECO_JOG">Endereço: </label>
+        <input type="endereco" name="ENDERECO_JOG" id="ENDERECO_JOG"><br>
         
-        <label for="endereco">Telefone: </label>
-        <input type="telefone" name="telefone" id="telefone" maxlength="11"><br>
+        <label for="TEL_JOG">Telefone: </label>
+        <input type="telefone" name="TEL_JOG" id="TEL_JOG" maxlength="11"><br>
 
         <input type="submit">
     </form>

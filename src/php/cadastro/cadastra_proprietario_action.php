@@ -1,20 +1,18 @@
 <?php
-require_once "config.php";
+require_once "../config.php";
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        $nome = $_POST['nome'];
-        $email = $_POST['email'];
-        $CPF = $_POST['CPF'];
-        $cidade = $_POST['cidade'];
-        $UF = $_POST['UF'];
-        $endereco = $_POST['endereco'];
-        $telefone = $_POST['telefone'];
+        $NOME_PROP = $_POST['NOME_PROP'];
+        $EMAIL_PROP = $_POST['EMAIL_PROP'];
+        $SENHA_PROP = $_POST['SENHA_PROP'];
+        $CPF_PROP = $_POST['CPF_PROP'];
+        $TEL_PROP = $_POST['TEL_PROP'];
 
-        $query = $pdo->prepare("INSERT INTO proprietario (nome, email, CPF, cidade, UF, endereco, telefone) VALUES (?,?,?,?,?,?,?)");
-        $query->execute([$nome, $email, $CPF, $cidade, $UF, $endereco, $telefone]);
+        $query = $pdo->prepare("INSERT INTO proprietarios (NOME_PROP, EMAIL_PROP, SENHA_PROP, CPF_PROP, TEL_PROP) VALUES (?,?,?,?,?)");
+        $query->execute([$NOME_PROP, $EMAIL_PROP, $SENHA_PROP, $CPF_PROP, $TEL_PROP]);
         
 
-        echo "Olá $nome ! Seus dados foram cadastrados com sucesso <br>";
+        echo "Olá $NOME_PROP ! Seus dados foram cadastrados com sucesso <br>";
         echo "<button><a href='cadastra_jogador.php'>Voltar</a></button>";
     } else{
         echo "<strong><p style='color:red'>Requisição inválida. Não usou método POST</p></strong>";
