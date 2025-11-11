@@ -27,7 +27,7 @@
         <label for="CIDADE_JOG">Cidade: </label>
         <input type="text" name="CIDADE_JOG" id="CIDADE_JOG"><br>
 
-        <!-- <label for="UF">UF: </label>
+        <label for="UF">UF: </label>
         <select name="UF" id="UF">
             <option value="">Selecione</option>
             <option value="AC">Acre</option>
@@ -57,7 +57,7 @@
             <option value="SP">São Paulo</option>
             <option value="SE">Sergipe</option>
             <option value="TO">Tocantins</option>
-        </select><br> -->
+        </select><br>
         
         <label for="ENDERECO_JOG">Endereço: </label>
         <input type="endereco" name="ENDERECO_JOG" id="ENDERECO_JOG"><br>
