@@ -8,7 +8,7 @@ require_once "../config.php";
         $CPF_PROP = $_POST['CPF_PROP'];
         $TEL_PROP = $_POST['TEL_PROP'];
 
-        $query = $pdo->prepare("INSERT INTO proprietarios (NOME_PROP, EMAIL_PROP, SENHA_PROP, CPF_PROP, TEL_PROP) VALUES (?,?,?,?,?)");
+        $query = $pdo->prepare("INSERT INTO PROPRIETARIOS (NOME_PROP, EMAIL_PROP, SENHA_PROP, CPF_PROP, TEL_PROP) VALUES (?,?,?,?,?)");
         $query->execute([$NOME_PROP, $EMAIL_PROP, $SENHA_PROP, $CPF_PROP, $TEL_PROP]);
         
 
