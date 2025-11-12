@@ -15,11 +15,12 @@
     </h2>
     <a href="./src/php/cadastro/cadastra_jogador.php">Jogador</a>
     <a href="./src/php/cadastro/cadastra_proprietario.php">Proprietário</a>
+    <a href="./src/php/cadastro/cadastra_equipe.php">equipe</a>
 
     <h2>
         Login:
     </h2>
     <a href="./src/php/login/login_prop.php">Proprietário</a>
-
+    <a href="./src/php/login/login_jog.php">Usuário</a>
 </body>
 </html>

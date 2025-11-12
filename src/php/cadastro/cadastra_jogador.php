@@ -28,7 +28,7 @@
         
 
         echo "Olá $NOME_JOG ! Seus dados foram cadastrados com sucesso <br>";
-        echo "<button><a href=''>Login</a></button>";
+        echo "<button><a href='../login/login_jog.php'>Login</a></button>";
     } else {
 ?>
 
