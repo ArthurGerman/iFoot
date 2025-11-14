@@ -13,7 +13,7 @@
         
 
         echo "Olá $NOME_PROP ! Seus dados foram cadastrados com sucesso <br>";
-        echo "<button><a href='../login/proprietario/login_prop.php'>Realizar login</a></button>";
+        echo "<button><a href='../login/login_prop.php'>Realizar login</a></button>";
     }   else{
 
 ?>

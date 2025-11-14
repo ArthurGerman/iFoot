@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -10,6 +14,14 @@
         Início do projeto
     </h1>
 
+    <?php echo $_SESSION['id_jog'];?>
+    
+    <?php if (isset($_SESSION['id_jog'])) : ?>
+        <h1>Olá <?php echo $_SESSION['name_jog'] ?></h1>    
+    <?php else :?> 
+        <h1>Não funcionou</h1>
+    <?php endif; ?>
+    
     <h2>
         Cadastro:
     </h2>
@@ -22,6 +34,6 @@
         Login:
     </h2>
     <a href="./src/php/login/login_prop.php">Proprietário</a>
-    <a href="./src/php/login/login_jog.php">Usuário</a>
+    <a href="./src/php/login/login_jog.php">Jogador</a>
 </body>
 </html>

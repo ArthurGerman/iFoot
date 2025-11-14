@@ -6,17 +6,25 @@
         $SENHA_PROP = $_POST['SENHA_PROP'];
     
     
-        $query = $pdo->prepare("SELECT ID_PROP FROM PROPRIETARIOS WHERE EMAIL_PROP = ? AND SENHA_PROP = ?");
+        $query = $pdo->prepare("SELECT * FROM PROPRIETARIOS WHERE EMAIL_PROP = ? AND SENHA_PROP = ?");
         $query->execute([$EMAIL_PROP, $SENHA_PROP]);
         $result = $query->fetch(PDO::FETCH_ASSOC);
     
         if ($result) {
-            //localização do crud do proprietário. Como não tem ainda, vou redirecionar para o cadastro de quadra
-            header("Location: ../cadastro/cadastra_quadra.php");
+            $_SESSION['id_prop'] = $result['ID_PROP'];
+            $_SESSION['name_prop'] = $result['NOME_PROP'];
+            header('Location: /index.php');
         } else {
-                echo "<p style='color:red'>Email ou senha inválidos!</p>";
+            echo "Email ou senha estão incorretos";
         }
     }
+    //     if ($result) {
+    //         //localização do crud do proprietário. Como não tem ainda, vou redirecionar para o cadastro de quadra
+    //         header("Location: ../cadastro/cadastra_quadra.php");
+    //     } else {
+    //             echo "<p style='color:red'>Email ou senha inválidos!</p>";
+    //     }
+    // }
 
     
 ?>
@@ -34,7 +42,7 @@
         <input type="email" name="EMAIL_PROP" id="EMAIL_PROP"><br>
 
         <label for="SENHA_PROP">Senha:</label>
-        <input type="text" name="SENHA_PROP" id="SENHA_PROP"><br>
+        <input type="password" name="SENHA_PROP" id="SENHA_PROP"><br>
 
         <input type="submit">
     </form>
