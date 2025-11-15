@@ -1,1 +1,0 @@
-Nessa pasta estarão as ações de crud que o proprietário e o jogador vão poder fazer, tais como deletar ou mudar o nome da quadra.

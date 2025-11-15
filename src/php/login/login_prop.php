@@ -1,6 +1,8 @@
 <?php 
     require_once '../config.php';
 
+    $erro = ""; // Variável para que a mensagem de erro apareca depois do form
+
     if ($_SERVER['REQUEST_METHOD'] == 'POST'){
         $EMAIL_PROP = $_POST['EMAIL_PROP'];
         $SENHA_PROP = $_POST['SENHA_PROP'];
@@ -13,9 +15,9 @@
         if ($result) {
             $_SESSION['id_prop'] = $result['ID_PROP'];
             $_SESSION['name_prop'] = $result['NOME_PROP'];
-            header('Location: /index.php');
+            header('Location: /src/php/acoes/crud%20proprietario/inicio_prop.php');
         } else {
-            echo "Email ou senha estão incorretos";
+            $erro = "Email ou senha estão incorretos";
         }
     }
     //     if ($result) {
@@ -37,6 +39,8 @@
     <title>Login</title>
 </head>
 <body>
+    <a href="/index.php">Voltar a Home</a><br><br>
+
     <form action="" method="post">
         <label for="EMAIL_PROP">Email: </label>
         <input type="email" name="EMAIL_PROP" id="EMAIL_PROP"><br>
@@ -46,5 +50,9 @@
 
         <input type="submit">
     </form>
+
+    <?php if ($erro): ?>
+        <p style="color:red"><?php echo $erro; ?></p>
+    <?php endif; ?>
 </body>
 </html>

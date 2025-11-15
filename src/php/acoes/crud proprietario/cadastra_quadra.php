@@ -10,6 +10,8 @@
         Cadastramento de quadras
     </h2>
 
+    <a href="./inicio_prop.php">Voltar</a>
+
     <form action="" method="post">
 
         <label for="CPF_PROP">Seu CPF: </label>

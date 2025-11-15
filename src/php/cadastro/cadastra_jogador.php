@@ -44,6 +44,8 @@
     <h1>
         Cadastramento de usuário
     </h1>
+
+    <a href="/index.php">Voltar</a><br><br>
     
     <form action="" method="post">
 
@@ -52,9 +54,6 @@
         
         <label for="EMAIL_JOG">E-mail: </label>
         <input type="email" name="EMAIL_JOG" id="EMAIL_JOG"><br>
-
-        <label for="SENHA_JOG">Senha</label>
-        <input type="password" name="SENHA_JOG" id="SENHA_JOG"><br>
 
         <label for="CPF_JOG">CPF: </label>
         <input type="text" name="CPF_JOG" id="CPF_JOG" maxlength="11"><br>
@@ -99,11 +98,14 @@
         
         <label for="TEL_JOG">Telefone: </label>
         <input type="telefone" name="TEL_JOG" id="TEL_JOG" maxlength="11"><br>
-
+        
+        <label for="SENHA_JOG">Senha</label>
+        <input type="password" name="SENHA_JOG" id="SENHA_JOG"><br>
+        
         <input type="submit">
     </form>
 
-    <script src="../js/tratamento-erros_usuarios.js"></script>
+    <script src="/src/js/tratamento-erros_jog.js"></script>
 </body>
 </html>
 

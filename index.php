@@ -27,8 +27,8 @@ session_start();
     </h2>
     <a href="./src/php/cadastro/cadastra_jogador.php">Jogador</a>
     <a href="./src/php/cadastro/cadastra_proprietario.php">Proprietário</a>
-    <a href="./src/php/cadastro/cadastra_equipe.php">Equipe</a>
-    <a href="./src/php/cadastro/cadastro_partida.php">Partida</a>
+    <!--<a href="./src/php/cadastro/cadastra_equipe.php">Equipe</a>--><!--Deixei comentado porque essas funcionalidades são da parte do crud do jogador-->
+    <!--<a href="./src/php/cadastro/cadastro_partida.php">Partida</a>-->
 
     <h2>
         Login:
