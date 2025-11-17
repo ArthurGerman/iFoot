@@ -14,8 +14,12 @@ session_start();
         Início do projeto
     </h1>
 
-    <?php echo $_SESSION['id_jog'];?>
-    
+    <?php if ($_SESSION) {
+        echo $_SESSION['id_jog'];
+    }else{
+        echo "sem login";
+    }
+    ?>
     <?php if (isset($_SESSION['id_jog'])) : ?>
         <h1>Olá <?php echo $_SESSION['name_jog'] ?></h1>    
     <?php else :?> 
