@@ -1,5 +1,5 @@
 <?php
-require_once '../config.php';
+require_once '../../config.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // valor temporario
     $ID_QUAD = 1;
 
-    $query = $pdo->prepare("INSERT INTO partidas (DATA_PTD, HORARIO_INICIO_PTD, HORARIO_FIM_PTD, ID_QUAD) VALUES (?, ?, ?, ?)");
+    $query = $pdo->prepare("INSERT INTO PARTIDAS (DATA_PTD, HORARIO_INICIO_PTD, HORARIO_FIM_PTD, ID_QUAD) VALUES (?, ?, ?, ?)");
     $query->execute([$DATA_PTD, $HORARIO_INICIO_PTD, $HORARIO_FIM_PTD, $ID_QUAD]);
 
     echo "Partida cadastrada com sucesso!";
@@ -45,6 +45,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             <input type="submit">
         </form>
+
+        <a href="./inicio_jog.php">Voltar</a><br><br>
 
         <script src="/src/js/tratamento-erros_partida.js"></script>
     </body>

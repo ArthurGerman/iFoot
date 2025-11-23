@@ -11,5 +11,12 @@
     </h1>
 
     <a href="/index.php">Home</a>
+
+    <br>
+    <br>
+
+    <a href="./cadastro_partida.php">Cadastrar nova partidas</a>
+    <a href="./listar_partidas.php">Listar partidas</a>
+
 </body>
 </html>
