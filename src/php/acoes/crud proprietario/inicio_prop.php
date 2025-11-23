@@ -12,7 +12,7 @@
 
     <a href="/index.php">Home</a><br><br>
 
-    <a href="./cadastra_quadra.php">Cadastrar quadras</a>
+    <a href="./cadastra_quadra.php">Cadastrar nova quadra</a>
     <a href="./lista_quadras.php">Listar quadras</a>
 </body>
 </html>

@@ -1,5 +1,6 @@
 <?php 
     require_once '../config.php';
+    session_start();
 
     $erro = ""; // Variável para que a mensagem de erro apareca depois do form
 

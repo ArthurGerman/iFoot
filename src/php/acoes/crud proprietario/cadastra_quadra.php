@@ -1,3 +1,42 @@
+<?php 
+    session_start();
+
+    require_once "../../config.php";
+
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        $PRECO_HORA_QUAD = $_POST['PRECO_HORA_QUAD'];
+        $ENDERECO_QUAD = $_POST['ENDERECO_QUAD'];
+        $CIDADE_QUAD = $_POST['CIDADE_QUAD'];
+        
+        $ID_PROP = $_SESSION['id_prop'];
+        $SIGLA_UF = $_POST['UF'];
+        $NOME_MODAL = $_POST['NOME_MODAL'];
+
+        //Query para descobrir o id correspondente à UF
+
+        $query_1 = $pdo->prepare("SELECT ID_UF FROM UF WHERE SIGLA_UF = ?");
+        $query_1->execute([$SIGLA_UF]);
+        $result_1 = $query_1->fetch(PDO::FETCH_ASSOC);
+        $ID_UF = $result_1['ID_UF'];
+
+        // Query para descobrir o id correspondente à modalidade
+
+        $query_2 = $pdo->prepare("SELECT ID_MODAL FROM MODALIDADES WHERE NOME_MODAL = ?");
+        $query_2->execute([$NOME_MODAL]);
+        $result_2 = $query_2->fetch(PDO::FETCH_ASSOC);
+        $ID_MODAL = $result_2['ID_MODAL'];
+
+
+        //Query para fazer a inserção de dados no banco
+
+        $query_3 = $pdo->prepare("INSERT INTO QUADRAS (PRECO_HORA_QUAD, ENDERECO_QUAD, CIDADE_QUAD, ID_PROP, ID_UF, ID_MODAL) VALUES (?,?,?,?,?,?)");
+        $query_3->execute([$PRECO_HORA_QUAD, $ENDERECO_QUAD, $CIDADE_QUAD, $ID_PROP, $ID_UF, $ID_MODAL]);
+        
+
+        header('Location: ./lista_quadras.php');
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -10,13 +49,9 @@
         Cadastramento de quadras
     </h2>
 
-    <a href="./inicio_prop.php">Voltar</a>
+    <a href="./inicio_prop.php">Voltar</a><br><br>
 
     <form action="" method="post">
-
-        <label for="CPF_PROP">Seu CPF: </label>
-        <input type="text" name="CPF_PROP" id="CPF_PROP"><br>
-
 
         <label for="PRECO_HORA_QUAD">Preço da hora: </label>
         <input type="number" name="PRECO_HORA_QUAD" id="PRECO_HORA_QUAD"><br>
@@ -53,22 +88,24 @@
             <option value="TO">Tocantins</option>
         </select><br>
 
-        <label for="CIDADE_QUAD">Cidade: </label>
-        <input type="text" name="CIDADE_QUAD" id="CIDADE_QUAD"><br>
-
         <label for="ENDERECO_QUAD">Endereço: </label>
         <input type="text" name="ENDERECO_QUAD" id="ENDERECO_QUAD"><br>
+
+        <label for="CIDADE_QUAD">Cidade: </label>
+        <input type="text" name="CIDADE_QUAD" id="CIDADE_QUAD"><br>
 
         <label for="NOME_MODAL">Modalidade: </label>
         <select name="NOME_MODAL" id="NOME_MODAL">
             <option value="">Selecione</option>
             <option value="CAMPO">Campo</option>
-            <option value="FUTSAL">Futsal</option>
             <option value="SOCIETY">Society</option>
+            <option value="QUADRA">Quadra</option>
         </select><br>
 
 
         <input type="submit">
     </form>
+
+    <script src="../../../js/tratamento-erros_cad-quadra.js"></script>
 </body>
 </html>
