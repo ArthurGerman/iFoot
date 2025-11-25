@@ -14,15 +14,19 @@ session_start();
         Início do projeto
     </h1>
 
-    <?php if ($_SESSION) {
+    <?php if (isset($_SESSION['id_jog'])) {
         echo $_SESSION['id_jog'];
-    }else{
+    }elseif (isset($_SESSION['id_prop'])){
+        echo $_SESSION['id_prop'];
+    }else {
         echo "sem login";
     }
     ?>
     <?php if (isset($_SESSION['id_jog'])) : ?>
         <h1>Olá <?php echo $_SESSION['name_jog'] ?></h1>    
-    <?php else :?> 
+    <?php elseif(isset($_SESSION['id_prop'])) : ?>
+        <h1>Olá <?php echo $_SESSION['name_prop'] ?></h1>
+    <?php else :?>
         <h1>Não funcionou</h1>
     <?php endif; ?>
     
@@ -39,5 +43,12 @@ session_start();
     </h2>
     <a href="./src/php/login/login_prop.php">Proprietário</a>
     <a href="./src/php/login/login_jog.php">Jogador</a>
+
+    <br>
+    <br>
+
+    <form action="./src/php/login/logout.php">
+        <button type="submit">Sair (Logout)</button>
+    </form>
 </body>
 </html>
