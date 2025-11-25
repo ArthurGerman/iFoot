@@ -2,6 +2,12 @@
     require_once '../config.php';
     session_start();
 
+    if(isset($_SESSION['id_prop'])){
+         header('Location: /src/php/acoes/crud%20proprietario/inicio_prop.php');
+    }else if(isset($_SESSION['id_jog'])) {
+        header('Location: /src/php/acoes/crud%20jogador/inicio_jog.php');
+    };
+
     $erro = ""; // Variável para que a mensagem de erro apareca depois do form
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST'){
