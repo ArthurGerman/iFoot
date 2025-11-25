@@ -33,22 +33,36 @@ session_start();
     <h2>
         Cadastro:
     </h2>
-    <a href="./src/php/cadastro/cadastra_jogador.php">Jogador</a>
-    <a href="./src/php/cadastro/cadastra_proprietario.php">Proprietário</a>
+
+    <ul>
+        <li>
+            <a href="./src/php/cadastro/cadastra_jogador.php">Jogador</a>
+        </li>
+        <li>
+            <a href="./src/php/cadastro/cadastra_proprietario.php">Proprietário</a>
+        </li>
+    </ul>
+
+    <hr>
     <!--<a href="./src/php/cadastro/cadastra_equipe.php">Equipe</a>--><!--Deixei comentado porque essas funcionalidades são da parte do crud do jogador-->
     <!--<a href="./src/php/cadastro/cadastro_partida.php">Partida</a>-->
 
     <h2>
         Login:
     </h2>
-    <a href="./src/php/login/login_prop.php">Proprietário</a>
-    <a href="./src/php/login/login_jog.php">Jogador</a>
 
-    <br>
-    <br>
+    <ul>
+        <li>
+            <a href="./src/php/login/login_prop.php">Proprietário</a>
+        </li>
+        <li>
+            <a href="./src/php/login/login_jog.php">Jogador</a>
+        </li>
+    </ul>
 
-    <form action="./src/php/login/logout.php">
+
+    <!--<form action="./src/php/login/logout.php">
         <button type="submit">Sair (Logout)</button>
-    </form>
+    </form>-->
 </body>
 </html>

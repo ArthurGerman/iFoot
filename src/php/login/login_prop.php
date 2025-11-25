@@ -2,11 +2,14 @@
     require_once '../config.php';
     session_start();
 
+    /* --------------------- ATENÇÃO -------------------------
+    O trecho de código abaixo serve para a funcionalidadeque permite redirecionar o usuário diretamente para a página inicial do crud quando já está logado
+
     if(isset($_SESSION['id_prop'])){
          header('Location: /src/php/acoes/crud%20proprietario/inicio_prop.php');
     }else if(isset($_SESSION['id_jog'])) {
         header('Location: /src/php/acoes/crud%20jogador/inicio_jog.php');
-    };
+    };*/
 
     $erro = ""; // Variável para que a mensagem de erro apareca depois do form
 
@@ -27,14 +30,6 @@
             $erro = "Email ou senha estão incorretos";
         }
     }
-    //     if ($result) {
-    //         //localização do crud do proprietário. Como não tem ainda, vou redirecionar para o cadastro de quadra
-    //         header("Location: ../cadastro/cadastra_quadra.php");
-    //     } else {
-    //             echo "<p style='color:red'>Email ou senha inválidos!</p>";
-    //     }
-    // }
-
     
 ?>
 

@@ -2,11 +2,14 @@
     require_once '../config.php';
     session_start();
 
+    /* --------------------- ATENÇÃO -------------------------
+    O trecho de código abaixo serve para a funcionalidadeque permite redirecionar o usuário diretamente para a página inicial do crud quando já está logado
+    
     if(isset($_SESSION['id_jog'])){
         header('Location: /src/php/acoes/crud%20jogador/inicio_jog.php');
     }else if(isset($_SESSION['id_prop'])) {
         header('Location: /src/php/acoes/crud%20proprietario/inicio_prop.php');
-    };
+    };*/
 
     $erro = ""; // Variável para que a mensagem de erro apareca depois do form
 
@@ -29,12 +32,6 @@
         }
         
         
-        // if ($result) {
-            //     //localização do crud do jogador. Como não tem ainda, vou redirecionar para o cadastro de equipe
-            //     header("Location: ../cadastro/cadastra_equipe.php");
-            // } else {
-                //         echo "<p style='color:red'>Email ou senha inválidos!</p>";
-                // }
     }
             
             

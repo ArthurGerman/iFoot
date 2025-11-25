@@ -10,9 +10,18 @@
         Aqui estarão presentes todas as funcionalidades para o proprietário
     </h1>
 
-    <a href="/index.php">Home</a><br><br>
+    <ul>
+        <li>
+            <a href="./cadastra_quadra.php">Cadastrar nova quadra</a>
+        </li>
+        <li>
+            <a href="./lista_quadras.php">Listar quadras</a>
+        </li>
+    </ul>
 
-    <a href="./cadastra_quadra.php">Cadastrar nova quadra</a>
-    <a href="./lista_quadras.php">Listar quadras</a>
+    <form action="../../login/logout.php">
+        <button type="submit">Sair (Logout)</button>
+    </form>
+
 </body>
 </html>

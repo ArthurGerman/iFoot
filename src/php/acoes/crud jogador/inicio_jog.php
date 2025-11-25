@@ -6,17 +6,23 @@
     <title>Página do jogador</title>
 </head>
 <body>
+
     <h1>
         Aqui estarão presentes todas as funcionalidades para o jogador
     </h1>
 
-    <a href="/index.php">Home</a>
+    <ul>
+        <li>
+            <a href="./cadastro_partida.php">Cadastrar nova partidas</a>
+        </li>
+        <li>
+            <a href="./listar_partidas.php">Listar partidas</a>
+        </li>
+    </ul>
 
-    <br>
-    <br>
-
-    <a href="./cadastro_partida.php">Cadastrar nova partidas</a>
-    <a href="./listar_partidas.php">Listar partidas</a>
+    <form action="../../login/logout.php">
+        <button type="submit">Sair (Logout)</button>
+    </form>
 
 </body>
 </html>
