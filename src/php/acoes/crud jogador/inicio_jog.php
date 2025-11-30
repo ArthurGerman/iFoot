@@ -13,10 +13,10 @@
 
     <ul>
         <li>
-            <a href="./cadastro_partida.php">Cadastrar nova partidas</a>
+            <a href="./lista_quadra.php">Cadastrar nova partidas</a>
         </li>
         <li>
-            <a href="./listar_partidas.php">Listar partidas</a>
+            <a href="./lista_partida.php">Ver minhas partidas</a>
         </li>
     </ul>
 

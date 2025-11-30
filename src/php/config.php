@@ -1,9 +1,9 @@
 <?php
 // Define as variáveis de conexão ao banco de dados MySQL
-$host = 'localhost'; // Endereço do servidor MySQL e a porta utilizada
+$host = 'localhost:3307'; // Endereço do servidor MySQL e a porta utilizada
 $db = 'db_ifoot';     // Nome do banco de dados
 $user = 'root';           // Usuário do banco de dados
-$pass = '';           // Senha do usuário do banco de dados
+$pass = '1234';           // Senha do usuário do banco de dados
 
 // Tenta estabelecer uma conexão com o banco de dados usando PDO
 try {

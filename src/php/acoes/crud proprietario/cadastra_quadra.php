@@ -4,13 +4,13 @@
     require_once "../../config.php";
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        $PRECO_HORA_QUAD = $_POST['PRECO_HORA_QUAD'];
         $ENDERECO_QUAD = $_POST['ENDERECO_QUAD'];
         $CIDADE_QUAD = $_POST['CIDADE_QUAD'];
-        
-        $ID_PROP = $_SESSION['id_prop'];
         $SIGLA_UF = $_POST['UF'];
         $NOME_MODAL = $_POST['NOME_MODAL'];
+        $PRECO_HORA_QUAD = str_replace(['.', ','], ['', '.'], $_POST['PRECO_HORA_QUAD']);
+        
+        $ID_PROP = $_SESSION['id_prop'];
 
         //Query para descobrir o id correspondente à UF
 
@@ -29,8 +29,8 @@
 
         //Query para fazer a inserção de dados no banco
 
-        $query_3 = $pdo->prepare("INSERT INTO QUADRAS (PRECO_HORA_QUAD, ENDERECO_QUAD, CIDADE_QUAD, ID_PROP, ID_UF, ID_MODAL) VALUES (?,?,?,?,?,?)");
-        $query_3->execute([$PRECO_HORA_QUAD, $ENDERECO_QUAD, $CIDADE_QUAD, $ID_PROP, $ID_UF, $ID_MODAL]);
+        $query_3 = $pdo->prepare("INSERT INTO QUADRAS (ENDERECO_QUAD, CIDADE_QUAD, ID_UF, ID_MODAL, PRECO_HORA_QUAD, ID_PROP) VALUES (?,?,?,?,?,?)");
+        $query_3->execute([$ENDERECO_QUAD, $CIDADE_QUAD, $ID_UF, $ID_MODAL, $PRECO_HORA_QUAD, $ID_PROP]);
         
 
         header('Location: ./lista_quadras.php');
@@ -53,9 +53,13 @@
 
     <form action="" method="post">
 
-        <label for="PRECO_HORA_QUAD">Preço da hora: </label>
-        <input type="number" name="PRECO_HORA_QUAD" id="PRECO_HORA_QUAD"><br>
-
+        
+        <label for="ENDERECO_QUAD">Endereço: </label>
+        <input type="text" name="ENDERECO_QUAD" id="ENDERECO_QUAD"><br>
+        
+        <label for="CIDADE_QUAD">Cidade: </label>
+        <input type="text" name="CIDADE_QUAD" id="CIDADE_QUAD"><br>
+        
         <label for="UF">UF: </label>
         <select name="UF" id="UF">
             <option value="">Selecione</option>
@@ -87,13 +91,7 @@
             <option value="SE">Sergipe</option>
             <option value="TO">Tocantins</option>
         </select><br>
-
-        <label for="ENDERECO_QUAD">Endereço: </label>
-        <input type="text" name="ENDERECO_QUAD" id="ENDERECO_QUAD"><br>
-
-        <label for="CIDADE_QUAD">Cidade: </label>
-        <input type="text" name="CIDADE_QUAD" id="CIDADE_QUAD"><br>
-
+        
         <label for="NOME_MODAL">Modalidade: </label>
         <select name="NOME_MODAL" id="NOME_MODAL">
             <option value="">Selecione</option>
@@ -101,11 +99,14 @@
             <option value="SOCIETY">Society</option>
             <option value="QUADRA">Quadra</option>
         </select><br>
-
+        
+        <label for="PRECO_HORA_QUAD">Preço da hora: </label>
+        <input type="text" name="PRECO_HORA_QUAD" id="PRECO_HORA_QUAD" value="0,00" oninput="formatarMoeda(this)"><br>
 
         <input type="submit">
     </form>
 
+    <script src="../../../js/formata_preco_quadra.js"></script>
     <script src="../../../js/tratamento-erros_cad-quadra.js"></script>
 </body>
 </html>
