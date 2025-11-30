@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Tempo de geração: 20/11/2025 às 00:58
+-- Tempo de geração: 30/11/2025 às 22:40
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -115,7 +115,8 @@ CREATE TABLE `QUADRAS` (
   `CIDADE_QUAD` varchar(50) NOT NULL,
   `ID_PROP` int(11) NOT NULL,
   `ID_UF` int(11) NOT NULL,
-  `ID_MODAL` int(11) NOT NULL
+  `ID_MODAL` int(11) NOT NULL,
+  `STATUS_QUAD` tinyint(1) NOT NULL DEFAULT 1 COMMENT '1 = Ativa, 0 = Inativa'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
