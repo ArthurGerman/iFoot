@@ -93,8 +93,8 @@
                     <td><?= $partida['PRECO_HORA_QUAD'] ?></td>
                     <td><?= $preco_total ?></td>
 
-                    <td><a href="">Editar</a></td>
-                    <td><a href="">Excluir</a></td>
+                    <td><a href="./edita_partida.php?id=<?= $partida['ID_PTD'] ?>">Editar</a></td>
+                    <td><a href="./excluir_partida.php?id=<?= $partida['ID_PTD'] ?>">Excluir</a></td>
                 </tr>
             <?php endforeach; ?>
         </tbody>

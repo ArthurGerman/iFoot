@@ -27,7 +27,7 @@ session_start();
     <?php elseif(isset($_SESSION['id_prop'])) : ?>
         <h1>Olá <?php echo $_SESSION['name_prop'] ?></h1>
     <?php else :?>
-        <h1>Não funcionou</h1>
+        <h1>Você não está logado</h1>
     <?php endif; ?>
     
     <h2>
