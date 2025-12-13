@@ -58,31 +58,36 @@
         Quadras disponíveis em <?= $result2['NOME_UF'] ?>
     </h1>
 
-    <form action="" method="post">
-        <table border="2">
-            <thead>
-                <tr>
-                    <th>Endereço</th>
-                    <th>Modalidade</th>
-                    <th>Preço por hora</th>
-                    <th>Ações</th>
-                </tr>
-            </thead>
-
-            <tbody>
-                <?php foreach ($quadras as $quadra): ?>
+    <?php if (empty($quadras)): ?>
+        <p>Não existem quadras disponíveis para <?= $result2['NOME_UF'] ?></p>
+    <?php else: ?>
+        
+        <form action="" method="post">
+            <table border="2">
+                <thead>
                     <tr>
-                        <td><?= $quadra['ENDERECO_QUAD'] ?></td>
-                        <td><?= $quadra['NOME_MODAL'] ?></td>
-                        <td><?= $quadra['PRECO_HORA_QUAD'] ?></td>
-
-                        <td><a href="./cadastro_partida.php?id=<?= $quadra['ID_QUAD'] ?>">Reservar</a></td>
+                        <th>Endereço</th>
+                        <th>Modalidade</th>
+                        <th>Preço por hora</th>
+                        <th>Ações</th>
                     </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table><br>
+                </thead>
 
-    </form>
+                <tbody>
+                    <?php foreach ($quadras as $quadra): ?>
+                        <tr>
+                            <td><?= $quadra['ENDERECO_QUAD'] ?></td>
+                            <td><?= $quadra['NOME_MODAL'] ?></td>
+                            <td><?= $quadra['PRECO_HORA_QUAD'] ?></td>
+
+                            <td><a href="./cadastro_partida.php?id=<?= $quadra['ID_QUAD'] ?>">Reservar</a></td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table><br>
+
+        </form>
+    <?php endif; ?>
 
 </body>
 </html>

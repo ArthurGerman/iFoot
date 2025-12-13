@@ -31,36 +31,41 @@
     </h1>
 
     <a href="./inicio_prop.php">Voltar</a><br><br>
-
-    <table border="2">
-        <thead>
-            <tr>
-                <th>Endereço</th>
-                <th>Cidade</th>
-                <th>Estado</th>
-                <th>Modalidade</th>
-                <th>Preço por hora</th>
-                <th>Situação</th>
-                <th colspan="2">Ações</th>
-            </tr>
-        </thead>
-
-        <tbody>
-            <?php foreach ($quadras as $quadra): ?>
-                <tr>
-                    <td><?= $quadra['ENDERECO_QUAD'] ?></td>
-                    <td><?= $quadra['CIDADE_QUAD'] ?></td>
-                    <td><?= $quadra['NOME_UF'] ?></td>
-                    <td><?= $quadra['NOME_MODAL'] ?></td>
-                    <td><?= $quadra['PRECO_HORA_QUAD'] ?></td>
-                    <td><?= $quadra['STATUS_QUAD'] == 1 ? 'A' : 'I' ?></td>
-
-                    <td><a href="./edita_quadra.php?id=<?= $quadra['ID_QUAD'] ?>">Editar</a></td> 
-                    <td><a href="./exclui_quadra.php?id=<?= $quadra['ID_QUAD'] ?>">Excluir</a></td>
-                </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
     
+    <?php if (empty($quadras)): ?>
+        <p>Não existem quadras cadastradas</p>
+    <?php else: ?>
+
+        <table border="2">
+            <thead>
+                <tr>
+                    <th>Endereço</th>
+                    <th>Cidade</th>
+                    <th>Estado</th>
+                    <th>Modalidade</th>
+                    <th>Preço por hora</th>
+                    <th>Situação</th>
+                    <th colspan="2">Ações</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <?php foreach ($quadras as $quadra): ?>
+                    <tr>
+                        <td><?= $quadra['ENDERECO_QUAD'] ?></td>
+                        <td><?= $quadra['CIDADE_QUAD'] ?></td>
+                        <td><?= $quadra['NOME_UF'] ?></td>
+                        <td><?= $quadra['NOME_MODAL'] ?></td>
+                        <td><?= $quadra['PRECO_HORA_QUAD'] ?></td>
+                        <td><?= $quadra['STATUS_QUAD'] == 1 ? 'A' : 'I' ?></td>
+
+                        <td><a href="./edita_quadra.php?id=<?= $quadra['ID_QUAD'] ?>">Editar</a></td> 
+                        <td><a href="./exclui_quadra.php?id=<?= $quadra['ID_QUAD'] ?>">Excluir</a></td>
+                    </tr>
+                <?php endforeach; ?>
+
+            </tbody>
+        </table>
+    <?php endif; ?>
 </body>
 </html>
