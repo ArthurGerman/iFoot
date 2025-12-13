@@ -18,6 +18,9 @@
         <li>
             <a href="./lista_partida.php">Ver minhas partidas</a>
         </li>
+        <li>
+            <a href="./update_jogador.php">Editar meus dados</a>
+        </li>
     </ul>
 
     <form action="../../login/logout.php">
