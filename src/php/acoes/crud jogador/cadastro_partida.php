@@ -65,7 +65,7 @@
             Cadastro da partida
         </h1>
 
-        <a href="./inicio_jog.php">Voltar</a><br><br>
+        <a href="./lista_quadra.php">Voltar</a><br><br>
 
         <form action="" method="post">
 

@@ -7,7 +7,7 @@
 </head>
 <body>
     <h1>
-        Aqui estarão presentes todas as funcionalidades para o proprietário
+        Painel do proprietário
     </h1>
 
     <ul>
@@ -15,7 +15,10 @@
             <a href="./cadastra_quadra.php">Cadastrar nova quadra</a>
         </li>
         <li>
-            <a href="./lista_quadras.php">Listar quadras</a>
+            <a href="./lista_quadras.php">Ver minhas quadras</a>
+        </li>
+        <li>
+            <a href="./update_prop.php">Editar meus dados</a>
         </li>
     </ul>
 

@@ -27,7 +27,7 @@
 </head>
 <body>
     <h1>
-        Aqui estará a lista de quadras do usuário
+        Suas quadras
     </h1>
 
     <a href="./inicio_prop.php">Voltar</a><br><br>
@@ -56,7 +56,7 @@
                     <td><?= $quadra['STATUS_QUAD'] == 1 ? 'A' : 'I' ?></td>
 
                     <td><a href="./edita_quadra.php?id=<?= $quadra['ID_QUAD'] ?>">Editar</a></td> 
-                    <td><a href="">Excluir</a></td>
+                    <td><a href="./exclui_quadra.php?id=<?= $quadra['ID_QUAD'] ?>">Excluir</a></td>
                 </tr>
             <?php endforeach; ?>
         </tbody>

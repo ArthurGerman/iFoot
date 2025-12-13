@@ -15,6 +15,8 @@
     $query2->execute();
     $ufs = $query2->fetchAll(PDO::FETCH_ASSOC);
 
+    $erro = ''; // Variável de erro que exibe a mensagem caso o proprietário tente inativar a quadra que tem partidas.
+
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $ENDERECO_QUAD = $_POST['ENDERECO_QUAD'];
         $CIDADE_QUAD = $_POST['CIDADE_QUAD'];
@@ -23,30 +25,40 @@
         $PRECO_HORA_QUAD = str_replace(['.', ','], ['', '.'], $_POST['PRECO_HORA_QUAD']);
         $STATUS_QUAD = $_POST['STATUS_QUAD'];
 
-        $query3 = $pdo->prepare("
-            UPDATE QUADRAS
-            SET ENDERECO_QUAD = ?, 
-            CIDADE_QUAD = ?, 
-            ID_UF = ?, 
-            ID_MODAL = ?, 
-            PRECO_HORA_QUAD = ?, 
-            STATUS_QUAD = ?
+        if ($STATUS_QUAD == 0) {
+            $verifica = $pdo->prepare("SELECT 1 FROM PARTIDAS WHERE ID_QUAD = ? LIMIT 1");
+            $verifica->execute([$ID_QUAD]);
+            if ($verifica->fetch()) {
+                $erro = "Não é possível inativar a quadra, pois existem partidas cadastradas nela.";
+            }
+        }
 
-            WHERE ID_QUAD = ?
-        ");
-
-        $query3->execute([
-            $ENDERECO_QUAD, 
-            $CIDADE_QUAD, 
-            $SIGLA_UF, 
-            $NOME_MODAL, 
-            $PRECO_HORA_QUAD, 
-            $STATUS_QUAD, 
-
-            $ID_QUAD
-        ]);
-
-        header("Location: ./lista_quadras.php");
+        if ($erro == ''){
+            $query3 = $pdo->prepare("
+                UPDATE QUADRAS
+                SET ENDERECO_QUAD = ?, 
+                CIDADE_QUAD = ?, 
+                ID_UF = ?, 
+                ID_MODAL = ?, 
+                PRECO_HORA_QUAD = ?, 
+                STATUS_QUAD = ?
+    
+                WHERE ID_QUAD = ?
+            ");
+    
+            $query3->execute([
+                $ENDERECO_QUAD, 
+                $CIDADE_QUAD, 
+                $SIGLA_UF, 
+                $NOME_MODAL, 
+                $PRECO_HORA_QUAD, 
+                $STATUS_QUAD, 
+    
+                $ID_QUAD
+            ]);
+            
+            header("Location: ./lista_quadras.php");
+        }
     }
 ?>
 
@@ -55,7 +67,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ver quadra</title>
+    <title>Edição de quadra</title>
 </head>
 <body>
 
@@ -99,6 +111,10 @@
             <option value="1" <?= $quadra['STATUS_QUAD'] == 1 ? 'selected' : '' ?>>Ativa</option>
             <option value="0" <?= $quadra['STATUS_QUAD'] == 0 ? 'selected' : '' ?>>Inativa</option>
         </select><br>
+
+        <?php if (!empty($erro)): ?>
+            <p style="color:red;"><?= $erro ?></p>
+        <?php endif; ?>
 
         <input type="submit" value="Editar">
     </form>

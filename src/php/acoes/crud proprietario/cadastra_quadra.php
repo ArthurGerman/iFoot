@@ -42,11 +42,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastramento de quadras</title>
+    <title>Cadastramento de quadra</title>
 </head>
 <body>
     <h2>
-        Cadastramento de quadras
+        Cadastramento de quadra
     </h2>
 
     <a href="./inicio_prop.php">Voltar</a><br><br>

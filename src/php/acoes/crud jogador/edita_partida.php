@@ -43,12 +43,12 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Cadastrar Partida</title>
+        <title>Edição de partida</title>
     </head>
 
     <body>
         <h1>
-            Cadastro da partida
+            Ediçao da partida
         </h1>
 
         <a href="./inicio_jog.php">Voltar</a><br><br>
@@ -56,13 +56,13 @@
         <form action="" method="post">
 
             <label for="DATA_PTD">Data: </label>
-            <input type="date" name="DATA_PTD" id="DATA_PTD"><br>
+            <input type="date" name="DATA_PTD" id="DATA_PTD" value="<?= $partida['DATA_PTD'] ?>"><br>
 
             <label for="HORARIO_INICIO_PTD">inicio da Partida: </label>
-            <input type="time" name="HORARIO_INICIO_PTD" id="HORARIO_INICIO_PTD"><br>
+            <input type="time" name="HORARIO_INICIO_PTD" id="HORARIO_INICIO_PTD" value="<?= $partida['HORARIO_INICIO_PTD'] ?>"><br>
 
             <label for="HORARIO_FIM_PTD">fim da Partida: </label>
-            <input type="time" name="HORARIO_FIM_PTD" id="HORARIO_FIM_PTD"><br>
+            <input type="time" name="HORARIO_FIM_PTD" id="HORARIO_FIM_PTD" value="<?= $partida['HORARIO_FIM_PTD'] ?>"><br>
 
             <input type="submit">
         </form>

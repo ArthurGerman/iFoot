@@ -82,7 +82,6 @@
             </tbody>
         </table><br>
 
-        <input type="submit">
     </form>
 
 </body>
