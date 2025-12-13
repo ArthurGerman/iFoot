@@ -13,21 +13,42 @@
         $HORARIO_INICIO_PTD = $_POST['HORARIO_INICIO_PTD'];
         $HORARIO_FIM_PTD = $_POST['HORARIO_FIM_PTD'];
 
+        $stmt = $pdo->prepare("SELECT HORARIO_INICIO_PTD, HORARIO_FIM_PTD FROM PARTIDAS WHERE ID_QUAD = ? AND DATA_PTD = ?");
+        $stmt->execute([$ID_QUAD, $DATA_PTD]);
+        $times = $stmt;
 
-        $query1 = $pdo->prepare("INSERT INTO PARTIDAS (DATA_PTD, HORARIO_INICIO_PTD, HORARIO_FIM_PTD, ID_QUAD) VALUES (?, ?, ?, ?)");
-        $query1->execute([$DATA_PTD, $HORARIO_INICIO_PTD, $HORARIO_FIM_PTD, $ID_QUAD]);
+        $conflict = false;
 
-        $ID_PTD = $pdo->lastInsertId(); // Comando para descobrir o id da última quadra a qual o usuário fez a reserva
+        if ($stmt->rowCount() > 0) {
+            foreach ($times as $time) {
+                if ($HORARIO_INICIO_PTD < $time["HORARIO_FIM_PTD"] && $HORARIO_FIM_PTD > $time["HORARIO_INICIO_PTD"]) {
+                    $conflict = true;
+                    break;
+                }
+            };
+        }
+
+        if (!$conflict) {
+
+            $query2 = $pdo->prepare("INSERT INTO PARTIDAS (DATA_PTD, HORARIO_INICIO_PTD, HORARIO_FIM_PTD, ID_QUAD) VALUES (?, ?, ?, ?)");
+            $query2->execute([$DATA_PTD, $HORARIO_INICIO_PTD, $HORARIO_FIM_PTD, $ID_QUAD]);
+
+            $ID_PTD = $pdo->lastInsertId(); // Comando para descobrir o id da última quadra a qual o usuário fez a reserva
         
-        // Query para inserir na tabela intermediária o id do jogador e da partida
+            // Query para inserir na tabela intermediária o id do jogador e da partida
 
-        $query2 = $pdo->prepare("INSERT INTO JOGADOR_PARTIDA (ID_JOG, ID_PTD) VALUES (?, ?)");
-        $query2->execute([$ID_JOG, $ID_PTD]);
+            $query3 = $pdo->prepare("INSERT INTO JOGADOR_PARTIDA (ID_JOG, ID_PTD) VALUES (?, ?)");
+            $query3->execute([$ID_JOG, $ID_PTD]);
 
 
-        echo "Partida cadastrada com sucesso!<br>";
-        //Onde vai mostrar as informções da partida
-        echo "<button><a href='./lista_partida.php'>Ver minhas partidas</a></button>";
+            echo "Partida cadastrada com sucesso!<br>";
+            //Onde vai mostrar as informções da partida
+            echo "<button><a href='./lista_partida.php'>Ver minhas partidas</a></button>";
+        } else {
+            echo "<p style='color:red;'>❌ Horário indisponível. Já existe uma partida nesse período.</p>";
+            echo "<button type='button' onclick='history.back()'>Voltar</button>";
+        };
+
     } else {
 ?>
     <!DOCTYPE html>
