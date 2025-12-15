@@ -1,0 +1,27 @@
+{
+  "name": "ifoot",
+  "version": "1.0.0",
+  "description": "É um projeto colaborativo que tem como objetivo proporcionar funcionalidades interessantes para jogadores de futebol amador, como marcação de partidas, encontro de jogadores próximos, reserva de quadras, entre outras funções.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "tailwindcss -i ./src/styles/input.css -o ./src/styles/global.css --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ArthurGerman/iFoot.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/ArthurGerman/iFoot/issues"
+  },
+  "homepage": "https://github.com/ArthurGerman/iFoot#readme",
+  "devDependencies": {
+    "autoprefixer": "^10.4.23",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^3.4.19"
+  }
+}
