@@ -9,9 +9,20 @@
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
+        date_default_timezone_set('America/Sao_Paulo');
+
         $DATA_PTD = $_POST['DATA_PTD'];
         $HORARIO_INICIO_PTD = $_POST['HORARIO_INICIO_PTD'];
         $HORARIO_FIM_PTD = $_POST['HORARIO_FIM_PTD'];
+
+        $data_hora_agora = new DateTime();
+        $data_hora_partida = new DateTime($DATA_PTD . ' ' . $HORARIO_INICIO_PTD);
+
+        if ($data_hora_partida < $data_hora_agora) {
+            echo "<p style='color:red;'>❌ Não é permitido cadastrar partidas em datas ou horários que já passaram.</p>";
+            echo "<button type='button' onclick='history.back()'>Voltar</button>";
+            exit;
+        }
 
         $stmt = $pdo->prepare("SELECT HORARIO_INICIO_PTD, HORARIO_FIM_PTD FROM PARTIDAS WHERE ID_QUAD = ? AND DATA_PTD = ?");
         $stmt->execute([$ID_QUAD, $DATA_PTD]);

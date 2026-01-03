@@ -18,6 +18,9 @@
             <a href="./lista_quadras.php">Ver minhas quadras</a>
         </li>
         <li>
+            <a href="./calendario_partidas.php">Ver partidas agendadas para minhas quadras</a>
+        </li>
+        <li>
             <a href="./update_prop.php">Editar meus dados</a>
         </li>
     </ul>
