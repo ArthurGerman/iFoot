@@ -18,8 +18,13 @@
         $data_hora_agora = new DateTime();
         $data_hora_partida = new DateTime($DATA_PTD . ' ' . $HORARIO_INICIO_PTD);
 
-        if ($data_hora_partida < $data_hora_agora) {
+        if ($data_hora_partida < $data_hora_agora) { // Testa se o usuário está tentando cadastrar em uma data/horário que já passou
             echo "<p style='color:red;'>❌ Não é permitido cadastrar partidas em datas ou horários que já passaram.</p>";
+            echo "<button type='button' onclick='history.back()'>Voltar</button>";
+            exit;
+        }
+        if ($HORARIO_FIM_PTD <= $HORARIO_INICIO_PTD) { // Testa se o usuário está colocando o horário de fim antes do horário de início da partida
+            echo "<p style='color:red;'>❌ O horário final deve ser maior que o horário inicial.</p>";
             echo "<button type='button' onclick='history.back()'>Voltar</button>";
             exit;
         }
