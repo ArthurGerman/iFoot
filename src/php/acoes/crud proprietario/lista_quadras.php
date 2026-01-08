@@ -45,7 +45,7 @@
                     <th>Modalidade</th>
                     <th>Preço por hora</th>
                     <th>Situação</th>
-                    <th colspan="2">Ações</th>
+                    <th colspan="3">Ações</th>
                 </tr>
             </thead>
 
@@ -61,6 +61,7 @@
 
                         <td><a href="./edita_quadra.php?id=<?= $quadra['ID_QUAD'] ?>">Editar</a></td> 
                         <td><a href="./exclui_quadra.php?id=<?= $quadra['ID_QUAD'] ?>">Excluir</a></td>
+                        <td><a href="./historico_quadra.php?id=<?= $quadra['ID_QUAD'] ?>">Ver histórico</a></td>
                     </tr>
                 <?php endforeach; ?>
 

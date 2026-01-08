@@ -32,12 +32,12 @@ USE `db_ifoot`;
 CREATE TABLE `JOGADORES` (
   `ID_JOG` int(11) NOT NULL,
   `NOME_JOG` varchar(255) NOT NULL,
-  `EMAIL_JOG` varchar(50) NOT NULL,
-  `CPF_JOG` varchar(11) NOT NULL,
+  `EMAIL_JOG` varchar(50) NOT NULL UNIQUE,
+  `CPF_JOG` varchar(11) NOT NULL UNIQUE,
   `CIDADE_JOG` varchar(50) NOT NULL,
   `ENDERECO_JOG` varchar(255) NOT NULL,
   `TEL_JOG` varchar(11) NOT NULL,
-  `SENHA_JOG` varchar(8) NOT NULL,
+  `SENHA_JOG` varchar(255) NOT NULL,
   `ID_UF` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -96,10 +96,10 @@ CREATE TABLE `PARTIDAS` (
 CREATE TABLE `PROPRIETARIOS` (
   `ID_PROP` int(11) NOT NULL,
   `NOME_PROP` varchar(255) NOT NULL,
-  `EMAIL_PROP` varchar(50) NOT NULL,
-  `CPF_PROP` varchar(11) NOT NULL,
+  `EMAIL_PROP` varchar(50) NOT NULL UNIQUE,
+  `CPF_PROP` varchar(11) NOT NULL UNIQUE,
   `TEL_PROP` varchar(11) NOT NULL,
-  `SENHA_PROP` varchar(8) NOT NULL
+  `SENHA_PROP` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------

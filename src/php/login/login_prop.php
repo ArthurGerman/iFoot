@@ -18,14 +18,18 @@
         $SENHA_PROP = $_POST['SENHA_PROP'];
     
     
-        $query = $pdo->prepare("SELECT * FROM PROPRIETARIOS WHERE EMAIL_PROP = ? AND SENHA_PROP = ?");
-        $query->execute([$EMAIL_PROP, $SENHA_PROP]);
-        $result = $query->fetch(PDO::FETCH_ASSOC);
+        $query = $pdo->prepare("SELECT * FROM PROPRIETARIOS WHERE EMAIL_PROP = ?");
+        $query->execute([$EMAIL_PROP]);
+        $proprietario = $query->fetch(PDO::FETCH_ASSOC);
     
-        if ($result) {
-            $_SESSION['id_prop'] = $result['ID_PROP'];
-            $_SESSION['name_prop'] = $result['NOME_PROP'];
+
+        if ($proprietario && password_verify($SENHA_PROP, $proprietario['SENHA_PROP'])) {
+
+            $_SESSION['id_prop'] = $proprietario['ID_PROP'];
+            $_SESSION['name_prop'] = $proprietario['NOME_PROP'];
+
             header('Location: /src/php/acoes/crud%20proprietario/inicio_prop.php');
+            
         } else {
             $erro = "Email ou senha estão incorretos";
         }
@@ -41,7 +45,10 @@
     <title>Login</title>
 </head>
 <body>
-    <a href="/index.php">Voltar a Home</a><br><br>
+
+    <a href="/index.php">Voltar a Home</a><br>
+
+    <h1>Login de proprietário</h1>
 
     <form action="" method="post">
         <label for="EMAIL_PROP">Email: </label>

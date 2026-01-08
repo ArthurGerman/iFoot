@@ -53,10 +53,10 @@ session_start();
 
     <ul>
         <li>
-            <a href="./src/php/login/login_prop.php">Proprietário</a>
+            <a href="./src/php/login/login_jog.php">Jogador</a>
         </li>
         <li>
-            <a href="./src/php/login/login_jog.php">Jogador</a>
+            <a href="./src/php/login/login_prop.php">Proprietário</a>
         </li>
     </ul>
 

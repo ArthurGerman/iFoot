@@ -18,15 +18,18 @@
         $SENHA_JOG = $_POST['SENHA_JOG'];
     
     
-        $query = $pdo -> prepare("SELECT * FROM jogadores WHERE EMAIL_JOG = ? AND SENHA_JOG = ?");
-        $query -> execute([$EMAIL_JOG, $SENHA_JOG]);
-        $result = $query -> fetch(PDO::FETCH_ASSOC);
-
+        $query = $pdo -> prepare("SELECT * FROM jogadores WHERE EMAIL_JOG = ?");
+        $query -> execute([$EMAIL_JOG]);
+        $jogador = $query->fetch(PDO::FETCH_ASSOC);
         
-        if ($result) {
-            $_SESSION['id_jog'] = $result['ID_JOG'];
-            $_SESSION['name_jog'] = $result['NOME_JOG'];
+        
+        if ($jogador && password_verify($SENHA_JOG, $jogador['SENHA_JOG'])) {
+
+            $_SESSION['id_jog'] = $jogador['ID_JOG'];
+            $_SESSION['name_jog'] = $jogador['NOME_JOG'];
+
             header('Location: /src/php/acoes/crud%20jogador/inicio_jog.php');
+
         } else {
             $erro = "Email ou senha estão incorretos";
         }
@@ -45,7 +48,10 @@
     <title>Login</title>
 </head>
 <body>
-    <a href="/index.php">Voltar a Home</a><br><br>
+
+    <a href="/index.php">Voltar a Home</a><br>
+
+    <h1>Login de jogador</h1>
 
     <form action="" method="post">
         <label for="EMAIL_JOG">Email: </label>

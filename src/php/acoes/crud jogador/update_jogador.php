@@ -2,6 +2,8 @@
     session_start();
     require_once '../../config.php';
 
+    $mensagem_erro = ""; // Variável para armazenar a mensagem de erro que aparece caso o usuário tente cadastrar um email e/ou senha que já existem no banco de dados
+
     $ID_JOG = $_SESSION['id_jog'];
 
     $query = $pdo->prepare("
@@ -28,6 +30,7 @@
         $CIDADE_JOG = $_POST['CIDADE_JOG'];
         $ENDERECO_JOG = $_POST['ENDERECO_JOG'];
         $TEL_JOG = $_POST['TEL_JOG'];
+        $SENHA_JOG = $_POST['SENHA_JOG']; // Senha nova
 
         $SIGLA_UF = $_POST['UF'];
 
@@ -35,32 +38,91 @@
         $query2 -> execute([$SIGLA_UF]);
         $ID_UF = $query2->fetchColumn();
 
-        $query3 = $pdo -> prepare("
-            UPDATE JOGADORES
-            SET NOME_JOG = ?, 
-            EMAIL_JOG = ?,
-            CPF_JOG = ?,
-            CIDADE_JOG = ?,
-            ENDERECO_JOG = ?,
-            TEL_JOG = ?,
-            ID_UF = ?
+        //Bloco de verificações de CPF e email para garantir que o usuário não altere para algum que já exista
+        $verifica_email = $pdo->prepare("SELECT 1 FROM JOGADORES WHERE EMAIL_JOG = ? AND ID_JOG != ?");
+        $verifica_cpf = $pdo->prepare("SELECT 1 FROM JOGADORES WHERE CPF_JOG = ? AND ID_JOG != ?");
 
-            WHERE ID_JOG = ?
-        ");
+        $verifica_email->execute([$EMAIL_JOG, $ID_JOG]);
+        $verifica_cpf->execute([$CPF_JOG, $ID_JOG]);
+
+        if ($verifica_cpf->rowCount() > 0 && $verifica_email->rowCount() > 0) {
+
+            $mensagem_erro = "❌ CPF e Email já estão sendo usados por outro usuário.<br>";
+
+        } else if ($verifica_email->rowCount() > 0){
+
+            $mensagem_erro =  "❌ Este e-mail já está sendo usado por outro usuário.<br>";
+
+        } else if ($verifica_cpf->rowCount() > 0){
+
+            $mensagem_erro =  "❌ Este CPF já está sendo usado por outro usuário.<br>";
+
+        } else{ // Bloco de alteração de dados
+
+            if(!empty($SENHA_JOG)){ // Se a senha não estiver vazia, o sistema atualiza a senha pois não tem como alterar uma senha que já foi feito o hash
+
+                $SENHA_JOG = password_hash($SENHA_JOG, PASSWORD_BCRYPT); //Senha nova com hash
+
+                $query3 = $pdo -> prepare("
+                    UPDATE JOGADORES
+                    SET NOME_JOG = ?, 
+                    EMAIL_JOG = ?,
+                    CPF_JOG = ?,
+                    CIDADE_JOG = ?,
+                    ENDERECO_JOG = ?,
+                    TEL_JOG = ?,
+                    SENHA_JOG = ?,
+                    ID_UF = ?
         
-        $query3 -> execute([
-            $NOME_JOG,
-            $EMAIL_JOG,
-            $CPF_JOG,
-            $CIDADE_JOG,
-            $ENDERECO_JOG,
-            $TEL_JOG,
-            $ID_UF,
+                    WHERE ID_JOG = ?
+                ");
+                
+                $query3 -> execute([
+                    $NOME_JOG,
+                    $EMAIL_JOG,
+                    $CPF_JOG,
+                    $CIDADE_JOG,
+                    $ENDERECO_JOG,
+                    $TEL_JOG,
+                    $SENHA_JOG,
+                    $ID_UF,
+        
+                    $ID_JOG
+                ]);
 
-            $ID_JOG
-        ]);
 
-        header("Location: ./inicio_jog.php");
+            } else{ // Se o usuário não colocou uma senha nova, o sistema não atualiza
+                $query3 = $pdo -> prepare("
+                    UPDATE JOGADORES
+                    SET NOME_JOG = ?, 
+                    EMAIL_JOG = ?,
+                    CPF_JOG = ?,
+                    CIDADE_JOG = ?,
+                    ENDERECO_JOG = ?,
+                    TEL_JOG = ?,
+                    ID_UF = ?
+        
+                    WHERE ID_JOG = ?
+                ");
+                
+                $query3 -> execute([
+                    $NOME_JOG,
+                    $EMAIL_JOG,
+                    $CPF_JOG,
+                    $CIDADE_JOG,
+                    $ENDERECO_JOG,
+                    $TEL_JOG,
+                    $ID_UF,
+        
+                    $ID_JOG
+                ]);
+
+
+            }
+    
+            header("Location: ../../login/login_jog.php");
+            exit();
+        }
     }
 ?>
 
@@ -70,12 +132,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>atualizar jogador</title>
+    <title>Atualização de dados</title>
 </head>
 
 <body>
     <h1>
-        atualizar dados
+        Atualização de dados do jogador
     </h1>
 
     <a href="./inicio_jog.php">Voltar</a><br><br>
@@ -132,10 +194,16 @@
         <label for="TEL_JOG">Telefone: </label>
         <input type="telefone" name="TEL_JOG" id="TEL_JOG" maxlength="11" value="<?=$results["TEL_JOG"]?>"><br>
 
+        <label for="SENHA_JOG">Senha: </label>
+        <input type="password" name="SENHA_JOG" id="SENHA_JOG" placeholder="Digite uma nova senha(opcional)"><br>
+
         <input type="submit">
     </form>
 
-    <script src="/src/js/tratamento-erros_jog.js"></script>
-</body>
+    <?php if (!empty($mensagem_erro)) :?>
+        <p style="color:red"><?= $mensagem_erro ?></p>
+    <?php endif;?> 
 
+    <script src="/src/js/tratamento-erros-update_jog.js"></script>
+</body>
 </html>

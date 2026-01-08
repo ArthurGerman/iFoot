@@ -24,7 +24,7 @@
 
     ");
     $query->execute([$ID_JOG]);
-    $results = $query->fetchAll(PDO::FETCH_ASSOC);
+    $partidas = $query->fetchAll(PDO::FETCH_ASSOC);
 
 
 
@@ -42,63 +42,69 @@
 
     <h1>Suas partidas</h1>
 
-    <table border="2">
-        <thead>
-            <tr>
-                <th>Endereço</th>
-                <th>Data</th>
-                <th>Início</th>
-                <th>Fim</th>
-                <th>Modalidade</th>
-                <th>Preço por hora</th>
-                <th>Preço total</th>
-                <th colspan="2">Ações</th>
-            </tr>
-        </thead>
+    <?php if (empty($partidas)): ?>
+        <p>Não existem partidas cadastradas</p>
+    <?php else: ?>
 
-        <tbody>
-            <?php foreach ($results as $partida): ?>
-                <?php
-                    // O código abaixo serve para fazer a lógica do preço da partida com base na quantidade de tempo
-
-                    // Construir DateTime completos com a data da partida
-                    $inicio = new DateTime($partida['DATA_PTD'] . ' ' . $partida['HORARIO_INICIO_PTD']);
-                    $fim    = new DateTime($partida['DATA_PTD'] . ' ' . $partida['HORARIO_FIM_PTD']);
-
-                    // Se o fim for menor que o início, avançar um dia (cruza meia-noite)
-                    if ($fim < $inicio) {
-                        $fim->modify('+1 day');
-                    }
-
-                    // Calcular duração em horas decimais
-                    $segundos = $fim->getTimestamp() - $inicio->getTimestamp();
-                    $duracao_horas = $segundos / 3600;
-
-                    // Proteger contra valores inválidos
-                    if ($duracao_horas < 0) {
-                        $duracao_horas = 0;
-                    }
-
-                    // Preço total
-                    $preco_total = $duracao_horas * (float)$partida['PRECO_HORA_QUAD'];
-
-                ?>
-
+        <table border="2">
+            <thead>
                 <tr>
-                    <td><?= $partida['ENDERECO_QUAD'] ?></td>
-                    <td><?= date('d-m-Y', strtotime($partida['DATA_PTD'])) ?></td>
-                    <td><?= $partida['HORARIO_INICIO_PTD'] ?></td>
-                    <td><?= $partida['HORARIO_FIM_PTD'] ?></td>
-                    <td><?= $partida['NOME_MODAL'] ?></td>
-                    <td><?= $partida['PRECO_HORA_QUAD'] ?></td>
-                    <td><?= $preco_total ?></td>
-
-                    <td><a href="./edita_partida.php?id=<?= $partida['ID_PTD'] ?>">Editar</a></td>
-                    <td><a href="./excluir_partida.php?id=<?= $partida['ID_PTD'] ?>">Excluir</a></td>
+                    <th>Endereço</th>
+                    <th>Data</th>
+                    <th>Início</th>
+                    <th>Fim</th>
+                    <th>Modalidade</th>
+                    <th>Preço por hora</th>
+                    <th>Preço total</th>
+                    <th colspan="2">Ações</th>
                 </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table><br>
+            </thead>
+
+            <tbody>
+                <?php foreach ($partidas as $partida): ?>
+                    <?php
+                        // O código abaixo serve para fazer a lógica do preço da partida com base na quantidade de tempo
+
+                        // Construir DateTime completos com a data da partida
+                        $inicio = new DateTime($partida['DATA_PTD'] . ' ' . $partida['HORARIO_INICIO_PTD']);
+                        $fim    = new DateTime($partida['DATA_PTD'] . ' ' . $partida['HORARIO_FIM_PTD']);
+
+                        // Se o fim for menor que o início, avançar um dia (cruza meia-noite)
+                        if ($fim < $inicio) {
+                            $fim->modify('+1 day');
+                        }
+
+                        // Calcular duração em horas decimais
+                        $segundos = $fim->getTimestamp() - $inicio->getTimestamp();
+                        $duracao_horas = $segundos / 3600;
+
+                        // Proteger contra valores inválidos
+                        if ($duracao_horas < 0) {
+                            $duracao_horas = 0;
+                        }
+
+                        // Preço total
+                        $preco_total = $duracao_horas * (float)$partida['PRECO_HORA_QUAD'];
+
+                    ?>
+
+                    <tr>
+                        <td><?= $partida['ENDERECO_QUAD'] ?></td>
+                        <td><?= date('d-m-Y', strtotime($partida['DATA_PTD'])) ?></td>
+                        <td><?= $partida['HORARIO_INICIO_PTD'] ?></td>
+                        <td><?= $partida['HORARIO_FIM_PTD'] ?></td>
+                        <td><?= $partida['NOME_MODAL'] ?></td>
+                        <td><?= $partida['PRECO_HORA_QUAD'] ?></td>
+                        <td><?= $preco_total ?></td>
+
+                        <td><a href="./edita_partida.php?id=<?= $partida['ID_PTD'] ?>">Editar</a></td>
+                        <td><a href="./excluir_partida.php?id=<?= $partida['ID_PTD'] ?>">Excluir</a></td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table><br>
+        
+    <?php endif;?>
     
 </body>
 </html>

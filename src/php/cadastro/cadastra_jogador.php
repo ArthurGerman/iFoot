@@ -1,6 +1,8 @@
 <?php 
     require_once "../config.php";
 
+    $mensagem_erro = ""; // Variável para armazenar a mensagem de erro que aparece caso o usuário tente cadastrar um email e/ou CPF que já existem no banco de dados
+
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $NOME_JOG = $_POST['NOME_JOG'];
         $EMAIL_JOG = $_POST['EMAIL_JOG'];
@@ -8,7 +10,7 @@
         $CIDADE_JOG = $_POST['CIDADE_JOG'];
         $ENDERECO_JOG = $_POST['ENDERECO_JOG'];
         $TEL_JOG = $_POST['TEL_JOG'];
-        $SENHA_JOG = $_POST['SENHA_JOG'];
+        $SENHA_JOG = password_hash($_POST['SENHA_JOG'], PASSWORD_BCRYPT);
 
         $SIGLA_UF = $_POST['UF'];
 
@@ -21,15 +23,37 @@
         $ID_UF = $result['ID_UF'];
 
 
-        //Query para fazer a inserção de dados no banco
+        //Query para verificar se o CPF e/ou email cadastrados já existem
+        // São duas verificações únicas pois possa ser que o email ou o CPF foram cadastrados iguais de maneira individual e não os dois juntos
+        $verifica_email = $pdo->prepare("SELECT 1 FROM JOGADORES WHERE EMAIL_JOG = ?");
+        $verifica_cpf = $pdo->prepare("SELECT 1 FROM JOGADORES WHERE CPF_JOG = ?");
 
-        $query2 = $pdo->prepare("INSERT INTO JOGADORES (NOME_JOG, EMAIL_JOG, CPF_JOG, CIDADE_JOG, ENDERECO_JOG, TEL_JOG, SENHA_JOG, ID_UF) VALUES (?,?,?,?,?,?,?,?)");
-        $query2->execute([$NOME_JOG, $EMAIL_JOG, $CPF_JOG, $CIDADE_JOG, $ENDERECO_JOG, $TEL_JOG, $SENHA_JOG, $ID_UF]);
-        
+        $verifica_email->execute([$EMAIL_JOG]);
+        $verifica_cpf->execute([$CPF_JOG]);
 
-        echo "Olá $NOME_JOG ! Seus dados foram cadastrados com sucesso <br>";
-        echo "<button><a href='../login/login_jog.php'>Login</a></button>";
-    } else {
+        if ($verifica_cpf->rowCount() > 0 && $verifica_email->rowCount() > 0) {
+            $mensagem_erro = "❌ CPF e Email já estão cadastrados no sistema.<br>";
+
+        } else if ($verifica_email->rowCount() > 0){
+            $mensagem_erro =  "❌ Este e-mail já está cadastrado no sistema.<br>";
+
+        } else if ($verifica_cpf->rowCount() > 0){
+            $mensagem_erro =  "❌ Este CPF já está cadastrado no sistema.<br>";
+
+        } else{
+
+            //Query para fazer a inserção de dados no banco
+    
+            $query2 = $pdo->prepare("INSERT INTO JOGADORES (NOME_JOG, EMAIL_JOG, CPF_JOG, CIDADE_JOG, ENDERECO_JOG, TEL_JOG, SENHA_JOG, ID_UF) VALUES (?,?,?,?,?,?,?,?)");
+            $query2->execute([$NOME_JOG, $EMAIL_JOG, $CPF_JOG, $CIDADE_JOG, $ENDERECO_JOG, $TEL_JOG, $SENHA_JOG, $ID_UF]);
+            
+            header('Location: ../login/login_jog.php');
+    
+            //echo "Olá $NOME_JOG ! Seus dados foram cadastrados com sucesso <br>";
+            //echo "<button><a href='../login/login_jog.php'>Login</a></button>";
+        }
+
+    }
 ?>
 
 
@@ -105,10 +129,10 @@
         <input type="submit">
     </form>
 
+    <?php if (!empty($mensagem_erro)) :?>
+        <p style="color:red"><?= $mensagem_erro ?></p>
+    <?php endif;?> 
+
     <script src="/src/js/tratamento-erros_jog.js"></script>
 </body>
 </html>
-
-<?php 
-    }
-?>

@@ -562,6 +562,10 @@ video {
   display: table;
 }
 
+.hidden {
+  display: none;
+}
+
 .border-collapse {
   border-collapse: collapse;
 }

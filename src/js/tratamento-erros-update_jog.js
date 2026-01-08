@@ -1,4 +1,5 @@
-// Este arquivo serve exclusivamente para tratamento de erros no momento da inserção dos dados por partes dos usuários. Ele atua no front-end não deixando que o formulário seja enviado sem estar preenchido completamente. Este tratamento de erro serve apenas para o cadastramento do jogador e do proprietário.
+// Script específico para o update do jogador, onde o usuário pode não digitar uma nova senha, ou seja, a senha nova é opcional
+
 
 document.querySelector("form").onsubmit = function(event) {
     let nome = document.getElementById("NOME_JOG").value;
@@ -7,15 +8,14 @@ document.querySelector("form").onsubmit = function(event) {
     let cidade = document.getElementById("CIDADE_JOG").value;
     let endereco = document.getElementById("ENDERECO_JOG").value;
     let telefone = document.getElementById("TEL_JOG").value;
-    let senha = document.getElementById("SENHA_JOG").value;
     let UF = document.getElementById("UF").value;
     
-    let array = [nome, email, CPF, cidade, endereco, telefone, senha, UF];
+    let array = [nome, email, CPF, cidade, endereco, telefone, UF];
     
     
     for(let i = 0; i < array.length; i++){
         if(array[i] == ""){
-            alert("Preencha todos os campos!")
+            alert("Preencha todos os campos obrigatórios!")
             event.preventDefault();
             break
         }

@@ -2,6 +2,8 @@
     session_start();
     require_once '../../config.php';
 
+    $mensagem_erro = ""; // Variável para armazenar a mensagem de erro que aparece caso o usuário tente cadastrar um email e/ou senha que já existem no banco de dados
+
     $ID_PROP = $_SESSION['id_prop'];
 
     $query = $pdo->prepare("SELECT * FROM PROPRIETARIOS WHERE ID_PROP = ?");
@@ -13,30 +15,81 @@
         $EMAIL_PROP = $_POST['EMAIL_PROP'];
         $CPF_PROP = $_POST['CPF_PROP'];
         $TEL_PROP = $_POST['TEL_PROP'];
-        $SENHA_PROP = $_POST['SENHA_PROP'];
+        $SENHA_PROP = $_POST['SENHA_PROP']; // Senha nova
 
-        $query = $pdo -> prepare("
-            UPDATE PROPRIETARIOS
-            SET NOME_PROP = ?, 
-            EMAIL_PROP = ?,
-            CPF_PROP = ?,
-            TEL_PROP = ?,
-            SENHA_PROP = ?
+        //Query para verificar se o CPF e/ou email cadastrados já existem
+        // São duas verificações únicas pois possa ser que o email ou o CPF foram cadastrados iguais de maneira individual e não os dois juntos
+        $verifica_email = $pdo->prepare("SELECT 1 FROM PROPRIETARIOS WHERE EMAIL_PROP = ? AND ID_PROP != ?");
+        $verifica_cpf = $pdo->prepare("SELECT 1 FROM PROPRIETARIOS WHERE CPF_PROP = ? AND ID_PROP != ?");
 
-            WHERE ID_PROP = ?
-        ");
+        $verifica_email->execute([$EMAIL_PROP, $ID_PROP]);
+        $verifica_cpf->execute([$CPF_PROP, $ID_PROP]);
+
+        if ($verifica_cpf->rowCount() > 0 && $verifica_email->rowCount() > 0) {
+
+            $mensagem_erro = "❌ CPF e Email já estão sendo usados por outro usuário.<br>";
+
+        } else if ($verifica_email->rowCount() > 0){
+
+            $mensagem_erro =  "❌ Este e-mail já está sendo usado por outro usuário.<br>";
+
+        } else if ($verifica_cpf->rowCount() > 0){
+
+            $mensagem_erro =  "❌ Este CPF já está sendo usado por outro usuário.<br>";
+
+        } else{ //Bloco de alteração de dados
+
+            if(!empty($SENHA_PROP)){ // Se a senha não estiver vazia, o sistema atualiza a senha pois não tem como alterar uma senha que já foi feito o hash
+                
+                $SENHA_PROP = password_hash($SENHA_PROP, PASSWORD_BCRYPT); //Senha nova com hash
+                
+                $query = $pdo -> prepare("
+                    UPDATE PROPRIETARIOS
+                    SET NOME_PROP = ?, 
+                    EMAIL_PROP = ?,
+                    CPF_PROP = ?,
+                    TEL_PROP = ?,
+                    SENHA_PROP = ?
         
-        $query -> execute([
-            $NOME_PROP,
-            $EMAIL_PROP,
-            $CPF_PROP,
-            $TEL_PROP,
-            $SENHA_PROP,
+                    WHERE ID_PROP = ?
+                ");
+                
+                $query -> execute([
+                    $NOME_PROP,
+                    $EMAIL_PROP,
+                    $CPF_PROP,
+                    $TEL_PROP,
+                    $SENHA_PROP,
+        
+                    $ID_PROP
+                ]);
 
-            $ID_PROP
-        ]);
+                
+            } else{ // Se o usuário não colocou uma senha nova, o sistema não atualiza
+                $query = $pdo -> prepare("
+                    UPDATE PROPRIETARIOS
+                    SET NOME_PROP = ?, 
+                    EMAIL_PROP = ?,
+                    CPF_PROP = ?,
+                    TEL_PROP = ?
+        
+                    WHERE ID_PROP = ?
+                    ");
+                
+                $query -> execute([
+                    $NOME_PROP,
+                    $EMAIL_PROP,
+                    $CPF_PROP,
+                    $TEL_PROP,
+        
+                    $ID_PROP
+                ]);
 
-        header("Location: ./inicio_prop.php");
+            }
+
+            header("Location: ../../login/login_prop.php");
+            exit();
+        }
     }
 ?>
 
@@ -71,12 +124,15 @@
         <input type="telefone" name="TEL_PROP" id="TEL_PROP" maxlength="11" value="<?=$results["TEL_PROP"]?>"><br>
 
         <label for="SENHA_PROP">Senha: </label>
-        <input type="text" name="SENHA_PROP" id="SENHA_PROP" value="<?=$results["SENHA_PROP"]?>"><br>
+        <input type="password" name="SENHA_PROP" id="SENHA_PROP" placeholder="Digite uma nova senha(opcional)"><br>
 
         <input type="submit">
     </form>
 
-    <script src="/src/js/tratamento-erros_prop.js"></script>
-</body>
+    <?php if (!empty($mensagem_erro)) :?>
+        <p style="color:red"><?= $mensagem_erro ?></p>
+    <?php endif;?> 
 
+    <script src="/src/js/tratamento-erros-update_prop.js"></script>
+</body>
 </html>
