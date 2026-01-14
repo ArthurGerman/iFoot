@@ -7,62 +7,54 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/src/styles/index.css">
     <title>iFoot</title>
 </head>
 <body>
-    <h1>
-        Início do projeto
-    </h1>
 
-    <?php if (isset($_SESSION['id_jog'])) {
-        echo $_SESSION['id_jog'];
-    }elseif (isset($_SESSION['id_prop'])){
-        echo $_SESSION['id_prop'];
-    }else {
-        echo "sem login";
-    }
-    ?>
-    <?php if (isset($_SESSION['id_jog'])) : ?>
-        <h1>Olá <?php echo $_SESSION['name_jog'] ?></h1>    
-    <?php elseif(isset($_SESSION['id_prop'])) : ?>
-        <h1>Olá <?php echo $_SESSION['name_prop'] ?></h1>
-    <?php else :?>
-        <h1>Você não está logado</h1>
-    <?php endif; ?>
-    
-    <h2>
-        Cadastro:
-    </h2>
+    <div class="container">
 
-    <ul>
-        <li>
-            <a href="./src/php/cadastro/cadastra_jogador.php">Jogador</a>
-        </li>
-        <li>
-            <a href="./src/php/cadastro/cadastra_proprietario.php">Proprietário</a>
-        </li>
-    </ul>
+        <div class="nav">
 
-    <hr>
-    <!--<a href="./src/php/cadastro/cadastra_equipe.php">Equipe</a>--><!--Deixei comentado porque essas funcionalidades são da parte do crud do jogador-->
-    <!--<a href="./src/php/cadastro/cadastro_partida.php">Partida</a>-->
+            <img src="./static/ifoot.png" alt="" id="ifoot-logo">
+            
+            <a href="" id="funcionamento">Como funciona</a>
+            <a href="" id="sobre">Sobre</a>
 
-    <h2>
-        Login:
-    </h2>
+            <div class="login">
 
-    <ul>
-        <li>
-            <a href="./src/php/login/login_jog.php">Jogador</a>
-        </li>
-        <li>
-            <a href="./src/php/login/login_prop.php">Proprietário</a>
-        </li>
-    </ul>
+                <a href="./src/php/login/login_jog.php">Entrar como jogador</a>
+                <a href="./src/php/login/login_prop.php">Entrar como proprietário</a>
 
+            </div>
+            
+        </div>
 
-    <!--<form action="./src/php/login/logout.php">
-        <button type="submit">Sair (Logout)</button>
-    </form>-->
+        
+        <div class="body">
+
+            <div class="registro">
+                <h2>
+                    Registre sua conta de <br> jogador
+                </h2>
+
+                <a href="./src/php/cadastro/cadastra_jogador.php">Registrar</a>
+
+            </div>
+        
+            <div class="registro">
+                <h2>
+                    Registre sua conta de <br> proprietário
+                </h2>
+
+                <a href="./src/php/cadastro/cadastra_proprietario.php">Registrar</a>
+
+            </div>
+        </div>
+    </div>
+
 </body>
 </html>

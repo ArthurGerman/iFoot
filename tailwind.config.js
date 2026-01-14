@@ -4,7 +4,11 @@ module.exports = {
     "./src/**/*.php"
   ],
   theme: {
-    extend: {},
+    extend: {
+      backgroundImage:{
+        hero: "url('/static/img_background.jpeg')"
+      }
+    },
   },
   plugins: [],
 }
