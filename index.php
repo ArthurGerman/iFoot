@@ -22,7 +22,7 @@ session_start();
             <img src="./static/ifoot.png" alt="" id="ifoot-logo">
             
             <a href="" id="funcionamento">Como funciona</a>
-            <a href="" id="sobre">Sobre</a>
+            <a href="./src/php/sobre.php" id="sobre">Sobre</a>
 
             <div class="login">
 
