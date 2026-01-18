@@ -1,15 +1,7 @@
 <?php 
-    require_once '../config.php';
     session_start();
 
-    /* --------------------- ATENÇÃO -------------------------
-    O trecho de código abaixo serve para a funcionalidadeque permite redirecionar o usuário diretamente para a página inicial do crud quando já está logado
-    
-    if(isset($_SESSION['id_jog'])){
-        header('Location: /src/php/acoes/crud%20jogador/inicio_jog.php');
-    }else if(isset($_SESSION['id_prop'])) {
-        header('Location: /src/php/acoes/crud%20proprietario/inicio_prop.php');
-    };*/
+    require_once '../config.php';
 
     $erro = ""; // Variável para que a mensagem de erro apareca depois do form
 
@@ -31,7 +23,7 @@
             header('Location: /src/php/acoes/crud%20jogador/inicio_jog.php');
 
         } else {
-            $erro = "Email ou senha estão incorretos";
+            $erro = "❌ Email ou senha estão incorretos";
         }
         
         
@@ -45,26 +37,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/src/styles/global.css">
     <title>Login</title>
 </head>
-<body>
+<body class=" font-outfit font-medium not-italic text-white">
 
-    <a href="/index.php">Voltar a Home</a><br>
+    <div class="relative bg-gradient-to-b from-[#2ba438] to-[#14551a] w-screen h-screen flex justify-end items-center">
 
-    <h1>Login de jogador</h1>
+        <img src="/static/ifoot.png" alt="" class="absolute left-40 top-1/2 -translate-y-1/2 w-96">
 
-    <form action="" method="post">
-        <label for="EMAIL_JOG">Email: </label>
-        <input type="email" name="EMAIL_JOG" id="EMAIL_JOG"><br>
-        
-        <label for="SENHA_JOG">Senha:</label>
-        <input type="password" name="SENHA_JOG" id="SENHA_JOG"><br>
-        
-        <input type="submit">
-    </form>
+        <div class="flex flex-col">
 
-    <?php if ($erro): ?>
-        <p style="color:red"><?php echo $erro; ?></p>
-    <?php endif; ?>
+            <div class="bg-[#4ad658] h-[400px] mr-52 p-10 rounded-2xl">
+            
+                <h1 class="text-[28px]">
+                    Faça seu login de jogador <br> aqui
+                </h1>
+
+                <br>
+            
+                <form action="" method="post" class="flex flex-col">
+
+                    <input 
+                        type="email" 
+                        name="EMAIL_JOG" 
+                        id="EMAIL_JOG"
+                        placeholder="E-mail"
+                        class="px-4 mb-4 bg-transparent border-[3px] border-solid border-white rounded-2xl h-12 text-white outline-none placeholder-white"
+                    >
+                    
+                    <input 
+                        type="password" 
+                        name="SENHA_JOG" 
+                        id="SENHA_JOG"
+                        placeholder="Digite a senha"
+                        class="px-4 mb-4 bg-transparent border-[3px] border-solid border-white rounded-2xl h-12 text-white outline-none placeholder-white"
+                    >
+                    
+                    <div class="flex justify-center gap-10 mt-6">
+
+                        <a href="/index.php" class="flex bg-white text-[#4ad658] text-[20px] h-12 w-28 rounded-2xl justify-center items-center hover:text-white hover:bg-[#2ba438]">Voltar</a>
+                        
+                        <input type="submit" class="bg-white text-[#4ad658] text-[20px] h-12 w-28 rounded-2xl cursor-pointer hover:text-white hover:bg-[#2ba438]">
+                    </div>
+
+                </form>
+            
+                <?php if ($erro): ?>
+                    <p class="text-red-600 flex p-2 mt-2 justify-center"><?php echo $erro; ?></p>
+                <?php endif; ?>
+
+            </div>
+
+            <p class="ml-6 mt-4 w-[375px]">
+                Ainda não se cadastrou? 
+                <a href="/src/php/cadastro/cadastra_jogador.php" class="ml-12 mr-6 underline font-semibold">Cadastre-se aqui</a>
+            </p>
+
+        </div>
+    </div>
+
+
+
+    <script src="/src/js/tratamento-erros-login_jog.js"></script>
 </body>
 </html>

@@ -41,7 +41,7 @@ session_start();
                     Registre sua conta de <br> jogador
                 </h2>
 
-                <a href="./src/php/cadastro/cadastra_jogador.php">Registrar</a>
+                <a href="./src/php/cadastro/cadastra_jogador.php">Registrar-se</a>
 
             </div>
         
@@ -50,7 +50,7 @@ session_start();
                     Registre sua conta de <br> proprietário
                 </h2>
 
-                <a href="./src/php/cadastro/cadastra_proprietario.php">Registrar</a>
+                <a href="./src/php/cadastro/cadastra_proprietario.php">Registrar-se</a>
 
             </div>
         </div>

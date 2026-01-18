@@ -1,9 +1,8 @@
 <?php 
     // Lista as partidas que ocorrerão no dia, além dos horários em que vão acontecer
 
-    session_start();
-
     require_once "../../config.php";
+    require_once '../../authenticate_prop.php';
 
 
     $ID_PROP = $_SESSION['id_prop'];

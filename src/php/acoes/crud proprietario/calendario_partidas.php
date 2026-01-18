@@ -1,8 +1,7 @@
 <?php
 
-    session_start();
-
     require_once "../../config.php";
+    require_once '../../authenticate_prop.php';
 
     // Definir mês e ano atuais
     date_default_timezone_set('America/Sao_Paulo');

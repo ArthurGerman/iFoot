@@ -1,6 +1,7 @@
 <?php
-    session_start();
+
     require_once '../../config.php';
+    require_once '../../authenticate_jog.php';
 
     $mensagem_erro = ""; // Variável para armazenar a mensagem de erro que aparece caso o usuário tente cadastrar um email e/ou senha que já existem no banco de dados
 

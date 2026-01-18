@@ -32,13 +32,13 @@
         $verifica_cpf->execute([$CPF_JOG]);
 
         if ($verifica_cpf->rowCount() > 0 && $verifica_email->rowCount() > 0) {
-            $mensagem_erro = "❌ CPF e Email já estão cadastrados no sistema.<br>";
+            $mensagem_erro = "❌ Estes CPF e Email já estão cadastrados no sistema !";
 
         } else if ($verifica_email->rowCount() > 0){
-            $mensagem_erro =  "❌ Este e-mail já está cadastrado no sistema.<br>";
+            $mensagem_erro =  "❌ Este e-mail já está cadastrado no sistema !";
 
         } else if ($verifica_cpf->rowCount() > 0){
-            $mensagem_erro =  "❌ Este CPF já está cadastrado no sistema.<br>";
+            $mensagem_erro =  "❌ Este CPF já está cadastrado no sistema !";
 
         } else{
 
@@ -62,76 +62,130 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/src/styles/global.css">
     <title>Cadastramento</title>
 </head>
-<body>
-    <h1>
-        Cadastramento de usuário
-    </h1>
+<body class=" font-outfit font-medium not-italic text-white">
 
-    <a href="/index.php">Voltar</a><br><br>
-    
-    <form action="" method="post">
+    <div class="relative bg-gradient-to-b from-[#2ba438] to-[#14551a] w-screen h-screen flex justify-end items-center">
 
-        <label for="NOME_JOG">Nome: </label>
-        <input type="text" name="NOME_JOG" id="NOME_JOG"><br>
+        <img src="/static/ifoot.png" alt="" class="absolute left-40 top-1/2 -translate-y-1/2 w-96">
+
+        <div class="bg-[#4ad658] h-[700px] mr-20 p-10 rounded-2xl">
+
+            <h1 class="text-[28px]">
+                Faça seu cadastro de jogador aqui
+            </h1>
+
+            <br>
         
-        <label for="EMAIL_JOG">E-mail: </label>
-        <input type="email" name="EMAIL_JOG" id="EMAIL_JOG"><br>
-
-        <label for="CPF_JOG">CPF: </label>
-        <input type="text" name="CPF_JOG" id="CPF_JOG" maxlength="11"><br>
-
-        <label for="CIDADE_JOG">Cidade: </label>
-        <input type="text" name="CIDADE_JOG" id="CIDADE_JOG"><br>
-
-        <label for="UF">UF: </label>
-        <select name="UF" id="UF">
-            <option value="">Selecione</option>
-            <option value="AC">Acre</option>
-            <option value="AL">Alagoas</option>
-            <option value="AP">Amapá</option>
-            <option value="AM">Amazonas</option>
-            <option value="BA">Bahia</option>
-            <option value="CE">Ceará</option>
-            <option value="DF">Distrito Federal</option>
-            <option value="ES">Espírito Santo</option>
-            <option value="GO">Goiás</option>
-            <option value="MA">Maranhão</option>
-            <option value="MT">Mato Grosso</option>
-            <option value="MS">Mato Grosso do Sul</option>
-            <option value="MG">Minas Gerais</option>
-            <option value="PA">Pará</option>
-            <option value="PB">Paraíba</option>
-            <option value="PR">Paraná</option>
-            <option value="PE">Pernambuco</option>
-            <option value="PI">Piauí</option>
-            <option value="RJ">Rio de Janeiro</option>
-            <option value="RN">Rio Grande do Norte</option>
-            <option value="RS">Rio Grande do Sul</option>
-            <option value="RO">Rondônia</option>
-            <option value="RR">Roraima</option>
-            <option value="SC">Santa Catarina</option>
-            <option value="SP">São Paulo</option>
-            <option value="SE">Sergipe</option>
-            <option value="TO">Tocantins</option>
-        </select><br>
+            
+            <form action="" method="post" class="flex flex-col">
         
-        <label for="ENDERECO_JOG">Endereço: </label>
-        <input type="endereco" name="ENDERECO_JOG" id="ENDERECO_JOG"><br>
+                <input 
+                    type="text" 
+                    name="NOME_JOG" 
+                    id="NOME_JOG" 
+                    placeholder="Digite seu nome"
+                    class="px-4 mb-3 bg-transparent border-[3px] border-solid border-white rounded-2xl h-12 text-white outline-none placeholder-white"
+                >
+                
+                <input 
+                    type="email" 
+                    name="EMAIL_JOG" 
+                    id="EMAIL_JOG"
+                    placeholder="E-mail"
+                    class="px-4 mb-3 bg-transparent border-[3px] border-solid border-white rounded-2xl h-12 text-white outline-none placeholder-white"
+                >
         
-        <label for="TEL_JOG">Telefone: </label>
-        <input type="telefone" name="TEL_JOG" id="TEL_JOG" maxlength="11"><br>
+                <input 
+                    type="text" 
+                    name="CPF_JOG" 
+                    id="CPF_JOG" 
+                    maxlength="11"
+                    placeholder="CPF (apenas números)"
+                    class="px-4 mb-3 bg-transparent border-[3px] border-solid border-white rounded-2xl h-12 text-white outline-none placeholder-white"
+                >
         
-        <label for="SENHA_JOG">Senha</label>
-        <input type="password" name="SENHA_JOG" id="SENHA_JOG"><br>
-        
-        <input type="submit">
-    </form>
+                <input 
+                    type="text" 
+                    name="CIDADE_JOG" 
+                    id="CIDADE_JOG"
+                    placeholder="Cidade"
+                    class="px-4 mb-3 bg-transparent border-[3px] border-solid border-white rounded-2xl h-12 text-white outline-none placeholder-white"
+                >
 
-    <?php if (!empty($mensagem_erro)) :?>
-        <p style="color:red"><?= $mensagem_erro ?></p>
-    <?php endif;?> 
+                
+                <select name="UF" id="UF" class="px-4 mb-3 bg-transparent border-[3px] border-solid border-white rounded-2xl h-12 text-white outline-none placeholder-white cursor-pointer">
+                    <option value="" disabled selected>Estado</option>
+                    <option value="AC" class="text-black">Acre</option>
+                    <option value="AL" class="text-black">Alagoas</option>
+                    <option value="AP" class="text-black">Amapá</option>
+                    <option value="AM" class="text-black">Amazonas</option>
+                    <option value="BA" class="text-black">Bahia</option>
+                    <option value="CE" class="text-black">Ceará</option>
+                    <option value="DF" class="text-black">Distrito Federal</option>
+                    <option value="ES" class="text-black">Espírito Santo</option>
+                    <option value="GO" class="text-black">Goiás</option>
+                    <option value="MA" class="text-black">Maranhão</option>
+                    <option value="MT" class="text-black">Mato Grosso</option>
+                    <option value="MS" class="text-black">Mato Grosso do Sul</option>
+                    <option value="MG" class="text-black">Minas Gerais</option>
+                    <option value="PA" class="text-black">Pará</option>
+                    <option value="PB" class="text-black">Paraíba</option>
+                    <option value="PR" class="text-black">Paraná</option>
+                    <option value="PE" class="text-black">Pernambuco</option>
+                    <option value="PI" class="text-black">Piauí</option>
+                    <option value="RJ" class="text-black">Rio de Janeiro</option>
+                    <option value="RN" class="text-black">Rio Grande do Norte</option>
+                    <option value="RS" class="text-black">Rio Grande do Sul</option>
+                    <option value="RO" class="text-black">Rondônia</option>
+                    <option value="RR" class="text-black">Roraima</option>
+                    <option value="SC" class="text-black">Santa Catarina</option>
+                    <option value="SP" class="text-black">São Paulo</option>
+                    <option value="SE" class="text-black">Sergipe</option>
+                    <option value="TO" class="text-black">Tocantins</option>
+                </select>
+                
+                <input 
+                    type="endereco" 
+                    name="ENDERECO_JOG" 
+                    id="ENDERECO_JOG"
+                    placeholder="Endereço"
+                    class="px-4 mb-3 bg-transparent border-[3px] border-solid border-white rounded-2xl h-12 text-white outline-none placeholder-white"
+                >
+                
+                <input 
+                    type="telefone" 
+                    name="TEL_JOG" 
+                    id="TEL_JOG" 
+                    maxlength="11"
+                    placeholder="Telefone (DDD + números)"
+                    class="px-4 mb-3 bg-transparent border-[3px] border-solid border-white rounded-2xl h-12 text-white outline-none placeholder-white"
+                >
+                
+                <input 
+                    type="password" 
+                    name="SENHA_JOG" 
+                    id="SENHA_JOG" 
+                    placeholder="Digite a senha"
+                    class="px-4 mb-3 bg-transparent border-[3px] border-solid border-white rounded-2xl h-12 text-white outline-none placeholder-white"
+                >
+                
+
+                <div class="flex justify-center gap-24 mt-2">
+
+                    <a href="/index.php" class="flex bg-white text-[#4ad658] text-[20px] h-12 w-28 rounded-2xl justify-center items-center hover:text-white hover:bg-[#2ba438]">Voltar</a>
+
+                    <input type="submit" value="Cadastrar" class="bg-white text-[#4ad658] text-[20px] h-12 w-28 rounded-2xl cursor-pointer hover:text-white hover:bg-[#2ba438]">
+                </div>
+            </form>
+        
+            <?php if (!empty($mensagem_erro)) :?>
+                <p class="text-red-600 flex p-2 mt-2 justify-center"><?= $mensagem_erro ?></p>
+            <?php endif;?> 
+        </div>
+    </div>
 
     <script src="/src/js/tratamento-erros_jog.js"></script>
 </body>

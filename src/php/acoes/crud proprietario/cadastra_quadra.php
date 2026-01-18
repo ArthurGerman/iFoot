@@ -1,7 +1,7 @@
 <?php 
-    session_start();
 
     require_once "../../config.php";
+    require_once '../../authenticate_prop.php';
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $ENDERECO_QUAD = $_POST['ENDERECO_QUAD'];

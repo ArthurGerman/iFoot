@@ -1,7 +1,7 @@
 <?php 
-    session_start();
 
     require_once "../../config.php";
+    require_once '../../authenticate_prop.php';
 
     $ID_QUAD = $_GET['id'];
 

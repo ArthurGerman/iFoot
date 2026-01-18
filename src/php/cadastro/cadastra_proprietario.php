@@ -21,15 +21,15 @@
 
         if ($verifica_cpf->rowCount() > 0 && $verifica_email->rowCount() > 0) {
 
-            $mensagem_erro = "❌ CPF e Email já estão cadastrados no sistema.<br>";
+            $mensagem_erro = "❌ Estes CPF e Email já estão cadastrados no sistema !";
 
         } else if ($verifica_email->rowCount() > 0){
 
-            $mensagem_erro =  "❌ Este e-mail já está cadastrado no sistema.<br>";
+            $mensagem_erro =  "❌ Este e-mail já está cadastrado no sistema !";
 
         } else if ($verifica_cpf->rowCount() > 0){
 
-            $mensagem_erro =  "❌ Este CPF já está cadastrado no sistema.<br>";
+            $mensagem_erro =  "❌ Este CPF já está cadastrado no sistema !";
 
         } else{
             $query = $pdo->prepare("INSERT INTO PROPRIETARIOS (NOME_PROP, EMAIL_PROP, CPF_PROP, TEL_PROP, SENHA_PROP) VALUES (?,?,?,?,?)");
@@ -49,38 +49,84 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../styles/global.css">
     <title>Cadastramento</title>
 </head>
-<body>
-    <h1>
-        Cadastramento de Proprietário
-    </h1>
+<body class=" font-outfit font-medium not-italic text-white">
 
-    <a href="/index.php">Voltar</a><br><br>
+    <div class="relative bg-gradient-to-b from-[#2ba438] to-[#14551a] w-screen h-screen flex justify-end items-center">
+
+        <img src="/static/ifoot.png" alt="" class="absolute left-40 top-1/2 -translate-y-1/2 w-96">
+        
+        <div class="bg-[#4ad658] h-[600px] mr-20 p-10 rounded-2xl">
+
+            <h1 class="text-[28px]">
+                Faça seu cadastro de proprietário <br> aqui
+            </h1>
+
+            <br>
+
+            
+            <form action="" method="post" class="flex flex-col">
+        
+                <input 
+                    type="text" 
+                    name="NOME_PROP" 
+                    id="NOME_PROP" 
+                    placeholder="Nome" 
+                    class="px-4 mb-4 bg-transparent border-[3px] border-solid border-white rounded-2xl h-12 text-white outline-none placeholder-white"
+                >
+                
+                <input 
+                    type="email" 
+                    name="EMAIL_PROP" 
+                    id="EMAIL_PROP"
+                    placeholder="E-mail"
+                    class="px-4 mb-4 bg-transparent border-[3px] border-solid border-white rounded-2xl h-12 text-white outline-none placeholder-white"
+                >
+                
+                <input 
+                    type="text" 
+                    name="CPF_PROP" 
+                    id="CPF_PROP" 
+                    maxlength="11"
+                    placeholder="CPF"
+                    class="px-4 mb-4 bg-transparent border-[3px] border-solid border-white rounded-2xl h-12 text-white outline-none placeholder-white"
+                >
+                
+                <input 
+                    type="telefone" 
+                    name="TEL_PROP" 
+                    id="TEL_PROP" 
+                    maxlength="11"
+                    placeholder="Telefone"
+                    class="px-4 mb-4 bg-transparent border-[3px] border-solid border-white rounded-2xl h-12 text-white outline-none placeholder-white"
+                >
+                
+                <input 
+                    type="password" 
+                    name="SENHA_PROP" 
+                    id="SENHA_PROP"
+                    placeholder="Digite a senha"
+                    class="px-4 mb-4 bg-transparent border-[3px] border-solid border-white rounded-2xl h-12 text-white outline-none placeholder-white"
+                >
+
+
+                
+                <div class="flex justify-center gap-24 mt-8">
+
+                    <a href="/index.php" class="flex bg-white text-[#4ad658] text-[20px] h-12 w-28 rounded-2xl justify-center items-center hover:text-white hover:bg-[#2ba438]">Voltar</a>
     
-    <form action="" method="post">
+                    <input type="submit" value="Cadastrar" class="bg-white text-[#4ad658] text-[20px] h-12 w-28 rounded-2xl cursor-pointer hover:text-white hover:bg-[#2ba438]">
+                </div>
+            </form>
 
-        <label for="NOME_PROP">Nome: </label>
-        <input type="text" name="NOME_PROP" id="NOME_PROP"><br>
-        
-        <label for="EMAIL_PROP">E-mail: </label>
-        <input type="email" name="EMAIL_PROP" id="EMAIL_PROP"><br>
-        
-        <label for="CPF_PROP">CPF: </label>
-        <input type="text" name="CPF_PROP" id="CPF_PROP" maxlength="11"><br>
-        
-        <label for="TEL_PROP">Telefone: </label>
-        <input type="telefone" name="TEL_PROP" id="TEL_PROP" maxlength="11"><br>
-        
-        <label for="SENHA_PROP">Senha: </label>
-        <input type="password" name="SENHA_PROP" id="SENHA_PROP"><br>
+            <?php if (!empty($mensagem_erro)) :?>
+                <p class="text-red-600 flex p-2 mt-2 justify-center"><?= $mensagem_erro ?></p>
+            <?php endif;?>
+        </div>
+    </div>
 
-        <input type="submit">
-    </form>
-
-    <?php if (!empty($mensagem_erro)) :?>
-        <p style="color:red"><?= $mensagem_erro ?></p>
-    <?php endif;?> 
 
     <script src="/src/js/tratamento-erros_prop.js"></script>
 </body>
