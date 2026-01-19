@@ -50,6 +50,12 @@
 
             </tbody>
         </table>
+        
+        <br>
+
+        <a href="./exporta_historico_quadra.php?id=<?= $ID_QUAD ?>" target="_blank">
+            <button>Exportar para PDF</button>
+        </a>
     <?php endif?>
 
 </body>

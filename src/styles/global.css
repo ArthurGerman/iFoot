@@ -602,36 +602,12 @@ video {
   position: relative;
 }
 
-.left-32{
-  left: 8rem;
+.left-40{
+  left: 10rem;
 }
 
 .top-1\/2{
   top: 50%;
-}
-
-.left-16{
-  left: 4rem;
-}
-
-.left-60{
-  left: 15rem;
-}
-
-.left-52{
-  left: 13rem;
-}
-
-.left-56{
-  left: 14rem;
-}
-
-.left-44{
-  left: 11rem;
-}
-
-.left-40{
-  left: 10rem;
 }
 
 .m-12{
@@ -684,14 +660,6 @@ video {
 
 .mr-6{
   margin-right: 1.5rem;
-}
-
-.mr-80{
-  margin-right: 20rem;
-}
-
-.mr-96{
-  margin-right: 24rem;
 }
 
 .mt-2{
