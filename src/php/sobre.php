@@ -12,7 +12,7 @@
 
     <div class=" w-screen h-screen flex flex-col">
 
-        <div class=" bg-[#4ad658] flex flex-row items-center h-20 pl-24">
+        <div class=" bg-gradient-to-b from-[#4ad658] to-green-500 flex flex-row items-center h-20 pl-24">
 
             <img src="/static/ifoot.png" alt="" id="ifoot-logo" class=" h-28">
             
@@ -20,11 +20,11 @@
 
             <div class=" flex gap-7 pr-12 ml-auto">
 
-                <a href="./src/php/login/login_jog.php" 
+                <a href="../php/login/login_jog.php" 
                 class="flex p-5 border-2 border-solid border-white rounded-2xl h-10 items-center hover:bg-white hover:text-[#4ad658]"
                 >Entrar como jogador</a>
 
-                <a href="./src/php/login/login_prop.php" 
+                <a href="../php/login/login_prop.php" 
                 class="flex p-5 border-2 border-solid border-white rounded-2xl h-10 items-center hover:bg-white hover:text-[#4ad658]"
                 >Entrar como proprietário</a>
 
@@ -34,7 +34,7 @@
 
         <!-- bg-[url(/static/img_background.jpeg)] esse é outro metodo de colocar uma imagem com tailwind ou criando pelo config mesmo como esta abaixo bg-hero -->
         <div class=" bg-hero flex-1 bg-cover bg-center bg-no-repeat flex flex-col items-center p-4">  
-            <div class=" h-5/6 w-7/12 bg-[#4ad658] flex flex-col items-center m-12 border-2 border-solid border-[#4ad658] rounded-2xl p-3 gap-5">
+            <div class=" h-5/6 w-7/12 bg-gradient-to-b from-[#4ad658] to-green-500 flex flex-col items-center m-12 border-2 border-solid border-[#4ad658] rounded-2xl p-3 gap-5">
                 <h1 class=" text-2xl font-bold text-center text-white">Sobre</h1>
     
                 <div class=" h-5/6 w-8/12 border-2 border-solid border-white rounded-2xl flex flex-col items-center gap-3 p-5 text-base">

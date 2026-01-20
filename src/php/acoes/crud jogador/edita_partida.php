@@ -51,7 +51,7 @@
             Ediçao da partida
         </h1>
 
-        <a href="./inicio_jog.php">Voltar</a><br><br>
+        <a href="./lista_partida.php">Voltar</a><br><br>
 
         <form action="" method="post">
 

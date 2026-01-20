@@ -71,7 +71,7 @@
 
         <img src="/static/ifoot.png" alt="" class="absolute left-40 top-1/2 -translate-y-1/2 w-96">
 
-        <div class="bg-[#4ad658] h-[700px] mr-20 p-10 rounded-2xl">
+        <div class="bg-gradient-to-b from-[#4ad658] to-green-500 h-[700px] mr-20 p-10 rounded-2xl">
 
             <h1 class="text-[28px]">
                 Faça seu cadastro de jogador aqui
@@ -175,9 +175,9 @@
 
                 <div class="flex justify-center gap-24 mt-2">
 
-                    <a href="/index.php" class="flex bg-white text-[#4ad658] text-[20px] h-12 w-28 rounded-2xl justify-center items-center hover:text-white hover:bg-[#2ba438]">Voltar</a>
+                    <a href="/index.php" class="flex bg-white text-green-600 hover:bg-gray-200 text-[20px] h-12 w-28 rounded-2xl justify-center items-center">Voltar</a>
 
-                    <input type="submit" value="Cadastrar" class="bg-white text-[#4ad658] text-[20px] h-12 w-28 rounded-2xl cursor-pointer hover:text-white hover:bg-[#2ba438]">
+                    <input type="submit" value="Cadastrar" class="bg-white text-green-600 hover:bg-gray-200 text-[20px] h-12 w-28 rounded-2xl cursor-pointer">
                 </div>
             </form>
         
