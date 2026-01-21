@@ -27,7 +27,6 @@
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $NOME_JOG = $_POST['NOME_JOG'];
         $EMAIL_JOG = $_POST['EMAIL_JOG'];
-        $CPF_JOG = $_POST['CPF_JOG'];
         $CIDADE_JOG = $_POST['CIDADE_JOG'];
         $ENDERECO_JOG = $_POST['ENDERECO_JOG'];
         $TEL_JOG = $_POST['TEL_JOG'];
@@ -41,22 +40,12 @@
 
         //Bloco de verificações de CPF e email para garantir que o usuário não altere para algum que já exista
         $verifica_email = $pdo->prepare("SELECT 1 FROM JOGADORES WHERE EMAIL_JOG = ? AND ID_JOG != ?");
-        $verifica_cpf = $pdo->prepare("SELECT 1 FROM JOGADORES WHERE CPF_JOG = ? AND ID_JOG != ?");
 
         $verifica_email->execute([$EMAIL_JOG, $ID_JOG]);
-        $verifica_cpf->execute([$CPF_JOG, $ID_JOG]);
 
-        if ($verifica_cpf->rowCount() > 0 && $verifica_email->rowCount() > 0) {
-
-            $mensagem_erro = "❌ CPF e Email já estão sendo usados por outro usuário.<br>";
-
-        } else if ($verifica_email->rowCount() > 0){
+        if ($verifica_email->rowCount() > 0){
 
             $mensagem_erro =  "❌ Este e-mail já está sendo usado por outro usuário.<br>";
-
-        } else if ($verifica_cpf->rowCount() > 0){
-
-            $mensagem_erro =  "❌ Este CPF já está sendo usado por outro usuário.<br>";
 
         } else{ // Bloco de alteração de dados
 
@@ -68,7 +57,6 @@
                     UPDATE JOGADORES
                     SET NOME_JOG = ?, 
                     EMAIL_JOG = ?,
-                    CPF_JOG = ?,
                     CIDADE_JOG = ?,
                     ENDERECO_JOG = ?,
                     TEL_JOG = ?,
@@ -81,7 +69,6 @@
                 $query3 -> execute([
                     $NOME_JOG,
                     $EMAIL_JOG,
-                    $CPF_JOG,
                     $CIDADE_JOG,
                     $ENDERECO_JOG,
                     $TEL_JOG,
@@ -97,7 +84,6 @@
                     UPDATE JOGADORES
                     SET NOME_JOG = ?, 
                     EMAIL_JOG = ?,
-                    CPF_JOG = ?,
                     CIDADE_JOG = ?,
                     ENDERECO_JOG = ?,
                     TEL_JOG = ?,
@@ -109,7 +95,6 @@
                 $query3 -> execute([
                     $NOME_JOG,
                     $EMAIL_JOG,
-                    $CPF_JOG,
                     $CIDADE_JOG,
                     $ENDERECO_JOG,
                     $TEL_JOG,
@@ -152,7 +137,7 @@
         <input type="email" name="EMAIL_JOG" id="EMAIL_JOG" value="<?=$results["EMAIL_JOG"]?>"><br>
 
         <label for="CPF_JOG">CPF: </label>
-        <input type="text" name="CPF_JOG" id="CPF_JOG" maxlength="11" value="<?=$results["CPF_JOG"]?>"><br>
+        <input type="text" name="CPF_JOG" id="CPF_JOG" maxlength="11" value="<?=$results["CPF_JOG"]?>" disabled><br>
 
         <label for="CIDADE_JOG">Cidade: </label>
         <input type="text" name="CIDADE_JOG" id="CIDADE_JOG" value="<?=$results["CIDADE_JOG"]?>"><br>

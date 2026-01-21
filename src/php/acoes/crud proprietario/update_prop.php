@@ -14,29 +14,17 @@
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $NOME_PROP = $_POST['NOME_PROP'];
         $EMAIL_PROP = $_POST['EMAIL_PROP'];
-        $CPF_PROP = $_POST['CPF_PROP'];
         $TEL_PROP = $_POST['TEL_PROP'];
         $SENHA_PROP = $_POST['SENHA_PROP']; // Senha nova
 
-        //Query para verificar se o CPF e/ou email cadastrados já existem
-        // São duas verificações únicas pois possa ser que o email ou o CPF foram cadastrados iguais de maneira individual e não os dois juntos
+        //Query para verificar se o email cadastrado já existem
         $verifica_email = $pdo->prepare("SELECT 1 FROM PROPRIETARIOS WHERE EMAIL_PROP = ? AND ID_PROP != ?");
-        $verifica_cpf = $pdo->prepare("SELECT 1 FROM PROPRIETARIOS WHERE CPF_PROP = ? AND ID_PROP != ?");
 
         $verifica_email->execute([$EMAIL_PROP, $ID_PROP]);
-        $verifica_cpf->execute([$CPF_PROP, $ID_PROP]);
 
-        if ($verifica_cpf->rowCount() > 0 && $verifica_email->rowCount() > 0) {
-
-            $mensagem_erro = "❌ CPF e Email já estão sendo usados por outro usuário.<br>";
-
-        } else if ($verifica_email->rowCount() > 0){
+        if ($verifica_email->rowCount() > 0){
 
             $mensagem_erro =  "❌ Este e-mail já está sendo usado por outro usuário.<br>";
-
-        } else if ($verifica_cpf->rowCount() > 0){
-
-            $mensagem_erro =  "❌ Este CPF já está sendo usado por outro usuário.<br>";
 
         } else{ //Bloco de alteração de dados
 
@@ -48,7 +36,6 @@
                     UPDATE PROPRIETARIOS
                     SET NOME_PROP = ?, 
                     EMAIL_PROP = ?,
-                    CPF_PROP = ?,
                     TEL_PROP = ?,
                     SENHA_PROP = ?
         
@@ -58,7 +45,6 @@
                 $query -> execute([
                     $NOME_PROP,
                     $EMAIL_PROP,
-                    $CPF_PROP,
                     $TEL_PROP,
                     $SENHA_PROP,
         
@@ -71,7 +57,6 @@
                     UPDATE PROPRIETARIOS
                     SET NOME_PROP = ?, 
                     EMAIL_PROP = ?,
-                    CPF_PROP = ?,
                     TEL_PROP = ?
         
                     WHERE ID_PROP = ?
@@ -80,7 +65,6 @@
                 $query -> execute([
                     $NOME_PROP,
                     $EMAIL_PROP,
-                    $CPF_PROP,
                     $TEL_PROP,
         
                     $ID_PROP
@@ -119,7 +103,7 @@
         <input type="email" name="EMAIL_PROP" id="EMAIL_PROP" value="<?=$results["EMAIL_PROP"]?>"><br>
 
         <label for="CPF_PROP">CPF: </label>
-        <input type="text" name="CPF_PROP" id="CPF_PROP" maxlength="11" value="<?=$results["CPF_PROP"]?>"><br>
+        <input type="text" name="CPF_PROP" id="CPF_PROP" maxlength="11" value="<?=$results["CPF_PROP"]?>" disabled><br>
 
         <label for="TEL_PROP">Telefone: </label>
         <input type="telefone" name="TEL_PROP" id="TEL_PROP" maxlength="11" value="<?=$results["TEL_PROP"]?>"><br>

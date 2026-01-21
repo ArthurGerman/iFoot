@@ -39,6 +39,7 @@
                 PARTIDAS.PRECO_TOTAL_PTD,
                 QUADRAS.ENDERECO_QUAD,
                 QUADRAS.CIDADE_QUAD,
+                QUADRAS.PRECO_HORA_QUAD,
                 UF.NOME_UF,
                 MODALIDADES.NOME_MODAL
 
@@ -104,7 +105,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=filter_alt,reply" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
     <link rel="stylesheet" href="/src/styles/global.css">
     <title>Início</title>
 </head>
@@ -112,9 +113,21 @@
 
     <div class="bg-[#F0F0F0] w-screen h-screen flex flex-col">
 
-        <div class="bg-gradient-to-b from-[#4ad658] to-green-500 h-20">
-            <img src="/static/ifoot.png" alt="" class="h-20">
+
+        <!-- Nav -->
+        <div class="flex bg-gradient-to-b from-[#4ad658] to-green-500 h-20">
+            <div class="w-1/2">
+                <img src="/static/ifoot.png" alt="" class="h-20">
+            </div>
+
+            <div class="flex w-1/2 h-20 items-center justify-end">
+                <span id="btnMenu" class="material-symbols-outlined text-white text-[36px] mr-10 cursor-pointer">
+                    menu
+                </span>
+            </div>
         </div>
+
+        <div id="menuOverlay" class="fixed inset-0 bg-black/40 hidden z-40"></div>
         
         <div class="flex flex-row mt-4">
 
@@ -137,7 +150,7 @@
         <div id="overlayFiltro" class="fixed inset-0 bg-black/30 hidden z-40"></div> <!-- Div que escurece a tela quando abre a caixa de filtros-->
 
         <!-- CAIXA DO FILTRO -->
-        <div id="caixaFiltro" class="fixed right-6 top-28 w-80 bg-gray-100 border border-gray-300 rounded-xl shadow-lg hidden z-50">
+        <div id="caixaFiltro" class="fixed right-6 top-16 w-80 bg-gray-100 border border-gray-300 rounded-xl shadow-lg hidden z-50">
 
             <!-- Cabeçalho -->
             <div class="flex items-center justify-between px-4 py-3 border-b border-gray-300">
@@ -223,7 +236,7 @@
                     </div>
                     
                     <div class="flex flex-col">
-                        <p class="font-semibold mb-2">Preço</p>
+                        <p class="font-semibold mb-2">Preço (filtro pelo preço total da partida)</p>
                         
                         <div>
                             <label for="PRECO_TOTAL_PTD_MIN" class="ml-2">Min:</label>
@@ -264,7 +277,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6 px-6">
                 <?php foreach ($partidas as $partida): ?>
                     
-                    <div class="flex bg-white rounded-xl shadow-md overflow-hidden h-72">
+                    <div class="flex bg-white rounded-xl shadow-md overflow-hidden h-80">
 
                         <!-- Imagem / placeholder -->
                         <div class="w-1/2 bg-gray-300 flex items-center justify-center">
@@ -290,14 +303,28 @@
                                     $HORARIO_INICIO_PTD = new DateTime($partida['HORARIO_INICIO_PTD']);
                                     $HORARIO_FIM_PTD = new DateTime($partida['HORARIO_FIM_PTD']);
 
+
+                                    if ($HORARIO_FIM_PTD < $HORARIO_INICIO_PTD) {
+                                        $HORARIO_FIM_PTD->modify('+1 day');
+                                    }
+
+                                    $intervalo = $HORARIO_INICIO_PTD->diff($HORARIO_FIM_PTD);
+
+                                    $duracao= $intervalo->h . 'h';
+                                    if ($intervalo->i > 0) {
+                                        $duracao .= $intervalo->i;
+                                    }
+
                                     $HORARIO_INICIO_PTD = $HORARIO_INICIO_PTD->format('H:i');
                                     $HORARIO_FIM_PTD = $HORARIO_FIM_PTD->format('H:i'); 
                                 ?>
 
 
+                                <p><strong>Duração:</strong> <?= $duracao ?>min</p>
                                 <p><strong>Data:</strong> <?= $DATA_PTD ?></p>
                                 <p><strong>Início:</strong> <?= $HORARIO_INICIO_PTD ?> hr</p>
                                 <p><strong>Fim:</strong> <?= $HORARIO_FIM_PTD ?> hr</p>
+                                <p><strong>Preço por hora: </strong> R$ <?= $partida['PRECO_HORA_QUAD'] ?>/h</p>
                                 <p><strong>Preço total:</strong> R$ <?= $partida['PRECO_TOTAL_PTD'] ?></p> <!-- Preço final calculado com base nas horas-->
                             </div>
 
@@ -319,23 +346,75 @@
 
 
 
-    <!--<ul>
-        <li>
-            <a href="./lista_quadra.php">Cadastrar nova partidas</a>
-        </li>
-        <li>
-            <a href="./lista_partida.php">Ver minhas partidas</a>
-        </li>
-        <li>
-            <a href="./update_jogador.php">Editar meus dados</a>
-        </li>
-    </ul>
 
-    <form action="../../login/logout.php">
-        <button type="submit">Sair (Logout)</button>
-    </form>-->
+
+
+
+
+    
+
+    <!-- Menu lateral flutuante-->
+
+    <aside id="menuLateral" class="fixed top-0 right-0 h-full w-80 bg-green-500 text-white transform translate-x-full transition-transform duration-300 z-50 flex flex-col">
+
+        <!-- Cabeçalho -->
+        <div class="flex items-center justify-between p-4">
+            <h2 class="text-xl font-semibold">Menu</h2>
+            <span id="fecharMenu" class="material-symbols-outlined cursor-pointer">
+                close
+            </span>
+        </div>
+
+        <!-- Avatar -->
+        <div class="flex justify-center my-6">
+            <div class="w-24 h-24 rounded-full bg-white/30 flex items-center justify-center">
+                <span class="material-symbols-outlined text-[64px]">
+                    person
+                </span>
+            </div>
+        </div>
+
+        <!-- Opções -->
+        <nav class="flex flex-col gap-3 px-4 text-sm">
+            <a href="./update_jogador.php" class="flex items-center gap-2 bg-white/20 hover:bg-white/30 p-2 rounded-lg">
+                <span class="material-symbols-outlined">person</span> Perfil
+            </a>
+
+            <a href="./lista_quadra.php" class="flex items-center gap-2 bg-white/20 hover:bg-white/30 p-2 rounded-lg">
+                <span class="material-symbols-outlined">add_circle</span> Criar Partida
+            </a>
+
+            <a href="./lista_partida.php" class="flex items-center gap-2 bg-white/20 hover:bg-white/30 p-2 rounded-lg">
+                <span class="material-symbols-outlined">sports_soccer</span> Partidas criadas por mim
+            </a>
+
+            <a href="" class="flex items-center gap-2 bg-white/20 hover:bg-white/30 p-2 rounded-lg">
+                <span class="material-symbols-outlined">event</span> Partidas Marcadas
+            </a>
+
+            <a href="" class="flex items-center gap-2 bg-white/20 hover:bg-white/30 p-2 rounded-lg">
+                <span class="material-symbols-outlined">help</span> Como usar
+            </a>
+
+            <!--<a href="" class="flex items-center gap-2 bg-white/20 hover:bg-white/30 p-2 rounded-lg">
+                <span class="material-symbols-outlined">settings</span> Configurações
+            </a>-->
+
+            <a href="../../login/logout.php" class="flex items-center gap-2 bg-red-500 hover:bg-red-600 p-2 rounded-lg mt-4">
+                <span class="material-symbols-outlined">logout</span> Sair da Conta
+            </a>
+        </nav>
+    </aside>
+
+
+
+
+
+
+
 
     <script src="/src/js/formata_preco_quadra.js"></script>
     <script src="/src/js/filtro.js"></script>
+    <script src="/src/js/menu_lateral_jog.js"></script>
 </body>
 </html>
