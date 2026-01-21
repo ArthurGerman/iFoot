@@ -12,6 +12,7 @@
         PARTIDAS.DATA_PTD,
         PARTIDAS.HORARIO_INICIO_PTD,
         PARTIDAS.HORARIO_FIM_PTD,
+        PARTIDAS.PRECO_TOTAL_PTD,
         QUADRAS.ENDERECO_QUAD,
         QUADRAS.PRECO_HORA_QUAD,
         MODALIDADES.NOME_MODAL
@@ -62,32 +63,6 @@
 
             <tbody>
                 <?php foreach ($partidas as $partida): ?>
-                    <?php
-                        // O código abaixo serve para fazer a lógica do preço da partida com base na quantidade de tempo
-
-                        // Construir DateTime completos com a data da partida
-                        $inicio = new DateTime($partida['DATA_PTD'] . ' ' . $partida['HORARIO_INICIO_PTD']);
-                        $fim    = new DateTime($partida['DATA_PTD'] . ' ' . $partida['HORARIO_FIM_PTD']);
-
-                        // Se o fim for menor que o início, avançar um dia (cruza meia-noite)
-                        if ($fim < $inicio) {
-                            $fim->modify('+1 day');
-                        }
-
-                        // Calcular duração em horas decimais
-                        $segundos = $fim->getTimestamp() - $inicio->getTimestamp();
-                        $duracao_horas = $segundos / 3600;
-
-                        // Proteger contra valores inválidos
-                        if ($duracao_horas < 0) {
-                            $duracao_horas = 0;
-                        }
-
-                        // Preço total
-                        $preco_total = $duracao_horas * (float)$partida['PRECO_HORA_QUAD'];
-
-                    ?>
-
                     <tr>
                         <td><?= $partida['ENDERECO_QUAD'] ?></td>
                         <td><?= date('d-m-Y', strtotime($partida['DATA_PTD'])) ?></td>
@@ -95,7 +70,7 @@
                         <td><?= $partida['HORARIO_FIM_PTD'] ?></td>
                         <td><?= $partida['NOME_MODAL'] ?></td>
                         <td><?= $partida['PRECO_HORA_QUAD'] ?></td>
-                        <td><?= $preco_total ?></td>
+                        <td><?= $partida['PRECO_TOTAL_PTD'] ?></td>
 
                         <td><a href="./edita_partida.php?id=<?= $partida['ID_PTD'] ?>">Editar</a></td>
                         <td><a href="./excluir_partida.php?id=<?= $partida['ID_PTD'] ?>">Excluir</a></td>

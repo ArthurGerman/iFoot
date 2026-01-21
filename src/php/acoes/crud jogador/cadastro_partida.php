@@ -46,8 +46,31 @@
 
         if (!$conflict) {
 
-            $query2 = $pdo->prepare("INSERT INTO PARTIDAS (DATA_PTD, HORARIO_INICIO_PTD, HORARIO_FIM_PTD, ID_QUAD) VALUES (?, ?, ?, ?)");
-            $query2->execute([$DATA_PTD, $HORARIO_INICIO_PTD, $HORARIO_FIM_PTD, $ID_QUAD]);
+            // Comandos para extrair o preço total da partida a partir do preço da hora da quadra
+            $query1 = $pdo->prepare("SELECT * FROM QUADRAS WHERE ID_QUAD = ?");
+            $query1->execute([$ID_QUAD]);
+            $dados_quadra = $query1->fetch(PDO::FETCH_ASSOC);
+            $PRECO_HORA_QUAD = (float) $dados_quadra['PRECO_HORA_QUAD'];
+
+            $HORARIO_INICIO_PTD_FORMAT = new DateTime($HORARIO_INICIO_PTD);
+            $HORARIO_FIM_PTD_FORMAT = new DateTime($HORARIO_FIM_PTD);
+
+            if ($HORARIO_FIM_PTD_FORMAT < $HORARIO_INICIO_PTD_FORMAT) { // Caso a partida seja em horários incomuns(ex: 22:00 até 01:00) esse if resolve
+                $HORARIO_FIM_PTD_FORMAT->modify('+1 day');
+            }
+            
+            $intervalo = $HORARIO_INICIO_PTD_FORMAT->diff($HORARIO_FIM_PTD_FORMAT); // Diferença de tempo
+            $duracao_horas = $intervalo->h + ($intervalo->i / 60); // Transformação do tempo em horas
+            
+            $PRECO_TOTAL_PTD = $duracao_horas * $PRECO_HORA_QUAD;
+
+
+
+
+
+            // Query para inserir os dados no banco
+            $query2 = $pdo->prepare("INSERT INTO PARTIDAS (DATA_PTD, HORARIO_INICIO_PTD, HORARIO_FIM_PTD, PRECO_TOTAL_PTD, ID_QUAD) VALUES (?, ?, ?, ?, ?)");
+            $query2->execute([$DATA_PTD, $HORARIO_INICIO_PTD, $HORARIO_FIM_PTD, $PRECO_TOTAL_PTD, $ID_QUAD]);
 
             $ID_PTD = $pdo->lastInsertId(); // Comando para descobrir o id da última quadra a qual o usuário fez a reserva
         

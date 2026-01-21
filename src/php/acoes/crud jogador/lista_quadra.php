@@ -51,8 +51,8 @@
         }
 
         if (!empty($_POST['CIDADE_QUAD'])) {
-            $sql .= " AND QUADRAS.CIDADE_QUAD = ?";
-            $parametros[] = $_POST['CIDADE_QUAD'];
+            $sql .= " AND QUADRAS.CIDADE_QUAD LIKE ?";
+            $parametros[] = '%' . $_POST['CIDADE_QUAD'] . '%';
         }
 
         if (!empty($_POST['NOME_MODAL'])) {
@@ -61,13 +61,15 @@
         }
 
         if (!empty($_POST['PRECO_HORA_QUAD_MIN'])) {
+            $PRECO_HORA_QUAD_MIN = str_replace(',', '.', $_POST['PRECO_HORA_QUAD_MIN']);
             $sql .= " AND QUADRAS.PRECO_HORA_QUAD >= ?";
-            $parametros[] = (float) $_POST['PRECO_HORA_QUAD_MIN'];
+            $parametros[] = (float) $PRECO_HORA_QUAD_MIN;
         }
 
         if (!empty($_POST['PRECO_HORA_QUAD_MAX']) && $_POST['PRECO_HORA_QUAD_MAX'] !== '0,00') {
+            $PRECO_HORA_QUAD_MAX = str_replace(',', '.', $_POST['PRECO_HORA_QUAD_MAX']);
             $sql .= " AND QUADRAS.PRECO_HORA_QUAD <= ?";
-            $parametros[] = (float) $_POST['PRECO_HORA_QUAD_MAX'];
+            $parametros[] = (float) $PRECO_HORA_QUAD_MAX;
         }
 
         $query = $pdo->prepare($sql);
@@ -84,7 +86,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=filter_alt,reply" />
-    <link rel="stylesheet" href="../../../styles/global.css">
+    <link rel="stylesheet" href="/src/styles/global.css">
     <title>Cadastrar Partida</title>
 </head>
 
@@ -141,7 +143,7 @@
                     <div>
                         <p class="font-semibold mb-2">Local</p>
                         
-                        <label class="block mb-1">Estado</label>
+                        <label for="UF" class="block mb-1">Estado</label>
                         <select id="UF" name="UF" class="w-full border rounded px-2 py-1">
                             <option value="" disabled selected>Selecione</option>
                             <option value="AC" <?= (isset($_POST['UF']) && $_POST['UF'] === 'AC') ? 'selected' : '' ?>>Acre</option>
@@ -173,7 +175,7 @@
                             <option value="TO" <?= (isset($_POST['UF']) && $_POST['UF'] === 'TO') ? 'selected' : '' ?>>Tocantins</option>
                         </select>
                         
-                        <label class="block mt-2 mb-1">Cidade</label>
+                        <label for="CIDADE_QUAD" class="block mt-2 mb-1">Cidade</label>
                         <input type="text" id="CIDADE_QUAD" name="CIDADE_QUAD" placeholder="Digite o nome da cidade" class="w-full border rounded px-2 py-1" value="<?= $_POST['CIDADE_QUAD'] ?? '' ?>">
                     </div>
                     
