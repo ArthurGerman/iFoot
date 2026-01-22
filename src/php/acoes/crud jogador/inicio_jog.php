@@ -106,12 +106,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+    <link rel="shortcut icon" href="/static/favicon.png" type="image/x-icon">
     <link rel="stylesheet" href="/src/styles/global.css">
     <title>Início</title>
 </head>
 <body class=" font-outfit font-medium not-italic text-[#6b6b6b]">
 
-    <div class="bg-[#F0F0F0] w-screen h-screen flex flex-col">
+    <div class="bg-[#F0F0F0] w-full h-full min-h-screen overflow-x-hidden flex flex-col">
 
 
         <!-- Nav -->

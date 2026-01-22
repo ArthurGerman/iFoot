@@ -15,6 +15,10 @@ function fecharMenu() {
     overlay.classList.add('hidden');
 }
 
+window.addEventListener('pageshow', () => {
+    fecharMenu();
+});
+
 btnMenu.addEventListener('click', abrirMenu);
 fechar.addEventListener('click', fecharMenu);
 overlay.addEventListener('click', fecharMenu);

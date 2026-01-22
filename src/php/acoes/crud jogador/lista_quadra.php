@@ -86,13 +86,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+    <link rel="shortcut icon" href="/static/favicon.png" type="image/x-icon">
     <link rel="stylesheet" href="/src/styles/global.css">
     <title>Cadastrar Partida</title>
 </head>
 
 <body class=" font-outfit font-medium not-italic text-[#6b6b6b]">
 
-    <div class="bg-[#F0F0F0] w-screen h-screen flex flex-col">
+    <div class="bg-[#F0F0F0] w-full h-full min-h-screen overflow-x-hidden flex flex-col">
 
 
         <!-- Nav -->
@@ -107,8 +108,15 @@
                 </span>
             </div>
         </div>
+
+        <div id="menuOverlay" class="fixed inset-0 bg-black/40 hidden z-40"></div>
         
-        <a href="./inicio_jog.php"><span class="material-symbols-outlined w-10 h-10 flex items-center justify-center rounded-xl bg-gray-300 hover:bg-gray-400 transition mt-4 ml-4">reply</span></a>
+
+        <a>
+            <button onclick="history.back()">
+                <span class="material-symbols-outlined w-10 h-10 flex items-center justify-center rounded-xl bg-gray-300 hover:bg-gray-400 transition mt-4 ml-4">reply</span>
+            </button>
+        </a>
     
         
     
