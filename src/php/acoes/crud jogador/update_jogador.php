@@ -3,7 +3,8 @@
     require_once '../../config.php';
     require_once '../../authenticate_jog.php';
 
-    $mensagem_erro = ""; // Variável para armazenar a mensagem de erro que aparece caso o usuário tente cadastrar um email e/ou senha que já existem no banco de dados
+    $mensagem_erro = ""; // Variável para armazenar a mensagem de erro
+    $mensagem_sucesso = ""; // Variável para armazenar a mensagem de sucesso
 
     $NOME_JOG = $_SESSION['name_jog'];
     $ID_JOG = $_SESSION['id_jog'];
@@ -59,7 +60,7 @@
 
         if ($verifica_email->rowCount() > 0){
 
-            $mensagem_erro =  "❌ Este e-mail já está sendo usado por outro usuário.<br>";
+            $_SESSION['mensagem_erro'] =  "❌ Este e-mail já está sendo usado por outro usuário.<br>";
 
 
         } else{ // Bloco de alteração de dados
@@ -97,7 +98,7 @@
             }
 
             // UF
-            if ($ID_UF != $results['ID_UF']) {
+            if ($ID_UF !== $results['ID_UF']) {
                 $CAMPOS_JOG[] = 'ID_UF = ?';
                 $DADOS_JOG[] = $ID_UF;
             }
@@ -111,7 +112,7 @@
             }
 
             if(empty($CAMPOS_JOG)){
-                $mensagem_erro = "⚠️ Nenhuma informação foi alterada.";
+                $_SESSION['mensagem_erro'] = "⚠️ Nenhuma informação foi alterada.";
 
             } else{
                 $DADOS_JOG[] = $ID_JOG;
@@ -119,6 +120,9 @@
                 $sql = "UPDATE JOGADORES SET " . implode(', ', $CAMPOS_JOG) . " WHERE ID_JOG = ?";
                 $stmt = $pdo->prepare($sql);
                 $stmt->execute($DADOS_JOG);
+
+                //Mensagem de confirmação de sucesso na edição de dados
+                $_SESSION['mensagem_sucesso'] = "✅ Dados alterados com sucesso!";
 
                 //Atualiza sessão apenas dos campos alterados
                 if ($NOME_JOG !== $results['NOME_JOG']) {
@@ -392,8 +396,14 @@
         
         <div class="w-full flex mt-2">
             <div class="ml-20 w-full">
-                <?php if (!empty($mensagem_erro)) :?>
-                    <p class="text-red-500"><?= $mensagem_erro ?></p>
+                <?php if (!empty($_SESSION['mensagem_erro'])) :?>
+                    <p id="msg" class="text-red-500"><?= $_SESSION['mensagem_erro'] ?></p>
+                    <?php unset($_SESSION['mensagem_erro']); ?>
+
+                <?php elseif (!empty($_SESSION['mensagem_sucesso'])): ?>
+                    <p id="msg" class="text-green-500"><?= $_SESSION['mensagem_sucesso'] ?></p>
+                    <?php unset($_SESSION['mensagem_sucesso']); ?>
+
                 <?php endif;?> 
             </div>
         </div>
@@ -466,5 +476,6 @@
 
     <script src="/src/js/tratamento-erros-update_jog.js"></script>
     <script src="/src/js/menu_lateral_jog.js"></script>
+    <script src="/src/js/some_mensagem.js"></script>
 </body>
 </html>
