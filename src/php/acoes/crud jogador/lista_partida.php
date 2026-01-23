@@ -13,14 +13,17 @@
         PARTIDAS.HORARIO_INICIO_PTD,
         PARTIDAS.HORARIO_FIM_PTD,
         PARTIDAS.PRECO_TOTAL_PTD,
+        QUADRAS.CIDADE_QUAD,
         QUADRAS.ENDERECO_QUAD,
         QUADRAS.PRECO_HORA_QUAD,
-        MODALIDADES.NOME_MODAL
+        MODALIDADES.NOME_MODAL,
+        UF.NOME_UF
 
         FROM JOGADOR_PARTIDA
         INNER JOIN PARTIDAS ON JOGADOR_PARTIDA.ID_PTD = PARTIDAS.ID_PTD
         INNER JOIN QUADRAS ON PARTIDAS.ID_QUAD = QUADRAS.ID_QUAD
         INNER JOIN MODALIDADES ON QUADRAS.ID_MODAL = MODALIDADES.ID_MODAL
+        INNER JOIN UF ON QUADRAS.ID_UF = UF.ID_UF
         WHERE JOGADOR_PARTIDA.ID_JOG = ?;
 
     ");
@@ -36,51 +39,183 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
     <link rel="shortcut icon" href="/static/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="/src/styles/global.css">
     <title>Minhas partidas</title>
 </head>
-<body>
-    <a href="./inicio_jog.php">Voltar</a><br>
+<body class=" font-outfit font-medium not-italic text-[#6b6b6b]">
 
-    <h1>Suas partidas</h1>
+    <div class="bg-[#F0F0F0] w-full min-h-screen overflow-x-hidden flex flex-col">
 
-    <?php if (empty($partidas)): ?>
-        <p>Não existem partidas cadastradas</p>
-    <?php else: ?>
 
-        <table border="2">
-            <thead>
-                <tr>
-                    <th>Endereço</th>
-                    <th>Data</th>
-                    <th>Início</th>
-                    <th>Fim</th>
-                    <th>Modalidade</th>
-                    <th>Preço por hora</th>
-                    <th>Preço total</th>
-                    <th colspan="2">Ações</th>
-                </tr>
-            </thead>
+        <!-- Nav -->
+        <div class="flex bg-gradient-to-b from-[#4ad658] to-green-500 h-20">
+            <div class="w-1/2">
+                <img src="/static/ifoot.png" alt="" class="h-20">
+            </div>
 
-            <tbody>
-                <?php foreach ($partidas as $partida): ?>
-                    <tr>
-                        <td><?= $partida['ENDERECO_QUAD'] ?></td>
-                        <td><?= date('d-m-Y', strtotime($partida['DATA_PTD'])) ?></td>
-                        <td><?= $partida['HORARIO_INICIO_PTD'] ?></td>
-                        <td><?= $partida['HORARIO_FIM_PTD'] ?></td>
-                        <td><?= $partida['NOME_MODAL'] ?></td>
-                        <td><?= $partida['PRECO_HORA_QUAD'] ?></td>
-                        <td><?= $partida['PRECO_TOTAL_PTD'] ?></td>
+            <div class="flex w-1/2 h-20 items-center justify-end">
+                <span id="btnMenu" class="material-symbols-outlined text-white text-[36px] mr-10 cursor-pointer">
+                    menu
+                </span>
+            </div>
+        </div>
 
-                        <td><a href="./edita_partida.php?id=<?= $partida['ID_PTD'] ?>">Editar</a></td>
-                        <td><a href="./excluir_partida.php?id=<?= $partida['ID_PTD'] ?>">Excluir</a></td>
-                    </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table><br>
-        
-    <?php endif;?>
+
+        <div id="menuOverlay" class="fixed inset-0 bg-black/40 hidden z-40"></div>
+
+
+        <a>
+            <button onclick="history.back()">
+                <span class="material-symbols-outlined w-10 h-10 flex items-center justify-center rounded-xl bg-gray-300 hover:bg-gray-400 transition mt-4 ml-4">reply</span>
+            </button>
+        </a>
+
+        <div class="mt-4 w-full">
+            <h1 class="text-[28px]  w-auto h-auto flex items-center justify-start ml-4">
+                Partidas criadas por você
+            </h1>
+        </div>
+
     
+        <?php if (empty($partidas)): ?>
+            <p>Não existem partidas cadastradas</p>
+        <?php else: ?>
+    
+            <!-- CARDS QUE MOSTRAM AS PARTIDAS DISPONÍVEIS-->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6 px-6 pb-20">
+                <?php foreach ($partidas as $partida): ?>
+                    
+                    <div class="flex bg-white rounded-xl shadow-md overflow-hidden h-80">
+
+                        <!-- Imagem / placeholder -->
+                        <div class="w-1/2 bg-gray-300 flex items-center justify-center">
+                            <span class="text-gray-500">Imagem da quadra</span>
+                        </div>
+
+                        <!-- Conteúdo -->
+                        <div class="w-1/2 bg-gradient-to-b from-[#4ad658] to-green-500 p-4 text-white flex flex-col justify-between">
+                            
+                            <div class="text-sm space-y-1 gap-10">
+                                <p><strong>Endereço:</strong> <?= $partida['ENDERECO_QUAD'] ?></p>
+                                <p><strong>Cidade:</strong> <?= $partida['CIDADE_QUAD'] ?></p>
+                                <p><strong>Estado:</strong> <?= $partida['NOME_UF'] ?></p>
+
+
+
+
+                                <!-- CÓDIGO PHP PARA EXIBIR A DATA E AS HORAS DA PARTIDA CORRETAMENTE-->
+                                <?php
+                                    $DATA_PTD = date('d/m/Y', strtotime($partida['DATA_PTD']));
+
+                                    $HORARIO_INICIO_PTD = new DateTime($partida['HORARIO_INICIO_PTD']);
+                                    $HORARIO_FIM_PTD = new DateTime($partida['HORARIO_FIM_PTD']);
+
+
+                                    if ($HORARIO_FIM_PTD < $HORARIO_INICIO_PTD) {
+                                        $HORARIO_FIM_PTD->modify('+1 day');
+                                    }
+
+                                    $intervalo = $HORARIO_INICIO_PTD->diff($HORARIO_FIM_PTD);
+
+                                    $duracao= $intervalo->h . 'h';
+                                    if ($intervalo->i > 0) {
+                                        $duracao .= $intervalo->i;
+                                    }
+
+                                    $HORARIO_INICIO_PTD = $HORARIO_INICIO_PTD->format('H:i');
+                                    $HORARIO_FIM_PTD = $HORARIO_FIM_PTD->format('H:i'); 
+                                ?>
+
+
+                                <p><strong>Data:</strong> <?= $DATA_PTD ?></p>
+                                <p><strong>Duração:</strong> <?= $duracao ?></p>
+                                <p><strong>Início:</strong> <?= $HORARIO_INICIO_PTD ?> hr</p>
+                                <p><strong>Fim:</strong> <?= $HORARIO_FIM_PTD ?> hr</p>
+                                <p><strong>Modalidade:</strong> <?= $partida['NOME_MODAL'] ?></p>
+                                <p><strong>Preço por hora: </strong> R$ <?= $partida['PRECO_HORA_QUAD'] ?>/h</p>
+                                <p><strong>Preço total:</strong> R$ <?= $partida['PRECO_TOTAL_PTD'] ?></p> <!-- Preço final calculado com base nas horas-->
+                            </div>
+
+                            <div class="flex flex-row gap-2">
+                                <a href="./edita_partida.php?id=<?= $partida['ID_PTD'] ?>" class="bg-white text-green-600 text-center py-2 rounded-md font-semibold hover:bg-gray-200 transition mt-2 w-1/2">
+                                    Editar
+                                </a>
+
+                                <a href="./excluir_partida.php?id=<?= $partida['ID_PTD'] ?>" class="bg-white text-green-600 text-center py-2 rounded-md font-semibold hover:bg-gray-200 transition mt-2 w-1/2">
+                                    Excluir
+                                </a>
+                            </div>
+
+                        </div>
+                    </div>
+
+                <?php endforeach; ?>
+            </div>
+            
+        <?php endif;?>
+    </div>
+
+
+
+
+
+
+
+
+    <!-- Menu lateral flutuante-->
+
+    <aside id="menuLateral" class="fixed top-0 right-0 h-full w-80 bg-green-500 text-white transform translate-x-full transition-transform duration-300 z-50 flex flex-col">
+
+        <!-- Cabeçalho -->
+        <div class="flex items-center justify-between p-4">
+            <h2 class="text-xl font-semibold">Menu</h2>
+            <span id="fecharMenu" class="material-symbols-outlined cursor-pointer">
+                close
+            </span>
+        </div>
+
+        <!-- Avatar -->
+        <div class="flex justify-center my-6">
+            <div class="w-24 h-24 rounded-full bg-white/30 flex items-center justify-center">
+                <span class="material-symbols-outlined text-[64px]">
+                    person
+                </span>
+            </div>
+        </div>
+
+        <!-- Opções -->
+        <nav class="flex flex-col gap-3 px-4 text-sm">
+
+            <a href="./inicio_jog.php" class="flex items-center gap-2 bg-white/20 hover:bg-white/30 p-2 rounded-lg">
+                <span class="material-symbols-outlined">house</span> Home
+            </a>
+
+            <a href="./lista_quadra.php" class="flex items-center gap-2 bg-white/20 hover:bg-white/30 p-2 rounded-lg">
+                <span class="material-symbols-outlined">add_circle</span> Criar Partida
+            </a>
+
+
+            <a href="" class="flex items-center gap-2 bg-white/20 hover:bg-white/30 p-2 rounded-lg">
+                <span class="material-symbols-outlined">event</span> Partidas Marcadas
+            </a>
+
+            <a href="" class="flex items-center gap-2 bg-white/20 hover:bg-white/30 p-2 rounded-lg">
+                <span class="material-symbols-outlined">help</span> Como usar
+            </a>
+
+            <!--<a href="" class="flex items-center gap-2 bg-white/20 hover:bg-white/30 p-2 rounded-lg">
+                <span class="material-symbols-outlined">settings</span> Configurações
+            </a>-->
+
+            <a href="../../login/logout.php" class="flex items-center gap-2 bg-red-500 hover:bg-red-600 p-2 rounded-lg mt-4">
+                <span class="material-symbols-outlined">logout</span> Sair da Conta
+            </a>
+        </nav>
+    </aside>
+    
+
+    <script src="/src/js/menu_lateral_jog.js"></script>
 </body>
 </html>

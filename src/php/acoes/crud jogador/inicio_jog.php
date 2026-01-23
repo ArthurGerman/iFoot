@@ -275,7 +275,7 @@
         <?php else: ?>
 
             <!-- CARDS QUE MOSTRAM AS PARTIDAS DISPONÍVEIS-->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6 px-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6 px-6 pb-20">
                 <?php foreach ($partidas as $partida): ?>
                     
                     <div class="flex bg-white rounded-xl shadow-md overflow-hidden h-80">

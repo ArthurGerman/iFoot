@@ -248,7 +248,7 @@
         <?php else: ?>
 
             <!-- CARDS QUE MOSTRAM AS QUADRAS DISPONÍVEIS-->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6 px-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6 px-6 pb-20">
                 <?php foreach ($quadras as $quadra): ?>
                     
                     <div class="flex bg-white rounded-xl shadow-md overflow-hidden h-48">
