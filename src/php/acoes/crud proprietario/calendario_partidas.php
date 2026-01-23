@@ -49,6 +49,7 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
+    <link rel="shortcut icon" href="/static/favicon.png" type="image/x-icon">
     <title>Calendário</title>
     <style>
         table {
