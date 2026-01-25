@@ -21,45 +21,78 @@
     <link rel="stylesheet" href="/src/styles/global.css">
     <title>Lista de quadras</title>
 </head>
-<body>
-    <h1>
-        Histórico de partidas da quadra
-    </h1>
+<body class=" font-outfit font-medium not-italic text-[#6b6b6b]">
 
-    <a href="./inicio_prop.php">Voltar</a><br><br>
+    <div class="bg-[#F0F0F0] w-full min-h-screen overflow-x-hidden flex flex-col">
+
+        <!-- Nav -->
+        <div class="flex bg-gradient-to-b from-[#4ad658] to-green-500 h-20">
+            <img src="/static/ifoot.png" alt="" class="h-20">
+        </div>
     
-
-    <?php if (empty($partidas)): ?>
-        <p>Ainda não existem partidas cadastradas para essa quadra</p>
-    <?php else: ?>
-
-        <table border="2">
-            <thead>
-                <tr>
-                    <th>Data</th>
-                    <th>Horário início</th>
-                    <th>Horário fim</th>
-                </tr>
-            </thead>
-
-            <tbody>
-                <?php foreach ($partidas as $partida): ?>
-                    <tr>
-                        <td><?= $partida['DATA_PTD'] ?></td>
-                        <td><?= $partida['HORARIO_INICIO_PTD'] ?></td>
-                        <td><?= $partida['HORARIO_FIM_PTD'] ?></td>
-                    </tr>
-                <?php endforeach; ?>
-
-            </tbody>
-        </table>
-        
-        <br>
-
-        <a href="./exporta_historico_quadra.php?id=<?= $ID_QUAD ?>" target="_blank">
-            <button>Exportar para PDF</button>
+    
+    
+        <a href="./inicio_prop.php">
+            <button>
+                <span class="material-symbols-outlined w-10 h-10 flex items-center justify-center rounded-xl bg-gray-300 hover:bg-gray-400 transition mt-4 ml-4">reply</span>
+            </button>
         </a>
-    <?php endif?>
+
+
+        <div class="mt-4 w-full">
+            <h1 class="text-[28px]  w-auto h-auto flex items-center justify-start ml-4">
+                Histórico de partidas da quadra
+            </h1>
+        </div>
+
+
+
+        <?php if (empty($partidas)): ?>
+            <p>Ainda não existem partidas cadastradas para essa quadra</p>
+        <?php else: ?>
+
+            <div class="px-4 mt-12 flex justify-center">
+
+                <div class="overflow-hidden rounded-xl shadow-md w-full max-w-3xl bg-yellow-500">
+
+
+                    <table class="w-full border-collapse bg-gray-200">
+
+                        <thead>
+                            <tr class="bg-gradient-to-b from-green-400 to-green-600 text-white">
+                                <th class="px-4 py-2 text-center font-semibold border-r border-green-500">Data</th>
+                                <th class="px-4 py-2 text-center font-semibold border-r border-green-500">Horário início</th>
+                                <th class="px-4 py-2 text-center font-semibold border-r border-green-500">Horário fim</th>
+                            </tr>
+                        </thead>
+                
+                        <tbody>
+                            <?php foreach ($partidas as $partida): ?>
+                                <tr class="border-t border-gray-400 text-gray-700 text-sm">
+                                    <td class="px-4 py-2 text-center border-r border-gray-400"><?= date('d/m/Y', strtotime($partida['DATA_PTD'])) ?></td>
+                                    <td class="px-4 py-2 text-center border-r border-gray-400"><?= substr($partida['HORARIO_INICIO_PTD'], 0, 5) ?> h</td>
+                                    <td class="px-4 py-2 text-center"><?= substr($partida['HORARIO_FIM_PTD'], 0, 5) ?> h</td>
+                                </tr>
+                            <?php endforeach; ?>
+                
+                        </tbody>
+                    </table>
+
+                </div>
+
+            </div>
+
+
+            <div class="flex justify-center mt-8">
+                <a href="./exporta_historico_quadra.php?id=<?= $ID_QUAD ?>" target="_blank">
+                    <button class="bg-green-500 text-white px-4 py-1 rounded">Exportar para PDF</button>
+                </a>
+            </div>
+        <?php endif?>
+
+
+    </div>
+
 
 </body>
 </html>
