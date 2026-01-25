@@ -55,7 +55,7 @@
 
         <div class="mt-4 w-full">
             <h1 class="text-[28px]  w-auto h-auto flex items-center justify-start ml-4">
-                Suas quadras
+                Olá <?= $_SESSION['name_prop'] ?>! Abaixo estão listadas as suas quadras
             </h1>
         </div>
 
@@ -169,7 +169,7 @@
     </aside>
 
 
-    <script src="/src/js/menu_lateral_jog.js"></script>
+    <script src="/src/js/menu_lateral.js"></script>
 
 </body>
 </html>

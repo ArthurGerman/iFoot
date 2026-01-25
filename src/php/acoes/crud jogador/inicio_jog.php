@@ -133,8 +133,8 @@
         <div class="flex flex-row mt-4">
 
             <div class="w-1/2">
-                <h1 class="text-[28px]  w-64 h-auto flex items-center justify-start ml-4">
-                    Últimas partidas
+                <h1 class="text-[28px]  w-auto h-auto flex items-center justify-start ml-4">
+                    Olá <?= $_SESSION['name_jog'] ?>! Abaixo estão as últimas partidas criadas
                 </h1>
 
             </div>
@@ -416,6 +416,6 @@
 
     <script src="/src/js/formata_preco_quadra.js"></script>
     <script src="/src/js/filtro.js"></script>
-    <script src="/src/js/menu_lateral_jog.js"></script>
+    <script src="/src/js/menu_lateral.js"></script>
 </body>
 </html>

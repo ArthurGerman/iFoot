@@ -51,23 +51,13 @@
 
         <!-- Nav -->
         <div class="flex bg-gradient-to-b from-[#4ad658] to-green-500 h-20">
-            <div class="w-1/2">
-                <img src="/static/ifoot.png" alt="" class="h-20">
-            </div>
-
-            <div class="flex w-1/2 h-20 items-center justify-end">
-                <span id="btnMenu" class="material-symbols-outlined text-white text-[36px] mr-10 cursor-pointer">
-                    menu
-                </span>
-            </div>
+            <img src="/static/ifoot.png" alt="" class="h-20">
         </div>
 
 
-        <div id="menuOverlay" class="fixed inset-0 bg-black/40 hidden z-40"></div>
 
-
-        <a>
-            <button onclick="history.back()">
+        <a href="./inicio_jog.php">
+            <button>
                 <span class="material-symbols-outlined w-10 h-10 flex items-center justify-center rounded-xl bg-gray-300 hover:bg-gray-400 transition mt-4 ml-4">reply</span>
             </button>
         </a>
@@ -159,63 +149,5 @@
 
 
 
-
-
-
-
-
-    <!-- Menu lateral flutuante-->
-
-    <aside id="menuLateral" class="fixed top-0 right-0 h-full w-80 bg-green-500 text-white transform translate-x-full transition-transform duration-300 z-50 flex flex-col">
-
-        <!-- Cabeçalho -->
-        <div class="flex items-center justify-between p-4">
-            <h2 class="text-xl font-semibold">Menu</h2>
-            <span id="fecharMenu" class="material-symbols-outlined cursor-pointer">
-                close
-            </span>
-        </div>
-
-        <!-- Avatar -->
-        <div class="flex justify-center my-6">
-            <div class="w-24 h-24 rounded-full bg-white/30 flex items-center justify-center">
-                <span class="material-symbols-outlined text-[64px]">
-                    person
-                </span>
-            </div>
-        </div>
-
-        <!-- Opções -->
-        <nav class="flex flex-col gap-3 px-4 text-sm">
-
-            <a href="./inicio_jog.php" class="flex items-center gap-2 bg-white/20 hover:bg-white/30 p-2 rounded-lg">
-                <span class="material-symbols-outlined">house</span> Home
-            </a>
-
-            <a href="./lista_quadra.php" class="flex items-center gap-2 bg-white/20 hover:bg-white/30 p-2 rounded-lg">
-                <span class="material-symbols-outlined">add_circle</span> Criar Partida
-            </a>
-
-
-            <a href="" class="flex items-center gap-2 bg-white/20 hover:bg-white/30 p-2 rounded-lg">
-                <span class="material-symbols-outlined">event</span> Partidas Marcadas
-            </a>
-
-            <a href="" class="flex items-center gap-2 bg-white/20 hover:bg-white/30 p-2 rounded-lg">
-                <span class="material-symbols-outlined">help</span> Como usar
-            </a>
-
-            <!--<a href="" class="flex items-center gap-2 bg-white/20 hover:bg-white/30 p-2 rounded-lg">
-                <span class="material-symbols-outlined">settings</span> Configurações
-            </a>-->
-
-            <a href="../../login/logout.php" class="flex items-center gap-2 bg-red-500 hover:bg-red-600 p-2 rounded-lg mt-4">
-                <span class="material-symbols-outlined">logout</span> Sair da Conta
-            </a>
-        </nav>
-    </aside>
-    
-
-    <script src="/src/js/menu_lateral_jog.js"></script>
 </body>
 </html>
