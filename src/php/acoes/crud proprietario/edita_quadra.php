@@ -57,7 +57,7 @@
                 $ID_QUAD
             ]);
             
-            header("Location: ./lista_quadras.php");
+            header("Location: ./inicio_prop.php");
         }
     }
 ?>
@@ -78,7 +78,7 @@
         Edição de quadra
     </h1>
 
-    <a href="./lista_quadras.php">Voltar</a>
+    <a href="./inicio_prop.php">Voltar</a>
 
     <form action="" method="post">
         

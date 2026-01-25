@@ -26,7 +26,7 @@
         Histórico de partidas da quadra
     </h1>
 
-    <a href="./lista_quadras.php">Voltar</a><br><br>
+    <a href="./inicio_prop.php">Voltar</a><br><br>
     
 
     <?php if (empty($partidas)): ?>

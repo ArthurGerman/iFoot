@@ -33,7 +33,7 @@
         $query_3->execute([$ENDERECO_QUAD, $CIDADE_QUAD, $ID_UF, $ID_MODAL, $PRECO_HORA_QUAD, $ID_PROP]);
         
 
-        header('Location: ./lista_quadras.php');
+        header('Location: ./inicio_prop.php');
     }
 ?>
 
