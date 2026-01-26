@@ -41,41 +41,79 @@
     <link rel="stylesheet" href="/src/styles/global.css">
     <title>Agenda do dia</title>
 </head>
-<body>
+<body class=" font-outfit font-medium not-italic text-[#6b6b6b]">
+
+    <div class="bg-[#F0F0F0] w-full h-full min-h-screen overflow-x-hidden flex flex-col">
+        
+        <!-- Nav -->
+        <div class="flex bg-gradient-to-b from-[#4ad658] to-green-500 h-20">
+            <img src="/static/ifoot.png" alt="" class="h-20">
+        </div>
     
-    <button>
-        <a href="./calendario_partidas.php">Voltar</a>
-    </button>
+    
+    
+        <a href="./calendario_partidas.php">
+            <button>
+                <span class="material-symbols-outlined w-10 h-10 flex items-center justify-center rounded-xl bg-gray-300 hover:bg-gray-400 transition mt-4 ml-4">reply</span>
+            </button>
+        </a>
 
-    <h2>Agenda do dia <?= date('d/m/Y', strtotime($data)) ?></h2>
 
-    <table border="2">
-        <thead>
-            <tr>
-                <th>Id da partida</th>
-                <th>Início</th>
-                <th>Fim</th>
-                <th>Id da quadra</th>
-                <th>Endereço</th>
-                <th>Cidade</th>
-            </tr>
-        </thead>
+        <div class="mt-4 w-full">
+            <h1 class="text-[28px]  w-auto h-auto flex items-center justify-start ml-4">
+                Agenda do dia <?= date('d/m/Y', strtotime($data)) ?>
+            </h1>
+        </div>
 
-        <tbody>
+
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6 px-6 pb-20">
             <?php foreach ($partidas as $partida): ?>
-                <tr>
-                    <td><?= $partida['ID_PTD'] ?></td>
-                    <td><?= $partida['HORARIO_INICIO_PTD'] ?></td>
-                    <td><?= $partida['HORARIO_FIM_PTD'] ?></td>
-                    <td><?= $partida['ID_QUAD'] ?></td>
-                    <td><?= $partida['ENDERECO_QUAD'] ?></td>
-                    <td><?= $partida['CIDADE_QUAD'] ?></td>
 
-                </tr>
+                <?php
+                    $inicio = new DateTime($partida['HORARIO_INICIO_PTD']);
+                    $fim = new DateTime($partida['HORARIO_FIM_PTD']);
+
+                    $intervalo = $inicio->diff($fim);
+
+                    $horas = $intervalo->h;
+                    $minutos = $intervalo->i;
+
+                    $duracao = $horas.'h';
+
+                    if ($minutos > 0) {
+                        $duracao .= $minutos . 'min';
+                    }
+                ?>
+                
+                <div class="flex bg-white rounded-xl shadow-md overflow-hidden h-48">
+
+                    <!-- Imagem / placeholder -->
+                    <div class="w-1/2 bg-gray-300 flex items-center justify-center">
+                        <span class="text-gray-500">Imagem da quadra</span>
+                    </div>
+
+                    <!-- Conteúdo -->
+                    <div class="w-1/2 bg-gradient-to-b from-[#4ad658] to-green-500 p-4 text-white flex flex-col justify-between">
+                        
+                        <div class="text-sm space-y-1 gap-10">
+                            <p><strong>ID:</strong> <?= $partida['ID_PTD'] ?></p>
+                            <p><strong>Início:</strong> <?= substr($partida['HORARIO_INICIO_PTD'], 0, 5) ?> h</p>
+                            <p><strong>Fim:</strong> <?= substr($partida['HORARIO_FIM_PTD'], 0, 5) ?> h</p>
+                            <p><strong>Duração:</strong> <?= $duracao ?> </p>
+                            <p><strong>Id da quadra:</strong> <?= $partida['ID_QUAD'] ?></p>
+                            <p><strong>Endereço:</strong> <?= $partida['ENDERECO_QUAD'] ?></p>
+                            <p><strong>Cidade:</strong> <?= $partida['CIDADE_QUAD'] ?></p>
+                        </div>
+
+
+                    </div>
+                </div>
+
             <?php endforeach; ?>
-
-        </tbody>
-    </table>
+        </div>
+    </div>
+    
 
 </body>
 </html>

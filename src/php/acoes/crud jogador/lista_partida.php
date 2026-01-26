@@ -121,8 +121,8 @@
 
                                 <p><strong>Data:</strong> <?= $DATA_PTD ?></p>
                                 <p><strong>Duração:</strong> <?= $duracao ?></p>
-                                <p><strong>Início:</strong> <?= $HORARIO_INICIO_PTD ?> hr</p>
-                                <p><strong>Fim:</strong> <?= $HORARIO_FIM_PTD ?> hr</p>
+                                <p><strong>Início:</strong> <?= $HORARIO_INICIO_PTD ?> h</p>
+                                <p><strong>Fim:</strong> <?= $HORARIO_FIM_PTD ?> h</p>
                                 <p><strong>Modalidade:</strong> <?= $partida['NOME_MODAL'] ?></p>
                                 <p><strong>Preço por hora: </strong> R$ <?= $partida['PRECO_HORA_QUAD'] ?>/h</p>
                                 <p><strong>Preço total:</strong> R$ <?= $partida['PRECO_TOTAL_PTD'] ?></p> <!-- Preço final calculado com base nas horas-->
