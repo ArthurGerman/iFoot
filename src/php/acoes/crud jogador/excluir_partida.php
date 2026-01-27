@@ -13,5 +13,5 @@
 
     $query2 -> execute([$ID_PTD]);
 
-    header('Location: lista_partida.php');
+    header('Location: ./partidas_marcadas.php');
 ?>

@@ -1,0 +1,164 @@
+<?php 
+
+    require_once '../../config.php';
+    require_once '../../authenticate_jog.php';
+
+    $ID_JOG = $_SESSION['id_jog'];
+
+    // Consulta que junta a tabela intermediária com a tabela de partidas, quadras e modalidades
+    $query = $pdo->prepare("
+        SELECT 
+        PARTIDAS.ID_PTD,
+        PARTIDAS.DATA_PTD,
+        PARTIDAS.HORARIO_INICIO_PTD,
+        PARTIDAS.HORARIO_FIM_PTD,
+        PARTIDAS.PRECO_TOTAL_PTD,
+        PARTIDAS.ID_CRIADOR,
+        QUADRAS.CIDADE_QUAD,
+        QUADRAS.ENDERECO_QUAD,
+        QUADRAS.PRECO_HORA_QUAD,
+        MODALIDADES.NOME_MODAL,
+        UF.NOME_UF
+
+        FROM JOGADOR_PARTIDA
+        INNER JOIN PARTIDAS ON JOGADOR_PARTIDA.ID_PTD = PARTIDAS.ID_PTD
+        INNER JOIN QUADRAS ON PARTIDAS.ID_QUAD = QUADRAS.ID_QUAD
+        INNER JOIN MODALIDADES ON QUADRAS.ID_MODAL = MODALIDADES.ID_MODAL
+        INNER JOIN UF ON QUADRAS.ID_UF = UF.ID_UF
+        WHERE JOGADOR_PARTIDA.ID_JOG = ?
+
+    ");
+    $query->execute([$ID_JOG]);
+    $partidas = $query->fetchAll(PDO::FETCH_ASSOC);
+
+
+
+?>
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+    <link rel="shortcut icon" href="/static/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="/src/styles/global.css">
+    <title>Partidas marcadas</title>
+</head>
+<body class=" font-outfit font-medium not-italic text-[#6b6b6b]">
+
+    <div class="bg-[#F0F0F0] w-full min-h-screen overflow-x-hidden flex flex-col">
+
+
+        <!-- Nav -->
+        <div class="flex bg-gradient-to-b from-[#4ad658] to-green-500 h-20">
+            <img src="/static/ifoot.png" alt="" class="h-20">
+        </div>
+
+
+
+        <a href="./inicio_jog.php">
+            <button>
+                <span class="material-symbols-outlined w-10 h-10 flex items-center justify-center rounded-xl bg-gray-300 hover:bg-gray-400 transition mt-4 ml-4">reply</span>
+            </button>
+        </a>
+
+        <div class="mt-4 w-full">
+            <h1 class="text-[28px]  w-auto h-auto flex items-center justify-start ml-4">
+                Todas as partidas marcadas
+            </h1>
+        </div>
+
+    
+        <?php if (empty($partidas)): ?>
+            <p class="ml-6 mt-2">Não existem partidas marcadas</p>
+        <?php else: ?>
+    
+            <!-- CARDS QUE MOSTRAM AS PARTIDAS DISPONÍVEIS-->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6 px-6 pb-20">
+                <?php foreach ($partidas as $partida): ?>
+                    
+                    <div class="flex bg-white rounded-xl shadow-md overflow-hidden h-[350px]">
+
+                        <!-- Imagem / placeholder -->
+                        <div class="w-1/2 bg-gray-300 flex items-center justify-center">
+                            <span class="text-gray-500">Imagem da quadra</span>
+                        </div>
+
+                        <!-- Conteúdo -->
+                        <div class="w-1/2 bg-gradient-to-b from-[#4ad658] to-green-500 p-4 text-white flex flex-col justify-between">
+                            
+                            <div class="text-sm space-y-1 gap-10">
+                                <p><strong>Endereço:</strong> <?= $partida['ENDERECO_QUAD'] ?></p>
+                                <p><strong>Cidade:</strong> <?= $partida['CIDADE_QUAD'] ?></p>
+                                <p><strong>Estado:</strong> <?= $partida['NOME_UF'] ?></p>
+
+
+
+
+                                <!-- CÓDIGO PHP PARA EXIBIR A DATA E AS HORAS DA PARTIDA CORRETAMENTE-->
+                                <?php
+                                    $DATA_PTD = date('d/m/Y', strtotime($partida['DATA_PTD']));
+
+                                    $HORARIO_INICIO_PTD = new DateTime($partida['HORARIO_INICIO_PTD']);
+                                    $HORARIO_FIM_PTD = new DateTime($partida['HORARIO_FIM_PTD']);
+
+
+                                    if ($HORARIO_FIM_PTD < $HORARIO_INICIO_PTD) {
+                                        $HORARIO_FIM_PTD->modify('+1 day');
+                                    }
+
+                                    $intervalo = $HORARIO_INICIO_PTD->diff($HORARIO_FIM_PTD);
+
+                                    $duracao= $intervalo->h . 'h';
+                                    if ($intervalo->i > 0) {
+                                        $duracao .= $intervalo->i;
+                                    }
+
+                                    $HORARIO_INICIO_PTD = $HORARIO_INICIO_PTD->format('H:i');
+                                    $HORARIO_FIM_PTD = $HORARIO_FIM_PTD->format('H:i'); 
+                                ?>
+
+
+                                <p><strong>Data:</strong> <?= $DATA_PTD ?></p>
+                                <p><strong>Início:</strong> <?= $HORARIO_INICIO_PTD ?> h</p>
+                                <p><strong>Fim:</strong> <?= $HORARIO_FIM_PTD ?> h</p>
+                                <p><strong>Duração total:</strong> <?= $duracao ?></p>
+                                <p><strong>Modalidade:</strong> <?= $partida['NOME_MODAL'] ?></p>
+                                <p><strong>Preço por hora: </strong> R$ <?= $partida['PRECO_HORA_QUAD'] ?>/h</p>
+                                <p><strong>Preço total:</strong> R$ <?= $partida['PRECO_TOTAL_PTD'] ?></p> <!-- Preço final calculado com base nas horas-->
+                            </div>
+
+                            <div class="flex flex-row gap-2">
+                                <?php if ($partida['ID_CRIADOR'] == $ID_JOG): ?>
+
+                                    <a href="./edita_partida.php?id=<?= $partida['ID_PTD'] ?>" class="bg-white text-green-600 text-center py-2 rounded-md font-semibold hover:bg-gray-200 transition mt-2 w-1/2">
+                                        Editar
+                                    </a>
+
+                                    <a href="./excluir_partida.php?id=<?= $partida['ID_PTD'] ?>" class="bg-white text-green-600 text-center py-2 rounded-md font-semibold hover:bg-gray-200 transition mt-2 w-1/2">
+                                        Excluir
+                                    </a>
+                                <?php else: ?>
+
+                                    <a href="./sair_partida.php?id=<?= $partida['ID_PTD'] ?>" class="bg-white text-green-600 text-center py-2 rounded-md font-semibold hover:bg-gray-200 transition mt-2 w-full">
+                                        Sair
+                                    </a>
+
+                                <?php endif;?>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                <?php endforeach; ?>
+            </div>
+            
+        <?php endif;?>
+    </div>
+
+
+
+</body>
+</html>

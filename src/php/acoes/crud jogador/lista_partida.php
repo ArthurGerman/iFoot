@@ -17,14 +17,18 @@
         QUADRAS.ENDERECO_QUAD,
         QUADRAS.PRECO_HORA_QUAD,
         MODALIDADES.NOME_MODAL,
-        UF.NOME_UF
+        MODALIDADES.QTD_MAX_JOG,
+        UF.NOME_UF,
+        COUNT(JOGADOR_PARTIDA.ID_JOG) AS QTD_JOGADORES_ATUAIS
 
-        FROM JOGADOR_PARTIDA
-        INNER JOIN PARTIDAS ON JOGADOR_PARTIDA.ID_PTD = PARTIDAS.ID_PTD
+        FROM PARTIDAS
+        LEFT JOIN JOGADOR_PARTIDA ON JOGADOR_PARTIDA.ID_PTD = PARTIDAS.ID_PTD
         INNER JOIN QUADRAS ON PARTIDAS.ID_QUAD = QUADRAS.ID_QUAD
         INNER JOIN MODALIDADES ON QUADRAS.ID_MODAL = MODALIDADES.ID_MODAL
         INNER JOIN UF ON QUADRAS.ID_UF = UF.ID_UF
-        WHERE JOGADOR_PARTIDA.ID_JOG = ?;
+        WHERE PARTIDAS.ID_CRIADOR = ?
+
+        GROUP BY PARTIDAS.ID_PTD
 
     ");
     $query->execute([$ID_JOG]);
@@ -77,7 +81,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6 px-6 pb-20">
                 <?php foreach ($partidas as $partida): ?>
                     
-                    <div class="flex bg-white rounded-xl shadow-md overflow-hidden h-80">
+                    <div class="flex bg-white rounded-xl shadow-md overflow-hidden h-[350px]">
 
                         <!-- Imagem / placeholder -->
                         <div class="w-1/2 bg-gray-300 flex items-center justify-center">
@@ -120,9 +124,10 @@
 
 
                                 <p><strong>Data:</strong> <?= $DATA_PTD ?></p>
-                                <p><strong>Duração:</strong> <?= $duracao ?></p>
                                 <p><strong>Início:</strong> <?= $HORARIO_INICIO_PTD ?> h</p>
                                 <p><strong>Fim:</strong> <?= $HORARIO_FIM_PTD ?> h</p>
+                                <p><strong>Duração total:</strong> <?= $duracao ?></p>
+                                <p><strong>Quantidade atual de jogadores:</strong> <?= $partida['QTD_JOGADORES_ATUAIS'] ?>/<?= $partida['QTD_MAX_JOG'] ?></p>
                                 <p><strong>Modalidade:</strong> <?= $partida['NOME_MODAL'] ?></p>
                                 <p><strong>Preço por hora: </strong> R$ <?= $partida['PRECO_HORA_QUAD'] ?>/h</p>
                                 <p><strong>Preço total:</strong> R$ <?= $partida['PRECO_TOTAL_PTD'] ?></p> <!-- Preço final calculado com base nas horas-->

@@ -16,12 +16,15 @@
             QUADRAS.CIDADE_QUAD,
             QUADRAS.PRECO_HORA_QUAD,
             UF.NOME_UF,
-            MODALIDADES.NOME_MODAL
+            MODALIDADES.NOME_MODAL,
+            MODALIDADES.QTD_MAX_JOG,
+            COUNT(JOGADOR_PARTIDA.ID_JOG) AS QTD_JOGADORES_ATUAIS
 
         FROM PARTIDAS
         INNER JOIN QUADRAS ON PARTIDAS.ID_QUAD = QUADRAS.ID_QUAD
         INNER JOIN UF ON QUADRAS.ID_UF = UF.ID_UF
         INNER JOIN MODALIDADES ON QUADRAS.ID_MODAL = MODALIDADES.ID_MODAL
+        INNER JOIN JOGADOR_PARTIDA ON PARTIDAS.ID_PTD = JOGADOR_PARTIDA.ID_PTD
         WHERE PARTIDAS.ID_CRIADOR != ?
         AND NOT EXISTS (
             SELECT 1
@@ -29,6 +32,9 @@
             WHERE JOGADOR_PARTIDA.ID_PTD = PARTIDAS.ID_PTD
             AND JOGADOR_PARTIDA.ID_JOG = ?
         )
+
+        GROUP BY PARTIDAS.ID_PTD
+        HAVING COUNT(JOGADOR_PARTIDA.ID_JOG) < MODALIDADES.QTD_MAX_JOG
     
     ");
 
@@ -50,12 +56,15 @@
                 QUADRAS.CIDADE_QUAD,
                 QUADRAS.PRECO_HORA_QUAD,
                 UF.NOME_UF,
-                MODALIDADES.NOME_MODAL
+                MODALIDADES.NOME_MODAL,
+                MODALIDADES.QTD_MAX_JOG,
+                COUNT(JOGADOR_PARTIDA.ID_JOG) AS QTD_JOGADORES_ATUAIS
 
             FROM PARTIDAS
             INNER JOIN QUADRAS ON PARTIDAS.ID_QUAD = QUADRAS.ID_QUAD
             INNER JOIN UF ON QUADRAS.ID_UF = UF.ID_UF
             INNER JOIN MODALIDADES ON QUADRAS.ID_MODAL = MODALIDADES.ID_MODAL
+            INNER JOIN JOGADOR_PARTIDA ON PARTIDAS.ID_PTD = JOGADOR_PARTIDA.ID_PTD
             WHERE PARTIDAS.ID_CRIADOR != ?
             AND NOT EXISTS (
                 SELECT 1
@@ -108,6 +117,11 @@
             $sql .= " AND PARTIDAS.PRECO_TOTAL_PTD <= ?";
             $parametros[] = (float) $PRECO_TOTAL_PTD_MAX;
         }
+
+        $sql .= "
+            GROUP BY PARTIDAS.ID_PTD
+            HAVING COUNT(JOGADOR_PARTIDA.ID_JOG) < MODALIDADES.QTD_MAX_JOG
+        ";
 
         $query = $pdo->prepare($sql);
         $query->execute($parametros);
@@ -293,7 +307,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6 px-6 pb-20">
                 <?php foreach ($partidas as $partida): ?>
                     
-                    <div class="flex bg-white rounded-xl shadow-md overflow-hidden h-80">
+                    <div class="flex bg-white rounded-xl shadow-md overflow-hidden h-[350px]">
 
                         <!-- Imagem / placeholder -->
                         <div class="w-1/2 bg-gray-300 flex items-center justify-center">
@@ -336,10 +350,11 @@
                                 ?>
 
 
-                                <p><strong>Duração:</strong> <?= $duracao ?>min</p>
                                 <p><strong>Data:</strong> <?= $DATA_PTD ?></p>
                                 <p><strong>Início:</strong> <?= $HORARIO_INICIO_PTD ?> hr</p>
                                 <p><strong>Fim:</strong> <?= $HORARIO_FIM_PTD ?> hr</p>
+                                <p><strong>Duração total:</strong> <?= $duracao ?>min</p>
+                                <p><strong>Quantidade atual de jogadores:</strong> <?= $partida['QTD_JOGADORES_ATUAIS'] ?>/<?= $partida['QTD_MAX_JOG'] ?></p>
                                 <p><strong>Preço por hora: </strong> R$ <?= $partida['PRECO_HORA_QUAD'] ?>/h</p>
                                 <p><strong>Preço total:</strong> R$ <?= $partida['PRECO_TOTAL_PTD'] ?></p> <!-- Preço final calculado com base nas horas-->
                             </div>
@@ -404,7 +419,7 @@
                 <span class="material-symbols-outlined">sports_soccer</span> Partidas criadas por mim
             </a>
 
-            <a href="" class="flex items-center gap-2 bg-white/20 hover:bg-white/30 p-2 rounded-lg">
+            <a href="./partidas_marcadas.php" class="flex items-center gap-2 bg-white/20 hover:bg-white/30 p-2 rounded-lg">
                 <span class="material-symbols-outlined">event</span> Partidas Marcadas
             </a>
 

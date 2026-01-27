@@ -856,12 +856,12 @@ video {
   height: 18rem;
 }
 
-.h-80{
-  height: 20rem;
-}
-
 .h-9{
   height: 2.25rem;
+}
+
+.h-\[350px\]{
+  height: 350px;
 }
 
 .h-\[400px\]{
@@ -910,6 +910,10 @@ video {
 
 .w-10{
   width: 2.5rem;
+}
+
+.w-2\/3{
+  width: 66.666667%;
 }
 
 .w-20{
@@ -986,10 +990,6 @@ video {
 
 .w-screen{
   width: 100vw;
-}
-
-.w-2\/3{
-  width: 66.666667%;
 }
 
 .max-w-3xl{
