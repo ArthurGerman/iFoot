@@ -61,7 +61,7 @@
 
         
         <?php if (empty($quadras)): ?>
-            <p>Não existem quadras cadastradas</p>
+            <p class="ml-6 mt-2">Não existem quadras cadastradas</p>
         <?php else: ?>
 
             <!-- CARDS QUE MOSTRAM AS PARTIDAS DISPONÍVEIS-->

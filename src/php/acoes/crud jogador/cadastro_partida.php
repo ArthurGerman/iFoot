@@ -67,8 +67,8 @@
 
 
             // Query para inserir os dados no banco
-            $query2 = $pdo->prepare("INSERT INTO PARTIDAS (DATA_PTD, HORARIO_INICIO_PTD, HORARIO_FIM_PTD, PRECO_TOTAL_PTD, ID_QUAD) VALUES (?, ?, ?, ?, ?)");
-            $query2->execute([$DATA_PTD, $HORARIO_INICIO_PTD, $HORARIO_FIM_PTD, $PRECO_TOTAL_PTD, $ID_QUAD]);
+            $query2 = $pdo->prepare("INSERT INTO PARTIDAS (DATA_PTD, HORARIO_INICIO_PTD, HORARIO_FIM_PTD, PRECO_TOTAL_PTD, ID_QUAD, ID_CRIADOR) VALUES (?, ?, ?, ?, ?, ?)");
+            $query2->execute([$DATA_PTD, $HORARIO_INICIO_PTD, $HORARIO_FIM_PTD, $PRECO_TOTAL_PTD, $ID_QUAD, $ID_JOG]);
 
             $ID_PTD = $pdo->lastInsertId(); // Comando para descobrir o id da última quadra a qual o usuário fez a reserva
         

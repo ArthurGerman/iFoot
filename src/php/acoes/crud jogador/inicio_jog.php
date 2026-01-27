@@ -3,7 +3,9 @@
     require_once '../../config.php';
     require_once '../../authenticate_jog.php';
 
+    $ID_JOG = $_SESSION['id_jog'];
 
+    // Lista apenas as partidas que outros usuários criaram e que ele não entrou
     $query = $pdo->prepare("
         SELECT PARTIDAS.ID_PTD,
             PARTIDAS.DATA_PTD,
@@ -20,10 +22,17 @@
         INNER JOIN QUADRAS ON PARTIDAS.ID_QUAD = QUADRAS.ID_QUAD
         INNER JOIN UF ON QUADRAS.ID_UF = UF.ID_UF
         INNER JOIN MODALIDADES ON QUADRAS.ID_MODAL = MODALIDADES.ID_MODAL
+        WHERE PARTIDAS.ID_CRIADOR != ?
+        AND NOT EXISTS (
+            SELECT 1
+            FROM JOGADOR_PARTIDA
+            WHERE JOGADOR_PARTIDA.ID_PTD = PARTIDAS.ID_PTD
+            AND JOGADOR_PARTIDA.ID_JOG = ?
+        )
     
     ");
 
-    $query->execute();
+    $query->execute([$ID_JOG, $ID_JOG]);
     $partidas = $query->fetchAll(PDO::FETCH_ASSOC);
 
 
@@ -47,10 +56,16 @@
             INNER JOIN QUADRAS ON PARTIDAS.ID_QUAD = QUADRAS.ID_QUAD
             INNER JOIN UF ON QUADRAS.ID_UF = UF.ID_UF
             INNER JOIN MODALIDADES ON QUADRAS.ID_MODAL = MODALIDADES.ID_MODAL
-            WHERE 1 = 1
+            WHERE PARTIDAS.ID_CRIADOR != ?
+            AND NOT EXISTS (
+                SELECT 1
+                FROM JOGADOR_PARTIDA
+                WHERE JOGADOR_PARTIDA.ID_PTD = PARTIDAS.ID_PTD
+                AND JOGADOR_PARTIDA.ID_JOG = ?
+            )
         ";
 
-        $parametros = []; // Array que serve para juntar todos os dados que o usuário colocar no filtro. Pois o usuário pode não preencher completamente o filtro. Caso o usuário não preencha nenhum campo do filtro, o sistema retorna todas as quadras ativas.
+        $parametros = [$ID_JOG, $ID_JOG]; // Array que serve para juntar todos os dados que o usuário colocar no filtro. Pois o usuário pode não preencher completamente o filtro. Caso o usuário não preencha nenhum campo do filtro, o sistema retorna todas as partidas ativas que ele não participa e que não foram criadas por ele.
 
         if (!empty($_POST['UF'])) {
             $sql .= " AND UF.SIGLA_UF = ?";
@@ -132,14 +147,14 @@
         
         <div class="flex flex-row mt-4">
 
-            <div class="w-1/2">
+            <div class="w-2/3">
                 <h1 class="text-[28px]  w-auto h-auto flex items-center justify-start ml-4">
-                    Olá <?= $_SESSION['name_jog'] ?>! Abaixo estão as últimas partidas criadas
+                    Olá <?= $_SESSION['name_jog'] ?>! Abaixo estão as últimas partidas criadas por outros jogadores
                 </h1>
 
             </div>
 
-            <div class="w-1/2 flex justify-end">
+            <div class="w-1/3 flex justify-end">
                 <button id="btnFiltro" class="border bg-gray-300 rounded-xl w-32 flex items-center justify-center p-2 mr-6 hover:bg-gray-400 transition ">
                     Filtro <span class="material-symbols-outlined">filter_alt</span>
                 </button>
@@ -266,7 +281,7 @@
 
         <!-- Mensagem de erro caso não existam partidas com os filtros que o jogador definiu-->
         <?php if (empty($partidas)): ?>
-            <p class="ml-6 mt-2">Não existem partidas disponíveis para os filtros que você aplicou. Por favor exclua os filtros e tente novamente.</p>
+            <p class="ml-6 mt-2">Não existem partidas disponíveis.</p>
 
             <form action="" method="GET">
                 <input type="submit" value="Excluir filtros" class="bg-gray-300 hover:bg-gray-400 trasnsition p-2 ml-6 mt-4 rounded-xl cursor-pointer">
@@ -329,7 +344,7 @@
                                 <p><strong>Preço total:</strong> R$ <?= $partida['PRECO_TOTAL_PTD'] ?></p> <!-- Preço final calculado com base nas horas-->
                             </div>
 
-                            <a href="?id=<?= $partida['ID_PTD'] ?>" class="bg-white text-green-600 text-center py-2 rounded-md font-semibold hover:bg-gray-200 transition mt-2">
+                            <a href="./entra_partida.php?id=<?= $partida['ID_PTD'] ?>" class="bg-white text-green-600 text-center py-2 rounded-md font-semibold hover:bg-gray-200 transition mt-2">
                                 Entrar
                             </a>
 

@@ -70,7 +70,7 @@
 
     
         <?php if (empty($partidas)): ?>
-            <p>Não existem partidas cadastradas</p>
+            <p class="ml-6 mt-2">Não existem partidas cadastradas</p>
         <?php else: ?>
     
             <!-- CARDS QUE MOSTRAM AS PARTIDAS DISPONÍVEIS-->
