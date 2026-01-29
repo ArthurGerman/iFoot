@@ -10,5 +10,5 @@ if (msg) {
         setTimeout(() => {
             msg.remove();
         }, 500);
-    }, 3000); // 3 segundos
+    }, 6000); // 6 segundos
 }

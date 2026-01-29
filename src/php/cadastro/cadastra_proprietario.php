@@ -69,48 +69,96 @@
 
             
             <form action="" method="post" class="flex flex-col">
-        
-                <input 
-                    type="text" 
-                    name="NOME_PROP" 
-                    id="NOME_PROP" 
-                    placeholder="Nome" 
-                    class="px-4 mb-4 bg-transparent border-[3px] border-solid border-white rounded-2xl h-12 text-white outline-none placeholder-white"
-                >
+
+                <div class="flex flex-row mb-3 gap-2">
+
+                    <div class="w-1/6 flex items-center justify-end">
+                        <label for="NOME_PROP">Nome:</label>
+                    </div>
+                    <div class="w-5/6 flex items-center">
+                        <input 
+                            type="text" 
+                            name="NOME_PROP" 
+                            id="NOME_PROP" 
+                            placeholder="Nome" 
+                            class="px-4 bg-white border-[3px] border-solid border-gray-300 rounded-2xl w-full h-12 outline-none placeholder-gray-300 text-[#6b6b6b]"
+                        >
+                    </div>
+
+                </div>
+
+
+                <div class="flex flex-row mb-3 gap-2">
+
+                    <div class="w-1/6 flex items-center justify-end">
+                        <label for="EMAIL_PROP">E-mail:</label>
+                    </div>
+                    <div class="w-5/6 flex items-center">
+                        <input 
+                            type="email" 
+                            name="EMAIL_PROP" 
+                            id="EMAIL_PROP"
+                            placeholder="E-mail"
+                            class="px-4 bg-white border-[3px] border-solid border-gray-300 rounded-2xl w-full h-12 outline-none placeholder-gray-300 text-[#6b6b6b]"
+                        >
+                    </div>
+
+                </div>
                 
-                <input 
-                    type="email" 
-                    name="EMAIL_PROP" 
-                    id="EMAIL_PROP"
-                    placeholder="E-mail"
-                    class="px-4 mb-4 bg-transparent border-[3px] border-solid border-white rounded-2xl h-12 text-white outline-none placeholder-white"
-                >
                 
-                <input 
-                    type="text" 
-                    name="CPF_PROP" 
-                    id="CPF_PROP" 
-                    maxlength="11"
-                    placeholder="CPF"
-                    class="px-4 mb-4 bg-transparent border-[3px] border-solid border-white rounded-2xl h-12 text-white outline-none placeholder-white"
-                >
+                <div class="flex flex-row mb-3 gap-2">
+
+                    <div class="w-1/6 flex items-center justify-end">
+                        <label for="CPF_PROP">CPF:</label>
+                    </div>
+                    <div class="w-5/6 flex items-center">
+                        <input 
+                            type="text" 
+                            name="CPF_PROP" 
+                            id="CPF_PROP" 
+                            maxlength="11"
+                            placeholder="Digite apenas os números"
+                            class="px-4 bg-white border-[3px] border-solid border-gray-300 rounded-2xl w-full h-12 outline-none placeholder-gray-300 text-[#6b6b6b]"
+                        >
+                    </div>
+                </div>
                 
-                <input 
-                    type="telefone" 
-                    name="TEL_PROP" 
-                    id="TEL_PROP" 
-                    maxlength="11"
-                    placeholder="Telefone"
-                    class="px-4 mb-4 bg-transparent border-[3px] border-solid border-white rounded-2xl h-12 text-white outline-none placeholder-white"
-                >
+
+                <div class="flex flex-row mb-3 gap-2">
+
+                    <div class="w-1/6 flex items-center justify-end">
+                        <label for="TEL_PROP">Telefone:</label>
+                    </div>
+                    <div class="w-5/6 flex items-center">
+                        <input 
+                            type="telefone" 
+                            name="TEL_PROP" 
+                            id="TEL_PROP" 
+                            maxlength="11"
+                            placeholder="Telefone (DDD + números)"
+                            class="px-4 bg-white border-[3px] border-solid border-gray-300 rounded-2xl w-full h-12 outline-none placeholder-gray-300 text-[#6b6b6b]"
+                        >
+                    </div>
+
+                </div>
                 
-                <input 
-                    type="password" 
-                    name="SENHA_PROP" 
-                    id="SENHA_PROP"
-                    placeholder="Digite a senha"
-                    class="px-4 mb-4 bg-transparent border-[3px] border-solid border-white rounded-2xl h-12 text-white outline-none placeholder-white"
-                >
+
+
+                <div class="flex flex-row mb-3 gap-2">
+
+                    <div class="w-1/6 flex items-center justify-end">
+                        <label for="SENHA_PROP">Senha:</label>
+                    </div>
+                    <div class="w-5/6 flex items-center">
+                        <input 
+                            type="password" 
+                            name="SENHA_PROP" 
+                            id="SENHA_PROP"
+                            placeholder="Digite a senha"
+                            class="px-4 bg-white border-[3px] border-solid border-gray-300 rounded-2xl w-full h-12 outline-none placeholder-gray-300 text-[#6b6b6b]"
+                        >
+                    </div>
+                </div>
 
 
                 

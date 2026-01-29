@@ -93,8 +93,8 @@
                             
                             <div class="text-sm space-y-1 gap-10">
                                 <p><strong>Endereço:</strong> <?= $partida['ENDERECO_QUAD'] ?></p>
-                                <p><strong>Cidade:</strong> <?= $partida['CIDADE_QUAD'] ?></p>
                                 <p><strong>Estado:</strong> <?= $partida['NOME_UF'] ?></p>
+                                <p><strong>Cidade:</strong> <?= $partida['CIDADE_QUAD'] ?></p>
 
 
 

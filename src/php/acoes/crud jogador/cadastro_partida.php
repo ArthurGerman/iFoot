@@ -35,7 +35,17 @@
 
         if ($stmt->rowCount() > 0) {
             foreach ($times as $time) {
-                if ($HORARIO_INICIO_PTD < $time["HORARIO_FIM_PTD"] && $HORARIO_FIM_PTD > $time["HORARIO_INICIO_PTD"]) {
+
+
+                // Conversão para validar o horário da partida
+                $inicio_existente = new DateTime($DATA_PTD . ' ' . $time['HORARIO_INICIO_PTD']);
+                $fim_existente    = new DateTime($DATA_PTD . ' ' . $time['HORARIO_FIM_PTD']);
+
+                $inicio_novo = new DateTime($DATA_PTD . ' ' . $HORARIO_INICIO_PTD);
+                $fim_novo    = new DateTime($DATA_PTD . ' ' . $HORARIO_FIM_PTD);
+
+
+                if ($inicio_novo < $fim_existente && $fim_novo > $inicio_existente) {
                     $conflict = true;
                     break;
                 }

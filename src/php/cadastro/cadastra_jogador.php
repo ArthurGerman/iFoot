@@ -49,8 +49,6 @@
             
             header('Location: ../login/login_jog.php');
     
-            //echo "Olá $NOME_JOG ! Seus dados foram cadastrados com sucesso <br>";
-            //echo "<button><a href='../login/login_jog.php'>Login</a></button>";
         }
 
     }
@@ -82,96 +80,177 @@
         
             
             <form action="" method="post" class="flex flex-col">
-        
-                <input 
-                    type="text" 
-                    name="NOME_JOG" 
-                    id="NOME_JOG" 
-                    placeholder="Digite seu nome"
-                    class="px-4 mb-3 bg-transparent border-[3px] border-solid border-white rounded-2xl h-12 text-white outline-none placeholder-white"
-                >
-                
-                <input 
-                    type="email" 
-                    name="EMAIL_JOG" 
-                    id="EMAIL_JOG"
-                    placeholder="E-mail"
-                    class="px-4 mb-3 bg-transparent border-[3px] border-solid border-white rounded-2xl h-12 text-white outline-none placeholder-white"
-                >
-        
-                <input 
-                    type="text" 
-                    name="CPF_JOG" 
-                    id="CPF_JOG" 
-                    maxlength="11"
-                    placeholder="CPF (apenas números)"
-                    class="px-4 mb-3 bg-transparent border-[3px] border-solid border-white rounded-2xl h-12 text-white outline-none placeholder-white"
-                >
-        
-                <input 
-                    type="text" 
-                    name="CIDADE_JOG" 
-                    id="CIDADE_JOG"
-                    placeholder="Cidade"
-                    class="px-4 mb-3 bg-transparent border-[3px] border-solid border-white rounded-2xl h-12 text-white outline-none placeholder-white"
-                >
+
+                <div class="flex flex-row mb-3 gap-2">
+
+                    <div class="w-1/6 flex items-center justify-end">
+                        <label for="NOME_JOG">Nome:</label>
+                    </div>
+                    <div class="w-5/6 flex items-center">
+                        <input 
+                            type="text" 
+                            name="NOME_JOG" 
+                            id="NOME_JOG" 
+                            placeholder="Digite seu nome"
+                            class="px-4 bg-white border-[3px] border-solid border-gray-300 rounded-2xl w-full h-12 outline-none placeholder-gray-300 text-[#6b6b6b]"
+                        >
+                    </div>
+
+                </div>
 
                 
-                <select name="UF" id="UF" class="px-4 mb-3 bg-transparent border-[3px] border-solid border-white rounded-2xl h-12 text-white outline-none placeholder-white cursor-pointer">
-                    <option value="" disabled selected>Estado</option>
-                    <option value="AC" class="text-black">Acre</option>
-                    <option value="AL" class="text-black">Alagoas</option>
-                    <option value="AP" class="text-black">Amapá</option>
-                    <option value="AM" class="text-black">Amazonas</option>
-                    <option value="BA" class="text-black">Bahia</option>
-                    <option value="CE" class="text-black">Ceará</option>
-                    <option value="DF" class="text-black">Distrito Federal</option>
-                    <option value="ES" class="text-black">Espírito Santo</option>
-                    <option value="GO" class="text-black">Goiás</option>
-                    <option value="MA" class="text-black">Maranhão</option>
-                    <option value="MT" class="text-black">Mato Grosso</option>
-                    <option value="MS" class="text-black">Mato Grosso do Sul</option>
-                    <option value="MG" class="text-black">Minas Gerais</option>
-                    <option value="PA" class="text-black">Pará</option>
-                    <option value="PB" class="text-black">Paraíba</option>
-                    <option value="PR" class="text-black">Paraná</option>
-                    <option value="PE" class="text-black">Pernambuco</option>
-                    <option value="PI" class="text-black">Piauí</option>
-                    <option value="RJ" class="text-black">Rio de Janeiro</option>
-                    <option value="RN" class="text-black">Rio Grande do Norte</option>
-                    <option value="RS" class="text-black">Rio Grande do Sul</option>
-                    <option value="RO" class="text-black">Rondônia</option>
-                    <option value="RR" class="text-black">Roraima</option>
-                    <option value="SC" class="text-black">Santa Catarina</option>
-                    <option value="SP" class="text-black">São Paulo</option>
-                    <option value="SE" class="text-black">Sergipe</option>
-                    <option value="TO" class="text-black">Tocantins</option>
-                </select>
+
+                <div class="flex flex-row mb-3 gap-2">
+
+                    <div class="w-1/6 flex items-center justify-end">
+                        <label for="EMAIL_JOG">E-mail:</label>
+                    </div>
+                    <div class="w-5/6 flex items-center">
+                        <input 
+                            type="email" 
+                            name="EMAIL_JOG" 
+                            id="EMAIL_JOG"
+                            placeholder="E-mail"
+                            class="px-4 bg-white border-[3px] border-solid border-gray-300 rounded-2xl w-full h-12 outline-none placeholder-gray-300 text-[#6b6b6b]"
+                        >
+                    </div>
+
+                </div>
+        
+
+                <div class="flex flex-row mb-3 gap-2">
+
+                    <div class="w-1/6 flex items-center justify-end">
+                        <label for="CPF_JOG">CPF:</label>
+                    </div>
+                    <div class="w-5/6 flex items-center">
+                        <input 
+                            type="text" 
+                            name="CPF_JOG" 
+                            id="CPF_JOG" 
+                            maxlength="11"
+                            placeholder="Digite apenas os números"
+                            class="px-4 bg-white border-[3px] border-solid border-gray-300 rounded-2xl w-full h-12 outline-none placeholder-gray-300 text-[#6b6b6b]"
+                        >
+                    </div>
+
+                </div>
+        
+
+                <div class="flex flex-row mb-3 gap-2">
+
+                    <div class="w-1/6 flex items-center justify-end">
+                        <label for="CIDADE_JOG">Cidade:</label>
+                    </div>
+                    <div class="w-5/6 flex items-center">
+                        <input 
+                            type="text" 
+                            name="CIDADE_JOG" 
+                            id="CIDADE_JOG"
+                            placeholder="Cidade"
+                            class="px-4 bg-white border-[3px] border-solid border-gray-300 rounded-2xl w-full h-12 outline-none placeholder-gray-300 text-[#6b6b6b]"
+                        >
+                    </div>
+
+                </div>
+
+                <div class="flex flex-row mb-3 gap-2">
+
+                    <div class="w-1/6 flex items-center justify-end">
+                        <label for="UF">Estado:</label>
+                    </div>
+                    <div class="w-5/6 flex items-center">
+                        <select name="UF" id="UF" class="px-4 bg-white border-[3px] border-solid border-gray-300 rounded-2xl w-full h-12 outline-none placeholder-gray-300 cursor-pointer text-gray-300">
+                            <option value="" disabled selected>Selecione</option>
+                            <option value="AC" class="text-black">Acre</option>
+                            <option value="AL" class="text-black">Alagoas</option>
+                            <option value="AP" class="text-black">Amapá</option>
+                            <option value="AM" class="text-black">Amazonas</option>
+                            <option value="BA" class="text-black">Bahia</option>
+                            <option value="CE" class="text-black">Ceará</option>
+                            <option value="DF" class="text-black">Distrito Federal</option>
+                            <option value="ES" class="text-black">Espírito Santo</option>
+                            <option value="GO" class="text-black">Goiás</option>
+                            <option value="MA" class="text-black">Maranhão</option>
+                            <option value="MT" class="text-black">Mato Grosso</option>
+                            <option value="MS" class="text-black">Mato Grosso do Sul</option>
+                            <option value="MG" class="text-black">Minas Gerais</option>
+                            <option value="PA" class="text-black">Pará</option>
+                            <option value="PB" class="text-black">Paraíba</option>
+                            <option value="PR" class="text-black">Paraná</option>
+                            <option value="PE" class="text-black">Pernambuco</option>
+                            <option value="PI" class="text-black">Piauí</option>
+                            <option value="RJ" class="text-black">Rio de Janeiro</option>
+                            <option value="RN" class="text-black">Rio Grande do Norte</option>
+                            <option value="RS" class="text-black">Rio Grande do Sul</option>
+                            <option value="RO" class="text-black">Rondônia</option>
+                            <option value="RR" class="text-black">Roraima</option>
+                            <option value="SC" class="text-black">Santa Catarina</option>
+                            <option value="SP" class="text-black">São Paulo</option>
+                            <option value="SE" class="text-black">Sergipe</option>
+                            <option value="TO" class="text-black">Tocantins</option>
+                        </select>
+                    </div>
+
+                </div>
+
                 
-                <input 
-                    type="endereco" 
-                    name="ENDERECO_JOG" 
-                    id="ENDERECO_JOG"
-                    placeholder="Endereço"
-                    class="px-4 mb-3 bg-transparent border-[3px] border-solid border-white rounded-2xl h-12 text-white outline-none placeholder-white"
-                >
+
+                <div class="flex flex-row mb-3 gap-2">
+
+                    <div class="w-1/6 flex items-center justify-end">
+                        <label for="ENDERECO_JOG">Endereço: </label>
+                    </div>
+                    <div class="w-5/6 flex items-center">
+                        <input 
+                            type="endereco" 
+                            name="ENDERECO_JOG" 
+                            id="ENDERECO_JOG"
+                            placeholder="Endereço"
+                            class="px-4 bg-white border-[3px] border-solid border-gray-300 rounded-2xl w-full h-12 outline-none placeholder-gray-300 text-[#6b6b6b]"
+                        >
+                    </div>
+
+                </div>
+
+
+
+                <div class="flex flex-row mb-3 gap-2">
+
+                    <div class="w-1/6 flex items-center justify-end">
+                        <label for="TEL_JOG">Telefone:</label>
+                    </div>
+                    <div class="w-5/6 flex items-center">
+                        <input 
+                            type="telefone" 
+                            name="TEL_JOG" 
+                            id="TEL_JOG" 
+                            maxlength="11"
+                            placeholder="Telefone (DDD + números)"
+                            class="px-4 bg-white border-[3px] border-solid border-gray-300 rounded-2xl w-full h-12 outline-none placeholder-gray-300 text-[#6b6b6b]"
+                        >
+                    </div>
+
+                </div>
                 
-                <input 
-                    type="telefone" 
-                    name="TEL_JOG" 
-                    id="TEL_JOG" 
-                    maxlength="11"
-                    placeholder="Telefone (DDD + números)"
-                    class="px-4 mb-3 bg-transparent border-[3px] border-solid border-white rounded-2xl h-12 text-white outline-none placeholder-white"
-                >
                 
-                <input 
-                    type="password" 
-                    name="SENHA_JOG" 
-                    id="SENHA_JOG" 
-                    placeholder="Digite a senha"
-                    class="px-4 mb-3 bg-transparent border-[3px] border-solid border-white rounded-2xl h-12 text-white outline-none placeholder-white"
-                >
+                
+                <div class="flex flex-row mb-3 gap-2">
+
+                    <div class="w-1/6 flex items-center justify-end">
+                        <label for="SENHA_JOG">Senha:</label>
+                    </div>
+                    <div class="w-5/6 flex items-center">
+                        <input 
+                            type="password" 
+                            name="SENHA_JOG" 
+                            id="SENHA_JOG" 
+                            placeholder="Digite a senha"
+                            class="px-4 bg-white border-[3px] border-solid border-gray-300 rounded-2xl w-full h-12 outline-none placeholder-gray-300 text-[#6b6b6b]"
+                        >
+                    </div>
+
+                </div>
                 
 
                 <div class="flex justify-center gap-24 mt-2">
@@ -189,5 +268,15 @@
     </div>
 
     <script src="/src/js/tratamento-erros_jog.js"></script>
+    <script>
+        const select_UF = document.getElementById('UF');
+
+        select_UF.addEventListener('change', function () {
+            if (this.value !== '') {
+            this.classList.remove('text-gray-300');
+            this.classList.add('text-[#6b6b6b]'); // mesma cor dos inputs
+            }
+        });
+    </script>
 </body>
 </html>

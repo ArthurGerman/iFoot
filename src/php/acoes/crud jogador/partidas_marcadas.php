@@ -7,7 +7,7 @@
 
     // Consulta que junta a tabela intermediária com a tabela de partidas, quadras e modalidades
     $query = $pdo->prepare("
-        SELECT 
+        SELECT DISTINCT
         PARTIDAS.ID_PTD,
         PARTIDAS.DATA_PTD,
         PARTIDAS.HORARIO_INICIO_PTD,
@@ -18,7 +18,14 @@
         QUADRAS.ENDERECO_QUAD,
         QUADRAS.PRECO_HORA_QUAD,
         MODALIDADES.NOME_MODAL,
-        UF.NOME_UF
+        MODALIDADES.QTD_MAX_JOG,
+        UF.NOME_UF,
+
+        (
+            SELECT COUNT(*)
+            FROM JOGADOR_PARTIDA
+            WHERE JOGADOR_PARTIDA.ID_PTD = PARTIDAS.ID_PTD
+        ) AS QTD_JOGADORES_ATUAIS
 
         FROM JOGADOR_PARTIDA
         INNER JOIN PARTIDAS ON JOGADOR_PARTIDA.ID_PTD = PARTIDAS.ID_PTD
@@ -90,8 +97,8 @@
                             
                             <div class="text-sm space-y-1 gap-10">
                                 <p><strong>Endereço:</strong> <?= $partida['ENDERECO_QUAD'] ?></p>
-                                <p><strong>Cidade:</strong> <?= $partida['CIDADE_QUAD'] ?></p>
                                 <p><strong>Estado:</strong> <?= $partida['NOME_UF'] ?></p>
+                                <p><strong>Cidade:</strong> <?= $partida['CIDADE_QUAD'] ?></p>
 
 
 
@@ -124,6 +131,7 @@
                                 <p><strong>Início:</strong> <?= $HORARIO_INICIO_PTD ?> h</p>
                                 <p><strong>Fim:</strong> <?= $HORARIO_FIM_PTD ?> h</p>
                                 <p><strong>Duração total:</strong> <?= $duracao ?></p>
+                                <p><strong>Quantidade atual de jogadores:</strong> <?= $partida['QTD_JOGADORES_ATUAIS'] ?>/<?= $partida['QTD_MAX_JOG'] ?></p>
                                 <p><strong>Modalidade:</strong> <?= $partida['NOME_MODAL'] ?></p>
                                 <p><strong>Preço por hora: </strong> R$ <?= $partida['PRECO_HORA_QUAD'] ?>/h</p>
                                 <p><strong>Preço total:</strong> R$ <?= $partida['PRECO_TOTAL_PTD'] ?></p> <!-- Preço final calculado com base nas horas-->

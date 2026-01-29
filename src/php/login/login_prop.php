@@ -64,22 +64,42 @@
                 <br>
                 
                 <form action="" method="post" class="flex flex-col">
-    
-                    <input 
-                        type="email" 
-                        name="EMAIL_PROP" 
-                        id="EMAIL_PROP"
-                        placeholder="E-mail"
-                        class="px-4 mb-4 bg-transparent border-[3px] border-solid border-white rounded-2xl h-12 text-white outline-none placeholder-white"
-                    >
+
+
+                    <div class="flex flex-row mb-3 gap-2">
+
+                        <div class="w-1/6 flex items-center justify-end">
+                            <label for="EMAIL_PROP">E-mail:</label>
+                        </div>
+                        <div class="w-5/6 flex items-center">
+                            <input 
+                                type="email" 
+                                name="EMAIL_PROP" 
+                                id="EMAIL_PROP"
+                                placeholder="E-mail"
+                                class="px-4 bg-white border-[3px] border-solid border-gray-300 rounded-2xl w-full h-12 outline-none placeholder-gray-300 text-[#6b6b6b]"
+                            >
+                        </div>
+
+                    </div>
                     
-                    <input 
-                        type="password" 
-                        name="SENHA_PROP" 
-                        id="SENHA_PROP"
-                        placeholder="Digite a senha"
-                        class="px-4 mb-4 bg-transparent border-[3px] border-solid border-white rounded-2xl h-12 text-white outline-none placeholder-white"
-                    >
+
+                    <div class="flex flex-row mb-3 gap-2">
+
+                        <div class="w-1/6 flex items-center justify-end">
+                            <label for="SENHA_PROP">Senha:</label>
+                        </div>
+                        <div class="w-5/6 flex items-center">
+                            <input 
+                                type="password" 
+                                name="SENHA_PROP" 
+                                id="SENHA_PROP"
+                                placeholder="Digite a senha"
+                                class="px-4 bg-white border-[3px] border-solid border-gray-300 rounded-2xl w-full h-12 outline-none placeholder-gray-300 text-[#6b6b6b]"
+                            >
+                        </div>
+
+                    </div>
     
                     
                     <div class="flex justify-center gap-24 mt-6">
