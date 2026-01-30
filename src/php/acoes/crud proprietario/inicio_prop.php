@@ -53,35 +53,35 @@
 
 
 
-        <div class="mt-4 w-full">
+        <div class="mt-8 pl-6 w-full">
             <h1 class="text-[28px]  w-auto h-auto flex items-center justify-start ml-4">
-                Olá <?= $_SESSION['name_prop'] ?>! Abaixo estão listadas as suas quadras
+                Seja bem-vindo ! Abaixo estão listadas as suas quadras
             </h1>
         </div>
 
         
         <?php if (empty($quadras)): ?>
-            <p class="ml-6 mt-2">Não existem quadras cadastradas</p>
+            <p class="ml-12 mt-2">Não existem quadras cadastradas.</p>
         <?php else: ?>
 
             <!-- CARDS QUE MOSTRAM AS PARTIDAS DISPONÍVEIS-->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6 px-6 pb-20">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8 px-12 pb-20">
                 <?php foreach ($quadras as $quadra): ?>
                     
-                    <div class="flex bg-white rounded-xl shadow-md overflow-hidden h-60">
+                    <div class="flex bg-white rounded-xl shadow-md overflow-hidden h-60 w-[700px]">
 
                         <!-- Imagem / placeholder -->
-                        <div class="w-1/2 bg-gray-300 flex items-center justify-center">
+                        <div class="w-[400px] bg-gray-300 flex items-center justify-center">
                             <span class="text-gray-500">Imagem da quadra</span>
                         </div>
 
                         <!-- Conteúdo -->
-                        <div class="w-1/2 bg-gradient-to-b from-[#4ad658] to-green-500 p-4 text-white flex flex-col justify-between">
+                        <div class="w-[300px] bg-gradient-to-b from-[#4ad658] to-green-500 p-4 text-white flex flex-col justify-between">
                             
                             <div class="text-sm space-y-1 gap-10">
-                                <p><strong>Endereço:</strong> <?= $quadra['ENDERECO_QUAD'] ?></p>
-                                <p><strong>Cidade:</strong> <?= $quadra['CIDADE_QUAD'] ?></p>
                                 <p><strong>Estado:</strong> <?= $quadra['NOME_UF'] ?></p>
+                                <p><strong>Cidade:</strong> <?= $quadra['CIDADE_QUAD'] ?></p>
+                                <p><strong>Endereço:</strong> <?= $quadra['ENDERECO_QUAD'] ?></p>
                                 <p><strong>Modalidade:</strong> <?= $quadra['NOME_MODAL'] ?></p>
                                 <p><strong>Preço por hora:</strong> R$ <?= $quadra['PRECO_HORA_QUAD'] ?>/h</p>
                                 <p><strong>Situação da quadra:</strong> <?= $quadra['STATUS_QUAD'] == 1 ? 'Ativa' : 'Inativa' ?></p>
@@ -97,7 +97,7 @@
                                 </a>
 
                                 <a href="./historico_quadra.php?id=<?= $quadra['ID_QUAD'] ?>" class="bg-white text-green-600 text-center py-2 rounded-md font-semibold hover:bg-gray-200 transition mt-2 w-1/3">
-                                    Ver histórico
+                                    Histórico
                                 </a>
                             </div>
 

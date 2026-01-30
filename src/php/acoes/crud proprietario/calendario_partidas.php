@@ -72,14 +72,14 @@
         </a>
 
 
-        <div class="mt-4 w-full">
+        <div class="mt-6 pl-6 w-full">
             <h1 class="text-[28px]  w-auto h-auto flex items-center justify-start ml-4">
                 Agenda para <?php echo $nomes_meses[$mes] . " de " . $ano; ?>
             </h1>
         </div>
     
 
-        <div class="flex ml-6 mt-8">
+        <div class="flex ml-14 mt-6">
             <form action="">
                 <label for="mes">Mês: </label>
                 <select name="mes" id="mes">
@@ -96,7 +96,7 @@
         </div>
         
     
-        <table class="w-[60%] border-collapse text-center ml-8 mt-6">
+        <table class="w-[60%] border-collapse text-center ml-14 mt-6">
             <tr class="text-white">
                 <th class="bg-green-500 border border-gray-400 py-2">Dom</th>
                 <th class="bg-green-500 border border-gray-400 py-2">Seg</th>
@@ -172,7 +172,7 @@
             </tr>
         </table>
 
-        <div class="ml-8 mt-1">
+        <div class="ml-14 mt-1">
             <p>*Dias marcados como azul são dias que possuem partidas</p>
         </div>
     </div>

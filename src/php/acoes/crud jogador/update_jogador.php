@@ -179,7 +179,7 @@
             </button>
         </a>
 
-        <div class="mt-4 w-full">
+        <div class="mt-6 pl-6 w-full">
             <h1 class="text-[28px]  w-auto h-auto flex items-center justify-start ml-4">
                 Aqui estão as suas informações pessoais
             </h1>

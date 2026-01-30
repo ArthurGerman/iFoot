@@ -70,7 +70,7 @@
             </button>
         </a>
 
-        <div class="mt-4 w-full">
+        <div class="mt-6 pl-6 w-full">
             <h1 class="text-[28px]  w-auto h-auto flex items-center justify-start ml-4">
                 Todas as partidas marcadas
             </h1>
@@ -78,30 +78,24 @@
 
     
         <?php if (empty($partidas)): ?>
-            <p class="ml-6 mt-2">Não existem partidas marcadas</p>
+            <p class="ml-12 mt-2">Não existem partidas marcadas</p>
         <?php else: ?>
     
             <!-- CARDS QUE MOSTRAM AS PARTIDAS DISPONÍVEIS-->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6 px-6 pb-20">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8 px-12 pb-20">
                 <?php foreach ($partidas as $partida): ?>
                     
-                    <div class="flex bg-white rounded-xl shadow-md overflow-hidden h-[350px]">
+                    <div class="flex bg-white rounded-xl shadow-md overflow-hidden h-[350px] w-[700px]">
 
                         <!-- Imagem / placeholder -->
-                        <div class="w-1/2 bg-gray-300 flex items-center justify-center">
+                        <div class="w-[400px] bg-gray-300 flex items-center justify-center">
                             <span class="text-gray-500">Imagem da quadra</span>
                         </div>
 
                         <!-- Conteúdo -->
-                        <div class="w-1/2 bg-gradient-to-b from-[#4ad658] to-green-500 p-4 text-white flex flex-col justify-between">
+                        <div class="w-[300px] bg-gradient-to-b from-[#4ad658] to-green-500 p-4 text-white flex flex-col justify-between">
                             
                             <div class="text-sm space-y-1 gap-10">
-                                <p><strong>Endereço:</strong> <?= $partida['ENDERECO_QUAD'] ?></p>
-                                <p><strong>Estado:</strong> <?= $partida['NOME_UF'] ?></p>
-                                <p><strong>Cidade:</strong> <?= $partida['CIDADE_QUAD'] ?></p>
-
-
-
 
                                 <!-- CÓDIGO PHP PARA EXIBIR A DATA E AS HORAS DA PARTIDA CORRETAMENTE-->
                                 <?php
@@ -127,7 +121,10 @@
                                 ?>
 
 
-                                <p><strong>Data:</strong> <?= $DATA_PTD ?></p>
+                                <p class="text-[22px] mb-2"><strong>Data:</strong> <?= $DATA_PTD ?></p>
+                                <p><strong>Estado:</strong> <?= $partida['NOME_UF'] ?></p>
+                                <p><strong>Cidade:</strong> <?= $partida['CIDADE_QUAD'] ?></p>
+                                <p><strong>Endereço:</strong> <?= $partida['ENDERECO_QUAD'] ?></p>
                                 <p><strong>Início:</strong> <?= $HORARIO_INICIO_PTD ?> h</p>
                                 <p><strong>Fim:</strong> <?= $HORARIO_FIM_PTD ?> h</p>
                                 <p><strong>Duração total:</strong> <?= $duracao ?></p>

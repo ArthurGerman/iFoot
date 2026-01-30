@@ -59,7 +59,7 @@
         </a>
 
 
-        <div class="mt-4 w-full">
+        <div class="mt-6 pl-6 w-full">
             <h1 class="text-[28px]  w-auto h-auto flex items-center justify-start ml-4">
                 Agenda do dia <?= date('d/m/Y', strtotime($data)) ?>
             </h1>
@@ -67,7 +67,7 @@
 
 
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6 px-6 pb-20">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8 px-12 pb-20">
             <?php foreach ($partidas as $partida): ?>
 
                 <?php
@@ -86,18 +86,17 @@
                     }
                 ?>
                 
-                <div class="flex bg-white rounded-xl shadow-md overflow-hidden h-48">
+                <div class="flex bg-white rounded-xl shadow-md overflow-hidden h-40 w-[700px]">
 
                     <!-- Imagem / placeholder -->
-                    <div class="w-1/2 bg-gray-300 flex items-center justify-center">
+                    <div class="w-[400px] bg-gray-300 flex items-center justify-center">
                         <span class="text-gray-500">Imagem da quadra</span>
                     </div>
 
                     <!-- Conteúdo -->
-                    <div class="w-1/2 bg-gradient-to-b from-[#4ad658] to-green-500 p-4 text-white flex flex-col justify-between">
+                    <div class="w-[300px] bg-gradient-to-b from-[#4ad658] to-green-500 p-4 text-white flex flex-col justify-between">
                         
                         <div class="text-sm space-y-1 gap-10">
-                            <p><strong>ID:</strong> <?= $partida['ID_PTD'] ?></p>
                             <p><strong>Início:</strong> <?= substr($partida['HORARIO_INICIO_PTD'], 0, 5) ?> h</p>
                             <p><strong>Fim:</strong> <?= substr($partida['HORARIO_FIM_PTD'], 0, 5) ?> h</p>
                             <p><strong>Duração:</strong> <?= $duracao ?> </p>

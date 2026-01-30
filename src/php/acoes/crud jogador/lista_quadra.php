@@ -112,7 +112,7 @@
     
         
     
-        <div class="flex flex-row mt-4">
+        <div class="flex flex-row mt-6 pl-6">
 
             <div class="w-1/2">
                 <h1 class="text-[28px]  w-64 h-auto flex items-center justify-start ml-4">
@@ -231,33 +231,33 @@
         
         <!-- Mensagem de erro caso não existam quadras com os filtros que o jogador definiu-->
         <?php if (empty($quadras)): ?>
-            <p class="ml-6 mt-2">Não existem quadras disponíveis para os filtros que você aplicou. Por favor exclua os filtros e tente novamente.</p>
+            <p class="ml-12 mt-2">Não existem quadras disponíveis para os filtros que você aplicou.</p>
 
             <form action="" method="GET">
-                <input type="submit" value="Excluir filtros" class="bg-gray-300 hover:bg-gray-400 trasnsition p-2 ml-6 mt-4 rounded-xl cursor-pointer">
+                <input type="submit" value="Excluir filtros" class="bg-gray-300 hover:bg-gray-400 trasnsition p-2 ml-12 mt-4 rounded-xl cursor-pointer">
             </form>
 
         <?php else: ?>
 
             <!-- CARDS QUE MOSTRAM AS QUADRAS DISPONÍVEIS-->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6 px-6 pb-20">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8 px-12 pb-20">
                 <?php foreach ($quadras as $quadra): ?>
                     
-                    <div class="flex bg-white rounded-xl shadow-md overflow-hidden h-48">
+                    <div class="flex bg-white rounded-xl shadow-md overflow-hidden h-52 w-[700px]">
 
                         <!-- Imagem / placeholder -->
-                        <div class="w-1/2 bg-gray-300 flex items-center justify-center">
+                        <div class="w-[400px] bg-gray-300 flex items-center justify-center">
                             <span class="text-gray-500">Imagem</span>
                         </div>
 
                         <!-- Conteúdo -->
-                        <div class="w-1/2 bg-gradient-to-b from-[#4ad658] to-green-500 p-4 text-white flex flex-col justify-between">
+                        <div class="w-[300px] bg-gradient-to-b from-[#4ad658] to-green-500 p-4 text-white flex flex-col justify-between">
                             
                             <div class="text-sm space-y-1 gap-10">
-                                <p><strong>Endereço:</strong> <?= $quadra['ENDERECO_QUAD'] ?></p>
-                                <p><strong>Cidade:</strong> <?= $quadra['CIDADE_QUAD'] ?></p>
+                                <p class="text-[22px] mb-2"><strong>Modalidade:</strong> <?= $quadra['NOME_MODAL'] ?></p>
                                 <p><strong>Estado:</strong> <?= $quadra['NOME_UF'] ?></p>
-                                <p><strong>Modalidade:</strong> <?= $quadra['NOME_MODAL'] ?></p>
+                                <p><strong>Cidade:</strong> <?= $quadra['CIDADE_QUAD'] ?></p>
+                                <p><strong>Endereço:</strong> <?= $quadra['ENDERECO_QUAD'] ?></p>
                                 <p><strong>Preço:</strong> R$ <?= $quadra['PRECO_HORA_QUAD'] ?>/h</p>
                             </div>
 

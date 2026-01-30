@@ -14,7 +14,6 @@
             PARTIDAS.PRECO_TOTAL_PTD,
             QUADRAS.ENDERECO_QUAD,
             QUADRAS.CIDADE_QUAD,
-            QUADRAS.PRECO_HORA_QUAD,
             UF.NOME_UF,
             MODALIDADES.NOME_MODAL,
             MODALIDADES.QTD_MAX_JOG,
@@ -54,7 +53,6 @@
                 PARTIDAS.PRECO_TOTAL_PTD,
                 QUADRAS.ENDERECO_QUAD,
                 QUADRAS.CIDADE_QUAD,
-                QUADRAS.PRECO_HORA_QUAD,
                 UF.NOME_UF,
                 MODALIDADES.NOME_MODAL,
                 MODALIDADES.QTD_MAX_JOG,
@@ -159,11 +157,11 @@
 
         <div id="menuOverlay" class="fixed inset-0 bg-black/40 hidden z-40"></div>
         
-        <div class="flex flex-row mt-4">
+        <div class="flex flex-row mt-8 pl-6">
 
             <div class="w-2/3">
                 <h1 class="text-[28px]  w-auto h-auto flex items-center justify-start ml-4">
-                    Olá <?= $_SESSION['name_jog'] ?>! Abaixo estão as últimas partidas criadas por outros jogadores
+                    Seja bem-vindo ! Abaixo estão as últimas partidas criadas por outros jogadores
                 </h1>
 
             </div>
@@ -295,32 +293,32 @@
 
         <!-- Mensagem de erro caso não existam partidas com os filtros que o jogador definiu-->
         <?php if (empty($partidas)): ?>
-            <p class="ml-6 mt-2">Não existem partidas disponíveis.</p>
+            <p class="ml-12 mt-2">Não existem partidas disponíveis.</p>
 
             <form action="" method="GET">
-                <input type="submit" value="Excluir filtros" class="bg-gray-300 hover:bg-gray-400 trasnsition p-2 ml-6 mt-4 rounded-xl cursor-pointer">
+                <input type="submit" value="Excluir filtros" class="bg-gray-300 hover:bg-gray-400 trasnsition p-2 ml-12 mt-4 rounded-xl cursor-pointer">
             </form>
 
         <?php else: ?>
 
             <!-- CARDS QUE MOSTRAM AS PARTIDAS DISPONÍVEIS-->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6 px-6 pb-20">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8 px-12 pb-20">
                 <?php foreach ($partidas as $partida): ?>
                     
-                    <div class="flex bg-white rounded-xl shadow-md overflow-hidden h-[350px]">
+                    <div class="flex bg-white rounded-xl shadow-md overflow-hidden h-[325px] w-[700px]">
 
                         <!-- Imagem / placeholder -->
-                        <div class="w-1/2 bg-gray-300 flex items-center justify-center">
+                        <div class="w-[400px] bg-gray-300 flex items-center justify-center">
                             <span class="text-gray-500">Imagem da quadra</span>
                         </div>
 
                         <!-- Conteúdo -->
-                        <div class="w-1/2 bg-gradient-to-b from-[#4ad658] to-green-500 p-4 text-white flex flex-col justify-between">
+                        <div class="w-[300px] bg-gradient-to-b from-[#4ad658] to-green-500 p-4 text-white flex flex-col justify-between">
                             
                             <div class="text-sm space-y-1 gap-10">
-                                <p><strong>Endereço:</strong> <?= $partida['ENDERECO_QUAD'] ?></p>
+                                <p class="text-[22px] mb-2"><strong>Estado:</strong> <?= $partida['NOME_UF'] ?></p>
                                 <p><strong>Cidade:</strong> <?= $partida['CIDADE_QUAD'] ?></p>
-                                <p><strong>Estado:</strong> <?= $partida['NOME_UF'] ?></p>
+                                <p><strong>Endereço:</strong> <?= $partida['ENDERECO_QUAD'] ?></p>
                                 <p><strong>Modalidade:</strong> <?= $partida['NOME_MODAL'] ?></p>
 
 
@@ -355,7 +353,6 @@
                                 <p><strong>Fim:</strong> <?= $HORARIO_FIM_PTD ?> hr</p>
                                 <p><strong>Duração total:</strong> <?= $duracao ?>min</p>
                                 <p><strong>Quantidade atual de jogadores:</strong> <?= $partida['QTD_JOGADORES_ATUAIS'] ?>/<?= $partida['QTD_MAX_JOG'] ?></p>
-                                <p><strong>Preço por hora: </strong> R$ <?= $partida['PRECO_HORA_QUAD'] ?>/h</p>
                                 <p><strong>Preço total:</strong> R$ <?= $partida['PRECO_TOTAL_PTD'] ?></p> <!-- Preço final calculado com base nas horas-->
                             </div>
 

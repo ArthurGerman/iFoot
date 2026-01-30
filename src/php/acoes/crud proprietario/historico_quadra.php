@@ -39,7 +39,7 @@
         </a>
 
 
-        <div class="mt-4 w-full">
+        <div class="mt-6 pl-6 w-full">
             <h1 class="text-[28px]  w-auto h-auto flex items-center justify-start ml-4">
                 Histórico de partidas da quadra
             </h1>
@@ -48,12 +48,12 @@
 
 
         <?php if (empty($partidas)): ?>
-            <p>Ainda não existem partidas cadastradas para essa quadra</p>
+            <p class="ml-12 mt-2">Ainda não existem partidas cadastradas para essa quadra.</p>
         <?php else: ?>
 
             <div class="px-4 mt-12 flex justify-center">
 
-                <div class="overflow-hidden rounded-xl shadow-md w-full max-w-3xl bg-yellow-500">
+                <div class="overflow-hidden rounded-xl shadow-md w-full max-w-3xl">
 
 
                     <table class="w-full border-collapse bg-gray-200">
