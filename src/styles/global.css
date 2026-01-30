@@ -711,6 +711,10 @@ video {
   margin-left: 3rem;
 }
 
+.ml-14{
+  margin-left: 3.5rem;
+}
+
 .ml-16{
   margin-left: 4rem;
 }
@@ -733,10 +737,6 @@ video {
 
 .ml-6{
   margin-left: 1.5rem;
-}
-
-.ml-8{
-  margin-left: 2rem;
 }
 
 .ml-\[18px\]{
@@ -791,12 +791,12 @@ video {
   margin-top: 2rem;
 }
 
-.ml-14{
-  margin-left: 3.5rem;
+.ml-32{
+  margin-left: 8rem;
 }
 
-.mt-5{
-  margin-top: 1.25rem;
+.ml-24{
+  margin-left: 6rem;
 }
 
 .block{
@@ -844,12 +844,20 @@ video {
   height: 7rem;
 }
 
+.h-40{
+  height: 10rem;
+}
+
 .h-48{
   height: 12rem;
 }
 
 .h-5\/6{
   height: 83.333333%;
+}
+
+.h-52{
+  height: 13rem;
 }
 
 .h-60{
@@ -862,6 +870,10 @@ video {
 
 .h-9{
   height: 2.25rem;
+}
+
+.h-\[325px\]{
+  height: 325px;
 }
 
 .h-\[350px\]{
@@ -892,28 +904,8 @@ video {
   height: 100vh;
 }
 
-.h-\[300px\]{
-  height: 300px;
-}
-
-.h-\[30px\]{
-  height: 30px;
-}
-
-.h-\[320px\]{
-  height: 320px;
-}
-
-.h-\[325px\]{
-  height: 325px;
-}
-
-.h-52{
-  height: 13rem;
-}
-
-.h-40{
-  height: 10rem;
+.h-44{
+  height: 11rem;
 }
 
 .min-h-screen{
@@ -1034,26 +1026,6 @@ video {
 
 .w-screen{
   width: 100vw;
-}
-
-.w-\[\]{
-  width: ;
-}
-
-.w-\[400\]{
-  width: 400;
-}
-
-.w-\[40\]{
-  width: 40;
-}
-
-.w-\[300\]{
-  width: 300;
-}
-
-.w-\[700\]{
-  width: 700;
 }
 
 .max-w-3xl{
@@ -1408,6 +1380,11 @@ video {
   padding: 18rem;
 }
 
+.px-12{
+  padding-left: 3rem;
+  padding-right: 3rem;
+}
+
 .px-2{
   padding-left: 0.5rem;
   padding-right: 0.5rem;
@@ -1423,11 +1400,6 @@ video {
   padding-right: 1rem;
 }
 
-.px-6{
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
-}
-
 .py-1{
   padding-top: 0.25rem;
   padding-bottom: 0.25rem;
@@ -1441,26 +1413,6 @@ video {
 .py-3{
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
-}
-
-.px-8{
-  padding-left: 2rem;
-  padding-right: 2rem;
-}
-
-.px-10{
-  padding-left: 2.5rem;
-  padding-right: 2.5rem;
-}
-
-.px-1{
-  padding-left: 0.25rem;
-  padding-right: 0.25rem;
-}
-
-.px-12{
-  padding-left: 3rem;
-  padding-right: 3rem;
 }
 
 .pb-0{
@@ -1638,10 +1590,6 @@ video {
 .text-white{
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity, 1));
-}
-
-.text-\[\]{
-  color: ;
 }
 
 .underline{

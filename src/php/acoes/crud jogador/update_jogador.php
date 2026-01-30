@@ -60,7 +60,7 @@
 
         if ($verifica_email->rowCount() > 0){
 
-            $_SESSION['mensagem_erro'] =  "❌ Este e-mail já está sendo usado por outro usuário.<br>";
+            $_SESSION['mensagem_erro'] =  "❌ Este e-mail já está sendo usado por outro usuário.";
 
 
         } else{ // Bloco de alteração de dados
@@ -386,7 +386,7 @@
         
         
         <div class="w-full flex mt-2">
-            <div class="ml-20 w-full">
+            <div class="ml-24 w-full">
                 <?php if (!empty($_SESSION['mensagem_erro'])) :?>
                     <p id="msg" class="text-red-500"><?= $_SESSION['mensagem_erro'] ?></p>
                     <?php unset($_SESSION['mensagem_erro']); ?>

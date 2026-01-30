@@ -86,7 +86,7 @@
                     }
                 ?>
                 
-                <div class="flex bg-white rounded-xl shadow-md overflow-hidden h-40 w-[700px]">
+                <div class="flex bg-white rounded-xl shadow-md overflow-hidden h-44 w-[700px]">
 
                     <!-- Imagem / placeholder -->
                     <div class="w-[400px] bg-gray-300 flex items-center justify-center">

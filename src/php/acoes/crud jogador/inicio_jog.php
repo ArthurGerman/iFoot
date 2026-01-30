@@ -351,7 +351,7 @@
                                 <p><strong>Data:</strong> <?= $DATA_PTD ?></p>
                                 <p><strong>Início:</strong> <?= $HORARIO_INICIO_PTD ?> hr</p>
                                 <p><strong>Fim:</strong> <?= $HORARIO_FIM_PTD ?> hr</p>
-                                <p><strong>Duração total:</strong> <?= $duracao ?>min</p>
+                                <p><strong>Duração total:</strong> <?= $duracao ?></p>
                                 <p><strong>Quantidade atual de jogadores:</strong> <?= $partida['QTD_JOGADORES_ATUAIS'] ?>/<?= $partida['QTD_MAX_JOG'] ?></p>
                                 <p><strong>Preço total:</strong> R$ <?= $partida['PRECO_TOTAL_PTD'] ?></p> <!-- Preço final calculado com base nas horas-->
                             </div>
