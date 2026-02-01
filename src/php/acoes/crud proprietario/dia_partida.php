@@ -52,11 +52,11 @@
     
     
     
-        <a href="./calendario_partidas.php">
-            <button>
-                <span class="material-symbols-outlined w-10 h-10 flex items-center justify-center rounded-xl bg-gray-300 hover:bg-gray-400 transition mt-4 ml-4">reply</span>
-            </button>
-        </a>
+        <span class="material-symbols-outlined w-10 h-10 flex items-center justify-center rounded-xl bg-gray-300 hover:bg-gray-400 transition mt-4 ml-4">
+            <a href="./calendario_partidas.php" class="w-10 h-10 flex items-center justify-center rounded-xl">
+                reply
+            </a>
+        </span>
 
 
         <div class="mt-6 pl-6 w-full">

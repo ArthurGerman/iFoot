@@ -763,10 +763,6 @@ video {
   margin-right: 0.5rem;
 }
 
-.mr-20{
-  margin-right: 5rem;
-}
-
 .mr-52{
   margin-right: 13rem;
 }
@@ -1283,6 +1279,11 @@ video {
 .bg-yellow-300{
   --tw-bg-opacity: 1;
   background-color: rgb(253 224 71 / var(--tw-bg-opacity, 1));
+}
+
+.bg-yellow-500{
+  --tw-bg-opacity: 1;
+  background-color: rgb(234 179 8 / var(--tw-bg-opacity, 1));
 }
 
 .bg-\[url\(\/static\/img_background\.jpeg\)\]{

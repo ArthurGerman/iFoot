@@ -104,11 +104,11 @@
     
         
 
-        <a href="./inicio_jog.php">
-            <button>
-                <span class="material-symbols-outlined w-10 h-10 flex items-center justify-center rounded-xl bg-gray-300 hover:bg-gray-400 transition mt-4 ml-4">reply</span>
-            </button>
-        </a>
+        <span class="material-symbols-outlined w-10 h-10 flex items-center justify-center rounded-xl bg-gray-300 hover:bg-gray-400 transition mt-4 ml-4">
+            <a href="./inicio_jog.php" class="w-10 h-10 flex items-center justify-center rounded-xl">
+                reply
+            </a>
+        </span>
     
         
     
