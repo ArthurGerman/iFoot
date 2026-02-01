@@ -727,6 +727,10 @@ video {
   margin-left: 5rem;
 }
 
+.ml-24{
+  margin-left: 6rem;
+}
+
 .ml-28{
   margin-left: 7rem;
 }
@@ -753,6 +757,10 @@ video {
 
 .mr-10{
   margin-right: 2.5rem;
+}
+
+.mr-2{
+  margin-right: 0.5rem;
 }
 
 .mr-20{
@@ -789,14 +797,6 @@ video {
 
 .mt-8{
   margin-top: 2rem;
-}
-
-.ml-32{
-  margin-left: 8rem;
-}
-
-.ml-24{
-  margin-left: 6rem;
 }
 
 .block{
@@ -844,8 +844,8 @@ video {
   height: 7rem;
 }
 
-.h-40{
-  height: 10rem;
+.h-44{
+  height: 11rem;
 }
 
 .h-48{
@@ -902,10 +902,6 @@ video {
 
 .h-screen{
   height: 100vh;
-}
-
-.h-44{
-  height: 11rem;
 }
 
 .min-h-screen{
@@ -1070,10 +1066,6 @@ video {
   flex-direction: column;
 }
 
-.items-end{
-  align-items: flex-end;
-}
-
 .items-center{
   align-items: center;
 }
@@ -1098,12 +1090,12 @@ video {
   gap: 2.5rem;
 }
 
-.gap-2{
-  gap: 0.5rem;
+.gap-16{
+  gap: 4rem;
 }
 
-.gap-24{
-  gap: 6rem;
+.gap-2{
+  gap: 0.5rem;
 }
 
 .gap-3{
@@ -1124,6 +1116,10 @@ video {
 
 .gap-7{
   gap: 1.75rem;
+}
+
+.gap-\[105px\]{
+  gap: 105px;
 }
 
 .space-y-1 > :not([hidden]) ~ :not([hidden]){
@@ -1287,11 +1283,6 @@ video {
 .bg-yellow-300{
   --tw-bg-opacity: 1;
   background-color: rgb(253 224 71 / var(--tw-bg-opacity, 1));
-}
-
-.bg-yellow-500{
-  --tw-bg-opacity: 1;
-  background-color: rgb(234 179 8 / var(--tw-bg-opacity, 1));
 }
 
 .bg-\[url\(\/static\/img_background\.jpeg\)\]{

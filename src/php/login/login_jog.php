@@ -96,7 +96,7 @@
 
                     </div>
                     
-                    <div class="flex justify-center gap-10 mt-6">
+                    <div class="flex justify-end gap-6 mt-6">
 
                         <a href="/index.php" class="flex bg-white text-green-600 hover:bg-gray-200 text-[20px] h-12 w-28 rounded-2xl justify-center items-center">Voltar</a>
                         

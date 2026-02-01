@@ -49,131 +49,151 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
     <link rel="shortcut icon" href="/static/favicon.png" type="image/x-icon">
     <link rel="stylesheet" href="/src/styles/global.css">
     <title>Cadastramento</title>
 </head>
 <body class=" font-outfit font-medium not-italic text-white">
 
-    <div class="relative bg-gradient-to-b from-[#2ba438] to-[#14551a] w-screen h-screen flex justify-end items-center">
-
-        <img src="/static/ifoot.png" alt="" class="absolute left-40 top-1/2 -translate-y-1/2 w-96">
-        
-        <div class="bg-gradient-to-b from-[#4ad658] to-green-500 h-[600px] mr-20 p-10 rounded-2xl">
-
-            <h1 class="text-[28px]">
-                Faça seu cadastro de proprietário <br> aqui
-            </h1>
-
-            <br>
-
-            
-            <form action="" method="post" class="flex flex-col">
-
-                <div class="flex flex-row mb-3 gap-2">
-
-                    <div class="w-1/6 flex items-center justify-end">
-                        <label for="NOME_PROP">Nome:</label>
-                    </div>
-                    <div class="w-5/6 flex items-center">
-                        <input 
-                            type="text" 
-                            name="NOME_PROP" 
-                            id="NOME_PROP" 
-                            placeholder="Nome" 
-                            class="px-4 bg-white border-[3px] border-solid border-gray-300 rounded-2xl w-full h-12 outline-none placeholder-gray-300 text-[#6b6b6b]"
-                        >
-                    </div>
-
-                </div>
+    <div class="bg-gradient-to-b from-[#2ba438] to-[#14551a] w-screen h-screen flex">
 
 
-                <div class="flex flex-row mb-3 gap-2">
 
-                    <div class="w-1/6 flex items-center justify-end">
-                        <label for="EMAIL_PROP">E-mail:</label>
-                    </div>
-                    <div class="w-5/6 flex items-center">
-                        <input 
-                            type="email" 
-                            name="EMAIL_PROP" 
-                            id="EMAIL_PROP"
-                            placeholder="E-mail"
-                            class="px-4 bg-white border-[3px] border-solid border-gray-300 rounded-2xl w-full h-12 outline-none placeholder-gray-300 text-[#6b6b6b]"
-                        >
-                    </div>
+        <div class="w-1/2 flex items-center justify-center">
 
-                </div>
-                
-                
-                <div class="flex flex-row mb-3 gap-2">
-
-                    <div class="w-1/6 flex items-center justify-end">
-                        <label for="CPF_PROP">CPF:</label>
-                    </div>
-                    <div class="w-5/6 flex items-center">
-                        <input 
-                            type="text" 
-                            name="CPF_PROP" 
-                            id="CPF_PROP" 
-                            maxlength="11"
-                            placeholder="Digite apenas os números"
-                            class="px-4 bg-white border-[3px] border-solid border-gray-300 rounded-2xl w-full h-12 outline-none placeholder-gray-300 text-[#6b6b6b]"
-                        >
-                    </div>
-                </div>
-                
-
-                <div class="flex flex-row mb-3 gap-2">
-
-                    <div class="w-1/6 flex items-center justify-end">
-                        <label for="TEL_PROP">Telefone:</label>
-                    </div>
-                    <div class="w-5/6 flex items-center">
-                        <input 
-                            type="telefone" 
-                            name="TEL_PROP" 
-                            id="TEL_PROP" 
-                            maxlength="11"
-                            placeholder="Telefone (DDD + números)"
-                            class="px-4 bg-white border-[3px] border-solid border-gray-300 rounded-2xl w-full h-12 outline-none placeholder-gray-300 text-[#6b6b6b]"
-                        >
-                    </div>
-
-                </div>
-                
-
-
-                <div class="flex flex-row mb-3 gap-2">
-
-                    <div class="w-1/6 flex items-center justify-end">
-                        <label for="SENHA_PROP">Senha:</label>
-                    </div>
-                    <div class="w-5/6 flex items-center">
-                        <input 
-                            type="password" 
-                            name="SENHA_PROP" 
-                            id="SENHA_PROP"
-                            placeholder="Digite a senha"
-                            class="px-4 bg-white border-[3px] border-solid border-gray-300 rounded-2xl w-full h-12 outline-none placeholder-gray-300 text-[#6b6b6b]"
-                        >
-                    </div>
-                </div>
-
-
-                
-                <div class="flex justify-center gap-24 mt-8">
-
-                    <a href="/index.php" class="flex bg-white text-green-600 hover:bg-gray-200 text-[20px] h-12 w-28 rounded-2xl justify-center items-center">Voltar</a>
+            <div class="bg-gradient-to-b from-[#4ad658] to-green-500 h-[600px] ml-20 p-10 rounded-2xl">
     
-                    <input type="submit" value="Cadastrar" class="bg-white text-green-600 hover:bg-gray-200 text-[20px] h-12 w-28 rounded-2xl cursor-pointer">
-                </div>
-            </form>
-
-            <?php if (!empty($mensagem_erro)) :?>
-                <p class="text-red-600 flex p-2 mt-2 justify-center"><?= $mensagem_erro ?></p>
-            <?php endif;?>
+                <h1 class="text-[28px]">
+                    Faça seu cadastro de proprietário <br> aqui
+                </h1>
+    
+                <br>
+    
+                <form action="" method="post" class="flex flex-col">
+    
+                    <div class="flex flex-row mb-3 gap-2">
+    
+                        <div class="w-1/6 flex items-center justify-end">
+                            <label for="NOME_PROP">Nome:</label>
+                        </div>
+                        <div class="w-5/6 flex items-center">
+                            <input 
+                                type="text" 
+                                name="NOME_PROP" 
+                                id="NOME_PROP" 
+                                placeholder="Nome" 
+                                class="px-4 bg-white border-[3px] border-solid border-gray-300 rounded-2xl w-full h-12 outline-none placeholder-gray-300 text-[#6b6b6b]"
+                            >
+                        </div>
+    
+                    </div>
+    
+    
+                    <div class="flex flex-row mb-3 gap-2">
+    
+                        <div class="w-1/6 flex items-center justify-end">
+                            <label for="EMAIL_PROP">E-mail:</label>
+                        </div>
+                        <div class="w-5/6 flex items-center">
+                            <input 
+                                type="email" 
+                                name="EMAIL_PROP" 
+                                id="EMAIL_PROP"
+                                placeholder="E-mail"
+                                class="px-4 bg-white border-[3px] border-solid border-gray-300 rounded-2xl w-full h-12 outline-none placeholder-gray-300 text-[#6b6b6b]"
+                            >
+                        </div>
+    
+                    </div>
+                    
+                    
+                    <div class="flex flex-row mb-3 gap-2">
+    
+                        <div class="w-1/6 flex items-center justify-end">
+                            <label for="CPF_PROP">CPF:</label>
+                        </div>
+                        <div class="w-5/6 flex items-center">
+                            <input 
+                                type="text" 
+                                name="CPF_PROP" 
+                                id="CPF_PROP" 
+                                maxlength="11"
+                                placeholder="Digite apenas os números"
+                                class="px-4 bg-white border-[3px] border-solid border-gray-300 rounded-2xl w-full h-12 outline-none placeholder-gray-300 text-[#6b6b6b]"
+                            >
+                        </div>
+                    </div>
+                    
+    
+                    <div class="flex flex-row mb-3 gap-2">
+    
+                        <div class="w-1/6 flex items-center justify-end">
+                            <label for="TEL_PROP">Telefone:</label>
+                        </div>
+                        <div class="w-5/6 flex items-center">
+                            <input 
+                                type="telefone" 
+                                name="TEL_PROP" 
+                                id="TEL_PROP" 
+                                maxlength="11"
+                                placeholder="Telefone (DDD + números)"
+                                class="px-4 bg-white border-[3px] border-solid border-gray-300 rounded-2xl w-full h-12 outline-none placeholder-gray-300 text-[#6b6b6b]"
+                            >
+                        </div>
+    
+                    </div>
+                    
+    
+    
+                    <div class="flex flex-row mb-3 gap-2">
+    
+                        <div class="w-1/6 flex items-center justify-end">
+                            <label for="SENHA_PROP">Senha:</label>
+                        </div>
+                        <div class="w-5/6 flex items-center">
+                            <input 
+                                type="password" 
+                                name="SENHA_PROP" 
+                                id="SENHA_PROP"
+                                placeholder="Digite a senha"
+                                class="px-4 bg-white border-[3px] border-solid border-gray-300 rounded-2xl w-full h-12 outline-none placeholder-gray-300 text-[#6b6b6b]"
+                            >
+                        </div>
+                    </div>
+    
+    
+                    
+                    <div class="flex justify-end gap-[105px] mt-8 mr-2">
+    
+                        <a href="/index.php" class="flex bg-white text-green-600 hover:bg-gray-200 text-[20px] h-12 w-28 rounded-2xl justify-center items-center">Voltar</a>
+        
+                        <input type="submit" value="Cadastrar" class="bg-white text-green-600 hover:bg-gray-200 text-[20px] h-12 w-28 rounded-2xl cursor-pointer">
+                    </div>
+                </form>
+    
+                <?php if (!empty($mensagem_erro)) :?>
+                    <p class="text-red-600 flex p-2 mt-2 justify-center"><?= $mensagem_erro ?></p>
+                <?php endif;?>
+            </div>
         </div>
+
+
+
+        <!-- DIV COM A FOTO DE PERFIL -->
+        <div class="w-1/2 flex flex-col items-center justify-center">
+            <div class="w-72 h-72 rounded-full bg-gray-300 flex items-center justify-center">
+                <span class="material-symbols-outlined text-[80px] text-white">
+                    person
+                </span>
+            </div>
+            
+            <button class="mt-4 text-sm text-green-600 hover:underline">
+                Mudar Imagem
+            </button>
+
+        </div>
+        
     </div>
 
 
