@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $verifica = $pdo->prepare("SELECT 1 FROM PARTIDAS WHERE ID_QUAD = ? LIMIT 1");
         $verifica->execute([$ID_QUAD]);
         if ($verifica->fetch()) {
-            $erro = "Não é possível inativar a quadra, pois existem partidas cadastradas nela.";
+            $erro = "❌ Não é possível inativar a quadra, pois existem partidas cadastradas nela.";
         }
     }
 
@@ -85,98 +85,163 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </div>
         </div>
 
-        <!-- Form -->
-        <div class="flex h-full w-full justify-between p-72 pt-28 pb-0">
 
-            <div class="flex flex-col justify-center gap-6">
-                <h2 class="text-[26px]">
-                    Edição de quadra
-                </h2>
+        <span class="material-symbols-outlined w-10 h-10 flex items-center justify-center rounded-xl bg-gray-300 hover:bg-gray-400 transition mt-4 ml-4">
+            <a href="./inicio_prop.php" class="w-10 h-10 flex items-center justify-center rounded-xl">
+                reply
+            </a>
+        </span>
 
-                <form action="" method="post" id="cadastro" class="flex flex-col items-center gap-3">
 
-                    <div class="-ml-4">
-                        <label for="ENDERECO_QUAD">Endereço: </label>
-                        <input type="text" name="ENDERECO_QUAD" id="ENDERECO_QUAD"
-                            value="<?= $quadra['ENDERECO_QUAD'] ?>"
-                            class="border rounded-md border-gray-400 w-44 pl-1">
+        <div class="mt-6 pl-6 w-full">
+            <h1 class="text-[28px]  w-auto h-auto flex items-center justify-start ml-4">
+                Edição dos dados da quadra
+            </h1>
+        </div>
+
+
+        <div class="flex mt-6 w-screen">
+
+            <div class="w-1/2 flex">
+    
+                <form action="" method="post" id="cadastro" class="">
+
+                    <div class="space-y-4 w-96 ml-28">
+
+                        <div class="flex flex-row w-full gap-2">
+                            <div class="w-[100px] flex items-center">
+                                <label for="ENDERECO_QUAD">Endereço: </label>
+
+                            </div>
+
+                            <div class="w-auto">
+                                <input type="text" name="ENDERECO_QUAD" id="ENDERECO_QUAD"
+                                    value="<?= $quadra['ENDERECO_QUAD'] ?>"
+                                    class="w-full h-9 px-3 rounded-md border border-gray-300 outline-none">
+                            </div>
+                        </div>
+        
+                        <div class="flex flex-row w-full gap-2">
+                            <div class="w-[100px] flex items-center ">
+                                <label for="CIDADE_QUAD">Cidade: </label>
+                            </div>
+
+                            <div class="w-auto">
+                                <input type="text" name="CIDADE_QUAD" id="CIDADE_QUAD"
+                                    value="<?= $quadra['CIDADE_QUAD'] ?>"
+                                    class="w-full h-9 px-3 rounded-md border border-gray-300 outline-none">
+                            </div>
+                        </div>
+        
+                        <div class="flex flex-row w-full gap-2">
+                            <div class="w-[100px] flex items-center ">
+                                <label for="UF">UF: </label>
+                            </div>
+
+                            <div class="w-auto">
+                                <select name="UF" id="UF" class="w-full h-9 px-3 rounded-md border border-gray-300 outline-none">
+                                    <option value="">Selecione</option>
+                                    <?php foreach ($ufs as $uf): ?>
+                                        <option value="<?= $uf['ID_UF'] ?>" <?= $quadra['ID_UF'] == $uf['ID_UF'] ? 'selected' : '' ?>>
+                                            <?= $uf['NOME_UF'] ?>
+                                        </option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                        </div>
+
+
+        
+                        <div class="flex flex-row w-full gap-2">
+                            <div class="w-[100px] flex items-center ">
+                                <label for="NOME_MODAL">Modalidade: </label>
+                            </div>
+
+                            <div class="w-auto">
+                                <select name="NOME_MODAL" id="NOME_MODAL" class="w-28 h-9 px-3 rounded-md border border-gray-300 outline-none">
+                                    <option value="">Selecione</option>
+                                    <option value="1" <?= $quadra['ID_MODAL'] == 1 ? 'selected' : '' ?>>Campo</option>
+                                    <option value="2" <?= $quadra['ID_MODAL'] == 2 ? 'selected' : '' ?>>Society</option>
+                                    <option value="3" <?= $quadra['ID_MODAL'] == 3 ? 'selected' : '' ?>>Quadra</option>
+                                </select>
+                            </div>
+                        </div>
+        
+
+
+                        <div class="flex flex-row w-full gap-2">
+                            <div class="w-[100px] flex items-center">
+                                <label for="PRECO_HORA_QUAD">Preço (R$/h) : </label>
+                            </div>
+
+                            <div class="w-auto">
+                                <input type="text" name="PRECO_HORA_QUAD" id="PRECO_HORA_QUAD"
+                                    value="<?= number_format($quadra['PRECO_HORA_QUAD'], 2, ',', '.') ?>"
+                                    oninput="formatarMoeda(this)"
+                                    class="w-24 h-9 px-3 rounded-md border border-gray-300 outline-none">
+                            </div>
+        
+                        </div>
+        
+                        <div class="flex flex-row w-full gap-2">
+                            <div class="w-[100px] flex items-center ">
+                                <label for="STATUS_QUAD">Situação: </label>
+                            </div>
+
+                            <div class="w-auto">
+                                <select name="STATUS_QUAD" id="STATUS_QUAD" class="w-24 h-9 px-3 rounded-md border border-gray-300 outline-none">
+                                    <option value="1" <?= $quadra['STATUS_QUAD'] == 1 ? 'selected' : '' ?>>Ativa</option>
+                                    <option value="0" <?= $quadra['STATUS_QUAD'] == 0 ? 'selected' : '' ?>>Inativa</option>
+                                </select>
+                            </div>
+                        </div>
+
+
+                        <div class="flex justify-end mr-10">
+                            <input type="submit" value="Salvar" class="bg-green-500 text-white px-4 py-1 rounded cursor-pointer">
+                        </div>
+                        
                     </div>
-
-                    <div>
-                        <label for="CIDADE_QUAD">Cidade: </label>
-                        <input type="text" name="CIDADE_QUAD" id="CIDADE_QUAD"
-                            value="<?= $quadra['CIDADE_QUAD'] ?>"
-                            class="border rounded-md border-gray-400 w-44 pl-1">
-                    </div>
-
-                    <div class="-mr-6">
-                        <label for="UF">UF: </label>
-                        <select name="UF" id="UF" class="border rounded-md border-gray-400">
-                            <option value="">Selecione</option>
-                            <?php foreach ($ufs as $uf): ?>
-                                <option value="<?= $uf['ID_UF'] ?>" <?= $quadra['ID_UF'] == $uf['ID_UF'] ? 'selected' : '' ?>>
-                                    <?= $uf['NOME_UF'] ?>
-                                </option>
-                            <?php endforeach; ?>
-                        </select>
-                    </div>
-
-                    <div class="-ml-20">
-                        <label for="NOME_MODAL">Modalidade: </label>
-                        <select name="NOME_MODAL" id="NOME_MODAL" class="border rounded-md border-gray-400 w-32">
-                            <option value="">Selecione</option>
-                            <option value="1" <?= $quadra['ID_MODAL'] == 1 ? 'selected' : '' ?>>Campo</option>
-                            <option value="2" <?= $quadra['ID_MODAL'] == 2 ? 'selected' : '' ?>>Society</option>
-                            <option value="3" <?= $quadra['ID_MODAL'] == 3 ? 'selected' : '' ?>>Quadra</option>
-                        </select>
-                    </div>
-
-                    <div class="-ml-36 -mr-1">
-                        <label for="PRECO_HORA_QUAD">Preço da hora: </label>
-                        <input type="text" name="PRECO_HORA_QUAD" id="PRECO_HORA_QUAD"
-                            value="<?= number_format($quadra['PRECO_HORA_QUAD'], 2, ',', '.') ?>"
-                            oninput="formatarMoeda(this)"
-                            class="border rounded-md border-gray-400 w-20 pl-1">
-
-                    </div>
-
-                    <div class="-ml-20 mr-1">
-                        <label for="STATUS_QUAD">Situação: </label>
-                        <select name="STATUS_QUAD" id="STATUS_QUAD" class="border rounded-md border-gray-400 w-24">
-                            <option value="1" <?= $quadra['STATUS_QUAD'] == 1 ? 'selected' : '' ?>>Ativa</option>
-                            <option value="0" <?= $quadra['STATUS_QUAD'] == 0 ? 'selected' : '' ?>>Inativa</option>
-                        </select><br>
-                    </div>
-
-                    <?php if (!empty($erro)): ?>
-                        <p style="color:red;"><?= $erro ?></p>
-                    <?php endif; ?>
+    
                 </form>
 
-                <div class="flex justify-between w-72">
-                    <a href="./inicio_prop.php" class="border rounded-lg w-24 h-9 flex text-center justify-center 
-                     bg-white text-green-600"><button>Voltar</button></a>
 
-                    <button type="submit" form="cadastro" class="border rounded-lg w-24 h-9 
-                     text-white bg-green-600">Editar</button>
-                </div>
-
-                <script src="../../../js/formata_preco_quadra.js"></script>
-                <script src="../../../js/tratamento-erros_cad-quadra.js"></script>
             </div>
 
-            <div class="flex flex-col justify-center items-center gap-5">
-                <div class="w-52 h-48 bg-slate-300 border rounded-lg p-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="size-full"
-                        viewBox="0 0 448 512"><!--!Font Awesome Free v7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2026 Fonticons, Inc.-->
-                        <path fill="#ffffff" d="M64 80c-8.8 0-16 7.2-16 16l0 320c0 8.8 7.2 16 16 16l320 0c8.8 0 16-7.2 16-16l0-320c0-8.8-7.2-16-16-16L64 80zM0 96C0 60.7 28.7 32 64 32l320 0c35.3 0 64 28.7 64 64l0 320c0 35.3-28.7 64-64 64L64 480c-35.3 0-64-28.7-64-64L0 96zm128 32a32 32 0 1 1 0 64 32 32 0 1 1 0-64zm136 72c8.5 0 16.4 4.5 20.7 11.8l80 136c4.4 7.4 4.4 16.6 .1 24.1S352.6 384 344 384l-240 0c-8.9 0-17.2-5-21.3-12.9s-3.5-17.5 1.6-24.8l56-80c4.5-6.4 11.8-10.2 19.7-10.2s15.2 3.8 19.7 10.2l17.2 24.6 46.5-79c4.3-7.3 12.2-11.8 20.7-11.8z" />
-                    </svg>
+
+
+
+            <!-- DIV COM A FOTO DE PERFIL -->
+            <div class="w-1/2 flex flex-col items-center justify-center">
+                <div class="w-72 h-72 rounded-full bg-gray-300 flex items-center justify-center">
+                    <span class="material-symbols-outlined text-[80px] text-white">
+                        person
+                    </span>
                 </div>
-                <button class="border rounded-lg w-44 h-10
-                 bg-white text-green-600">Mudar imagem</button>
+                
+                <button class="mt-4 text-sm text-green-600 hover:underline">
+                    Mudar Imagem
+                </button>
             </div>
+            
+            
+            
         </div>
-    </div>
-</body>
 
+
+        
+        <div class="flex flex-col w-full ml-28 mt-6">
+            <?php if (!empty($erro)): ?>
+                <p id="msg" class="text-red-500"><?= $erro ?></p>
+            <?php endif; ?>
+        </div>
+        
+    </div>
+    
+    
+    
+    <script src="../../../js/formata_preco_quadra.js"></script>
+    <script src="../../../js/tratamento-erros_cad-quadra.js"></script>
+    <script src="/src/js/some_mensagem.js"></script>
+</body>
 </html>
