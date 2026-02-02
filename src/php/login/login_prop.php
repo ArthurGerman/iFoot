@@ -118,9 +118,9 @@
     
             </div>
 
-            <p class="ml-10 mt-4 w-[408.54px]">
+            <p class="ml-16 mt-4 w-[408.54px]">
                 Ainda não se cadastrou? 
-                <a href="/src/php/cadastro/cadastra_proprietario.php" class="ml-16 mr-10 underline font-semibold">Cadastre-se aqui</a>
+                <a href="/src/php/cadastro/cadastra_proprietario.php" class="ml-15 mr-10 underline font-semibold">Cadastre-se aqui</a>
             </p>
 
         </div>

@@ -63,14 +63,13 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
     <link rel="shortcut icon" href="/static/favicon.png" type="image/x-icon">
     <link rel="stylesheet" href="/src/styles/global.css">
-    <title>Cadastramento</title>
+    <title>Cadastro de Jogador</title>
 </head>
-<body class=" font-outfit font-medium not-italic text-white">
+<body class="font-outfit font-medium not-italic text-white">
 
     <div class="bg-gradient-to-b from-[#2ba438] to-[#14551a] w-screen h-screen flex">
 
-
-
+        <!-- Seção do Formulário -->
         <div class="w-1/2 flex items-center justify-center">
 
             <div class="bg-gradient-to-b from-[#4ad658] to-green-500 h-[700px] ml-20 p-10 rounded-2xl">
@@ -81,9 +80,10 @@
     
                 <br>
             
-                
+                <!-- Formulario de Cadastro -->
                 <form action="" method="post" class="flex flex-col">
     
+                    <!-- Campo Nome -->
                     <div class="flex flex-row mb-3 gap-2">
     
                         <div class="w-1/6 flex items-center justify-end">
@@ -101,8 +101,7 @@
     
                     </div>
     
-                    
-    
+                    <!-- Campo E-mail -->
                     <div class="flex flex-row mb-3 gap-2">
     
                         <div class="w-1/6 flex items-center justify-end">
@@ -120,7 +119,7 @@
     
                     </div>
             
-    
+                    <!-- Campo CPF -->
                     <div class="flex flex-row mb-3 gap-2">
     
                         <div class="w-1/6 flex items-center justify-end">
@@ -139,7 +138,7 @@
     
                     </div>
             
-    
+                    <!-- Campo Cidade -->
                     <div class="flex flex-row mb-3 gap-2">
     
                         <div class="w-1/6 flex items-center justify-end">
@@ -157,6 +156,7 @@
     
                     </div>
     
+                    <!-- Campo Estado -->
                     <div class="flex flex-row mb-3 gap-2">
     
                         <div class="w-1/6 flex items-center justify-end">
@@ -199,6 +199,7 @@
     
                     
     
+                    <!-- Campo Endereço -->
                     <div class="flex flex-row mb-3 gap-2">
     
                         <div class="w-1/6 flex items-center justify-end">
@@ -216,8 +217,8 @@
     
                     </div>
     
-    
-    
+                    
+                    <!-- Campo Telefone -->
                     <div class="flex flex-row mb-3 gap-2">
     
                         <div class="w-1/6 flex items-center justify-end">
@@ -236,8 +237,7 @@
     
                     </div>
                     
-                    
-                    
+                    <!-- Campo Senha -->
                     <div class="flex flex-row mb-3 gap-2">
     
                         <div class="w-1/6 flex items-center justify-end">
@@ -255,12 +255,12 @@
     
                     </div>
                     
-    
+                    <!-- Botões de Ação -->
                     <div class="flex justify-end gap-[105px] mt-8 mr-2">
     
-                        <a href="/index.php" class="flex bg-white text-green-600 hover:bg-gray-200 text-[20px] h-12 w-28 rounded-2xl justify-center items-center">Voltar</a>
+                        <a href="/index.php" class="flex bg-white text-green-600 hover:bg-gray-200 text-[20px] h-12 w-28 rounded-2xl justify-center items-center transition">Voltar</a>
     
-                        <input type="submit" value="Cadastrar" class="bg-white text-green-600 hover:bg-gray-200 text-[20px] h-12 w-28 rounded-2xl cursor-pointer">
+                        <input type="submit" value="Cadastrar" class="bg-white text-green-600 hover:bg-gray-200 text-[20px] h-12 w-28 rounded-2xl cursor-pointer transition">
                     </div>
                 </form>
             
@@ -279,7 +279,7 @@
                 </span>
             </div>
             
-            <button class="mt-4 text-sm text-green-600 hover:underline">
+            <button class="mt-4 text-sm text-green-600 hover:underline transition">
                 Mudar Imagem
             </button>
 

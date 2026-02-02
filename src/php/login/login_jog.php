@@ -41,7 +41,7 @@
     <link rel="stylesheet" href="/src/styles/global.css">
     <title>Login</title>
 </head>
-<body class=" font-outfit font-medium not-italic text-white">
+<body class="font-outfit font-medium not-italic text-white">
 
     <div class="relative bg-gradient-to-b from-[#2ba438] to-[#14551a] w-screen h-screen flex justify-end items-center">
 
@@ -59,7 +59,7 @@
             
                 <form action="" method="post" class="flex flex-col">
 
-
+                    <!-CAMPO E-MAIL->
                     <div class="flex flex-row mb-3 gap-2">
 
                         <div class="w-1/6 flex items-center justify-end">
@@ -78,7 +78,7 @@
                     </div>
                     
 
-
+                    <!-- Campo da senha -->
                     <div class="flex flex-row mb-3 gap-2">
 
                         <div class="w-1/6 flex items-center justify-end">
@@ -96,6 +96,7 @@
 
                     </div>
                     
+                    <!--Botões de Ação-->
                     <div class="flex justify-end gap-6 mt-6">
 
                         <a href="/index.php" class="flex bg-white text-green-600 hover:bg-gray-200 text-[20px] h-12 w-28 rounded-2xl justify-center items-center">Voltar</a>
@@ -111,9 +112,9 @@
 
             </div>
 
-            <p class="ml-6 mt-4 w-[375px]">
+            <p class="ml-10 mt-4 w-[375px]">
                 Ainda não se cadastrou? 
-                <a href="/src/php/cadastro/cadastra_jogador.php" class="ml-12 mr-6 underline font-semibold">Cadastre-se aqui</a>
+                <a href="/src/php/cadastro/cadastra_jogador.php" class="ml-13 mr-6 underline font-semibold hover:text-gray-200 transition">Cadastre-se aqui</a>
             </p>
 
         </div>
