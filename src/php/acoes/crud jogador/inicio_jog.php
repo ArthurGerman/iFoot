@@ -42,6 +42,17 @@
 
 
 
+    $query2 = $pdo->prepare("
+        SELECT IMAGEM.PATH
+        FROM JOGADORES
+        INNER JOIN IMAGEM ON JOGADORES.ID_IMAGEM = IMAGEM.ID_IMAGEM
+        WHERE ID_JOG = ?
+    ");
+    $query2->execute([$ID_JOG]);
+    $imagem = $query2->fetch(PDO::FETCH_ASSOC);
+
+
+
     // --------------- FILTRO ---------------
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
@@ -395,10 +406,14 @@
 
         <!-- Avatar -->
         <div class="flex justify-center my-6">
-            <div class="w-24 h-24 rounded-full bg-white/30 flex items-center justify-center">
-                <span class="material-symbols-outlined text-[64px]">
-                    person
-                </span>
+            <div class="w-24 h-24 rounded-full bg-white/30 flex items-center justify-center overflow-hidden">
+                <?php if (!empty($imagem)): ?>
+                    <img src="../../../../storage/<?= $imagem['PATH'] ?>" alt="" class="w-full h-full object-cover">
+                <?php else: ?>
+                    <span class="material-symbols-outlined text-[64px]">
+                        person
+                    </span>
+                <?php endif?>
             </div>
         </div>
 

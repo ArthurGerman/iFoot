@@ -11,6 +11,26 @@
         $SENHA_PROP = password_hash($_POST['SENHA_PROP'], PASSWORD_BCRYPT);
 
 
+
+
+        // Verificar se foi enviada uma imagem
+        if (!empty($_FILES['imagem']['name'])) {
+            $extensao = pathinfo($_FILES['imagem']['name'], PATHINFO_EXTENSION);
+            $novoNome = uniqid() . '.' . $extensao;
+            $caminho = __DIR__ . '../../../../storage/' . $novoNome;
+
+            // Mover o arquivo para a pasta storage
+            if (move_uploaded_file($_FILES['imagem']['tmp_name'], $caminho)) {
+                // Inserir o caminho da imagem na tabela imagens
+                $query = $pdo->prepare("INSERT INTO IMAGEM (path) VALUES (?)");
+                $query->execute([$novoNome]);
+                $ID_IMAGEM = $pdo->lastInsertId();
+            }
+        } else {
+            $ID_IMAGEM = null;
+        }
+
+
         //Query para verificar se o CPF e/ou email cadastrados já existem
         // São duas verificações únicas pois possa ser que o email ou o CPF foram cadastrados iguais de maneira individual e não os dois juntos
         $verifica_email = $pdo->prepare("SELECT 1 FROM PROPRIETARIOS WHERE EMAIL_PROP = ?");
@@ -32,8 +52,8 @@
             $mensagem_erro =  "❌ Este CPF já está cadastrado no sistema !";
 
         } else{
-            $query = $pdo->prepare("INSERT INTO PROPRIETARIOS (NOME_PROP, EMAIL_PROP, CPF_PROP, TEL_PROP, SENHA_PROP) VALUES (?,?,?,?,?)");
-            $query->execute([$NOME_PROP, $EMAIL_PROP, $CPF_PROP, $TEL_PROP, $SENHA_PROP]);
+            $query = $pdo->prepare("INSERT INTO PROPRIETARIOS (NOME_PROP, EMAIL_PROP, CPF_PROP, TEL_PROP, SENHA_PROP, ID_IMAGEM) VALUES (?,?,?,?,?,?)");
+            $query->execute([$NOME_PROP, $EMAIL_PROP, $CPF_PROP, $TEL_PROP, $SENHA_PROP, $ID_IMAGEM]);
 
             // Redirecionar para login
             header('Location: ../login/login_prop.php');
@@ -70,7 +90,7 @@
                 <br>
     
                 <!-- Formulário de Cadastro -->
-                <form action="" method="post" class="flex flex-col">
+                <form action="" id="form_cadastro_prop" method="post" class="flex flex-col" enctype="multipart/form-data">
     
                     <!-- Campo Nome -->
                     <div class="flex flex-row mb-3 gap-2">
@@ -175,7 +195,7 @@
                 </form>
     
                 <?php if (!empty($mensagem_erro)) :?>
-                    <p class="text-red-600 flex p-2 mt-2 justify-center"><?= $mensagem_erro ?></p>
+                    <p class="text-red-600 flex p-2 mb-1 justify-center"><?= $mensagem_erro ?></p>
                 <?php endif;?>
             </div>
         </div>
@@ -184,21 +204,32 @@
 
         <!-- DIV COM A FOTO DE PERFIL -->
         <div class="w-1/2 flex flex-col items-center justify-center">
-            <div class="w-72 h-72 rounded-full bg-gray-300 flex items-center justify-center">
-                <span class="material-symbols-outlined text-[80px] text-white">
+            <div class="w-72 h-72 rounded-full bg-gray-300 flex items-center justify-center overflow-hidden relative">
+                <span id="icone-person" class="material-symbols-outlined text-[80px] text-white absolute">
                     person
                 </span>
+
+                <img id="preview-imagem" class="hidden w-full h-full object-cover">
             </div>
             
-            <button class="mt-4 text-sm text-green-600 hover:underline transition">
-                Mudar Imagem
-            </button>
 
+
+            <label for="imagem" class="mt-4 bg-white hover:bg-gray-300 text-green-500 px-5 py-2 rounded-full cursor-pointer transition font-semibold">
+                Adicionar imagem
+            </label>
+            <input 
+                type="file" 
+                id="imagem" 
+                form="form_cadastro_prop" 
+                name="imagem" accept="image/*" 
+                class="hidden"
+            >
         </div>
-        
+
     </div>
 
 
     <script src="/src/js/tratamento-erros_prop.js"></script>
+    <script src="/src/js/troca_icone_imagem.js"></script>
 </body>
 </html>

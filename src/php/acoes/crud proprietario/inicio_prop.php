@@ -16,6 +16,17 @@
     $query->execute([$ID_PROP]);
     $quadras = $query->fetchAll(PDO::FETCH_ASSOC);
 
+
+    $query2 = $pdo->prepare("
+        SELECT IMAGEM.PATH
+        FROM PROPRIETARIOS
+        INNER JOIN IMAGEM ON PROPRIETARIOS.ID_IMAGEM = IMAGEM.ID_IMAGEM
+        WHERE ID_PROP = ?
+    ");
+    $query2->execute([$ID_PROP]);
+    $imagem = $query2->fetch(PDO::FETCH_ASSOC);
+
+
 ?>
 
 <!DOCTYPE html>
@@ -135,10 +146,14 @@
 
         <!-- Avatar -->
         <div class="flex justify-center my-6">
-            <div class="w-24 h-24 rounded-full bg-white/30 flex items-center justify-center">
-                <span class="material-symbols-outlined text-[64px]">
-                    person
-                </span>
+            <div class="w-24 h-24 rounded-full bg-white/30 flex items-center justify-center overflow-hidden">
+                <?php if (!empty($imagem)): ?>
+                    <img src="../../../../storage/<?= $imagem['PATH'] ?>" alt="" class="w-full h-full object-cover">
+                <?php else: ?>
+                    <span class="material-symbols-outlined text-[64px]">
+                        person
+                    </span>
+                <?php endif?>
             </div>
         </div>
 

@@ -9,7 +9,12 @@
     $NOME_PROP = $_SESSION['name_prop'];
     $ID_PROP = $_SESSION['id_prop'];
 
-    $query = $pdo->prepare("SELECT * FROM PROPRIETARIOS WHERE ID_PROP = ?");
+    $query = $pdo->prepare("
+        SELECT *
+        FROM PROPRIETARIOS 
+        LEFT JOIN IMAGEM ON PROPRIETARIOS.ID_IMAGEM = IMAGEM.ID_IMAGEM
+        WHERE PROPRIETARIOS.ID_PROP = ?
+    ");
     $query->execute([$ID_PROP]);
     $results = $query->fetch(PDO::FETCH_ASSOC);
 
@@ -68,6 +73,48 @@
                 $DADOS_PROP[] = password_hash($SENHA_PROP, PASSWORD_BCRYPT);
 
                 $reload = true;
+            }
+
+
+
+
+            if (!empty($_FILES['imagem']['name'])) {
+
+                // 1. Apagar imagem antiga (se existir)
+                if (!empty($results['ID_IMAGEM'])) {
+
+                    $query = $pdo->prepare("SELECT PATH FROM IMAGEM WHERE ID_IMAGEM = ?");
+                    $query->execute([$results['ID_IMAGEM']]);
+                    $img = $query->fetch(PDO::FETCH_ASSOC);
+
+                    if ($img) {
+                        $arquivoAntigo = __DIR__ . '/../../../../storage/' . $img['PATH'];
+
+                        if (file_exists($arquivoAntigo)) {
+                            unlink($arquivoAntigo);
+                        }
+
+                        // Apaga do banco
+                        $query = $pdo->prepare("DELETE FROM IMAGEM WHERE ID_IMAGEM = ?");
+                        $query->execute([$results['ID_IMAGEM']]);
+                    }
+                }
+
+                $extensao = pathinfo($_FILES['imagem']['name'], PATHINFO_EXTENSION);
+                $novoNome = uniqid() . '.' . $extensao;
+                $caminho = __DIR__ . '/../../../../storage/' . $novoNome;
+
+                move_uploaded_file($_FILES['imagem']['tmp_name'], $caminho);
+
+                $query = $pdo->prepare("INSERT INTO IMAGEM (PATH) VALUES (?)");
+                $query->execute([$novoNome]);
+                $ID_IMAGEM = $pdo->lastInsertId();
+                
+                
+                $CAMPOS_PROP[] = 'ID_IMAGEM = ?';
+                $DADOS_PROP[] = $ID_IMAGEM;
+
+
             }
 
             if(empty($CAMPOS_PROP)){
@@ -149,7 +196,7 @@
         <div class="flex mt-6 w-screen">
             <div class="w-1/2 flex">
 
-                <form action="" method="post">
+                <form action="" id="form_update_prop" method="post" enctype="multipart/form-data">
 
                     <div class="space-y-4 w-96 ml-28">
 
@@ -251,15 +298,25 @@
 
             <!-- DIV COM A FOTO DE PERFIL -->
             <div class="w-1/2 flex flex-col items-center justify-center">
-                <div class="w-72 h-72 rounded-full bg-gray-300 flex items-center justify-center">
-                    <span class="material-symbols-outlined text-[80px] text-white">
+                <div class="w-72 h-72 rounded-full bg-gray-300 flex items-center justify-center overflow-hidden relative">
+                    
+                    <img src="<?= !empty($results['PATH']) ? '../../../../storage/' . $results['PATH'] : '' ?>" id="preview-imagem" class="w-full h-full object-cover <?= empty($results['PATH']) ? 'hidden' : '' ?>">
+
+                    <span id="icone-person" class="material-symbols-outlined text-[80px] text-white absolute <?= !empty($results['PATH']) ? 'hidden' : '' ?>">
                         person
                     </span>
                 </div>
                 
-                <button class="mt-4 text-sm text-green-600 hover:underline">
-                    Mudar Imagem
-                </button>
+                <label for="imagem" class="mt-4 bg-white hover:bg-gray-300 text-green-500 px-5 py-2 rounded-full cursor-pointer transition font-semibold">
+                    Alterar imagem
+                </label>
+                <input 
+                    type="file" 
+                    id="imagem" 
+                    form="form_update_prop" 
+                    name="imagem" accept="image/*" 
+                    class="hidden"
+                >
             </div>
         </div>
 
@@ -286,5 +343,6 @@
 
     <script src="/src/js/tratamento-erros-update_prop.js"></script>
     <script src="/src/js/some_mensagem.js"></script>
+    <script src="/src/js/troca_icone_imagem.js"></script>
 </body>
 </html>
