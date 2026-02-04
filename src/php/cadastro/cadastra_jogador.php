@@ -307,7 +307,7 @@
             </div>
             
             
-            <label for="imagem" class="mt-4 bg-white hover:bg-gray-300 text-green-500 px-5 py-2 rounded-full cursor-pointer transition font-semibold">
+            <label for="imagem" class="mt-4 bg-white hover:bg-gray-300 text-green-600 px-5 py-2 rounded-full cursor-pointer transition font-semibold">
                 Adicionar imagem
             </label>
             <input 

@@ -408,7 +408,7 @@
         <div class="flex justify-center my-6">
             <div class="w-24 h-24 rounded-full bg-white/30 flex items-center justify-center overflow-hidden">
                 <?php if (!empty($imagem)): ?>
-                    <img src="../../../../storage/<?= $imagem['PATH'] ?>" alt="" class="w-full h-full object-cover">
+                    <img src="../../../../../storage/<?= $imagem['PATH'] ?>" alt="" class="w-full h-full object-cover">
                 <?php else: ?>
                     <span class="material-symbols-outlined text-[64px]">
                         person
@@ -443,7 +443,7 @@
                 <span class="material-symbols-outlined">settings</span> Configurações
             </a>-->
 
-            <a href="../../login/logout.php" class="flex items-center gap-2 bg-red-500 hover:bg-red-600 p-2 rounded-lg mt-4">
+            <a href="../../login/logout.php" class="flex items-center gap-2 bg-white/20 hover:bg-white/30 p-2 rounded-lg">
                 <span class="material-symbols-outlined">logout</span> Sair da Conta
             </a>
         </nav>

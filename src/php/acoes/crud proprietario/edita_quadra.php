@@ -6,7 +6,12 @@ require_once '../../authenticate_prop.php';
 
 $ID_QUAD = $_GET['id']; //Id da quadra a ser editada
 
-$query = $pdo->prepare("SELECT * FROM QUADRAS WHERE ID_QUAD = ?");
+$query = $pdo->prepare("
+    SELECT * FROM QUADRAS
+    
+    INNER JOIN IMAGEM ON QUADRAS.ID_IMAGEM = IMAGEM.ID_IMAGEM
+    WHERE ID_QUAD = ?
+");
 $query->execute([$ID_QUAD]);
 $quadra = $query->fetch(PDO::FETCH_ASSOC);
 
@@ -34,6 +39,44 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     if ($erro == '') {
+
+        $ID_IMAGEM = $quadra['ID_IMAGEM'];
+        
+        if (!empty($_FILES['imagem']['name'])) {
+
+            // 1. Apagar imagem antiga (se existir)
+            if (!empty($quadra['ID_IMAGEM'])) {
+
+                $query = $pdo->prepare("SELECT PATH FROM IMAGEM WHERE ID_IMAGEM = ?");
+                $query->execute([$quadra['ID_IMAGEM']]);
+                $img = $query->fetch(PDO::FETCH_ASSOC);
+
+                if ($img) {
+                    $arquivoAntigo = __DIR__ . '/../../../../storage/' . $img['PATH'];
+
+                    if (file_exists($arquivoAntigo)) {
+                        unlink($arquivoAntigo);
+                    }
+
+                    // Apaga do banco
+                    $query = $pdo->prepare("DELETE FROM IMAGEM WHERE ID_IMAGEM = ?");
+                    $query->execute([$quadra['ID_IMAGEM']]);
+                }
+            }
+
+            $extensao = pathinfo($_FILES['imagem']['name'], PATHINFO_EXTENSION);
+            $novoNome = uniqid() . '.' . $extensao;
+            $caminho = __DIR__ . '/../../../../storage/' . $novoNome;
+
+            move_uploaded_file($_FILES['imagem']['tmp_name'], $caminho);
+
+            $query = $pdo->prepare("INSERT INTO IMAGEM (PATH) VALUES (?)");
+            $query->execute([$novoNome]);
+            $ID_IMAGEM = $pdo->lastInsertId();
+            
+        }
+
+
         $query3 = $pdo->prepare("
                 UPDATE QUADRAS
                 SET ENDERECO_QUAD = ?, 
@@ -41,7 +84,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 ID_UF = ?, 
                 ID_MODAL = ?, 
                 PRECO_HORA_QUAD = ?, 
-                STATUS_QUAD = ?
+                STATUS_QUAD = ?,
+                ID_IMAGEM = ?
     
                 WHERE ID_QUAD = ?
             ");
@@ -53,6 +97,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $NOME_MODAL,
             $PRECO_HORA_QUAD,
             $STATUS_QUAD,
+            $ID_IMAGEM,
 
             $ID_QUAD
         ]);
@@ -104,7 +149,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             <div class="w-1/2 flex">
     
-                <form action="" method="post" id="cadastro" class="">
+                <form action="" method="post" id="form_update_quadra" class="" enctype="multipart/form-data">
 
                     <div class="space-y-4 w-96 ml-28">
 
@@ -122,7 +167,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         </div>
         
                         <div class="flex flex-row w-full gap-2">
-                            <div class="w-[100px] flex items-center ">
+                            <div class="w-[100px] flex items-center">
                                 <label for="CIDADE_QUAD">Cidade: </label>
                             </div>
 
@@ -134,7 +179,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         </div>
         
                         <div class="flex flex-row w-full gap-2">
-                            <div class="w-[100px] flex items-center ">
+                            <div class="w-[100px] flex items-center">
                                 <label for="UF">UF: </label>
                             </div>
 
@@ -153,7 +198,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         
                         <div class="flex flex-row w-full gap-2">
-                            <div class="w-[100px] flex items-center ">
+                            <div class="w-[100px] flex items-center">
                                 <label for="NOME_MODAL">Modalidade: </label>
                             </div>
 
@@ -211,17 +256,28 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 
 
-            <!-- DIV COM A FOTO DE PERFIL -->
+            <!-- DIV COM A FOTO DA QUADRA -->
             <div class="w-1/2 flex flex-col items-center justify-center">
-                <div class="w-72 h-72 rounded-full bg-gray-300 flex items-center justify-center">
-                    <span class="material-symbols-outlined text-[80px] text-white">
-                        person
+                <div class="w-72 h-72 rounded-full bg-gray-300 flex items-center justify-center overflow-hidden relative">
+
+                    <img src="<?= !empty($quadra['PATH']) ? '../../../../storage/' . $quadra['PATH'] : '' ?>" id="preview-imagem" class="w-full h-full object-cover <?= empty($quadra['PATH']) ? 'hidden' : '' ?>">
+
+                    <span id="icone-person" class="material-symbols-outlined text-[80px] text-white absolute <?= !empty($quadra['PATH']) ? 'hidden' : '' ?>">
+                        stadium
                     </span>
                 </div>
                 
-                <button class="mt-4 text-sm text-green-600 hover:underline">
-                    Mudar Imagem
-                </button>
+
+                <label for="imagem" class="mt-4 bg-white hover:bg-gray-300 text-green-500 px-5 py-2 rounded-full cursor-pointer transition font-semibold">
+                    Alterar imagem
+                </label>
+                <input 
+                    type="file" 
+                    id="imagem" 
+                    form="form_update_quadra" 
+                    name="imagem" accept="image/*" 
+                    class="hidden"
+                >
             </div>
             
             
@@ -240,8 +296,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     
     
     
-    <script src="../../../js/formata_preco_quadra.js"></script>
-    <script src="../../../js/tratamento-erros_cad-quadra.js"></script>
+    <script src="/src/js/formata_preco_quadra.js"></script>
+    <script src="/src/js/tratamento-erros_cad-quadra.js"></script>
     <script src="/src/js/some_mensagem.js"></script>
+    <script src="/src/js/troca_icone_imagem.js"></script>
 </body>
 </html>

@@ -6,10 +6,19 @@
     $ID_PROP = $_SESSION['id_prop'];
 
     $query = $pdo->prepare("
-        SELECT QUADRAS.ID_QUAD, QUADRAS.PRECO_HORA_QUAD, QUADRAS.ENDERECO_QUAD, QUADRAS.CIDADE_QUAD, QUADRAS.STATUS_QUAD, UF.NOME_UF, MODALIDADES.NOME_MODAL
+        SELECT QUADRAS.ID_QUAD, 
+            QUADRAS.PRECO_HORA_QUAD, 
+            QUADRAS.ENDERECO_QUAD, 
+            QUADRAS.CIDADE_QUAD, 
+            QUADRAS.STATUS_QUAD, 
+            UF.NOME_UF, 
+            MODALIDADES.NOME_MODAL,
+            IMAGEM.PATH
+
         FROM QUADRAS
         INNER JOIN UF ON QUADRAS.ID_UF = UF.ID_UF
         INNER JOIN MODALIDADES ON QUADRAS.ID_MODAL = MODALIDADES.ID_MODAL
+        INNER JOIN IMAGEM ON QUADRAS.ID_IMAGEM = IMAGEM.ID_IMAGEM
         WHERE QUADRAS.ID_PROP = ?
         ORDER BY QUADRAS.ID_QUAD ASC
     ");
@@ -83,7 +92,7 @@
 
                         <!-- Imagem / placeholder -->
                         <div class="w-[400px] bg-gray-300 flex items-center justify-center">
-                            <span class="text-gray-500">Imagem da quadra</span>
+                            <img src="../../../../../storage/<?= $quadra['PATH'] ?>" alt="" class="w-full h-full object-cover">
                         </div>
 
                         <!-- Conteúdo -->
@@ -148,7 +157,7 @@
         <div class="flex justify-center my-6">
             <div class="w-24 h-24 rounded-full bg-white/30 flex items-center justify-center overflow-hidden">
                 <?php if (!empty($imagem)): ?>
-                    <img src="../../../../storage/<?= $imagem['PATH'] ?>" alt="" class="w-full h-full object-cover">
+                    <img src="../../../../../storage/<?= $imagem['PATH'] ?>" alt="" class="w-full h-full object-cover">
                 <?php else: ?>
                     <span class="material-symbols-outlined text-[64px]">
                         person
@@ -177,7 +186,7 @@
                 <span class="material-symbols-outlined">help</span> Como usar
             </a>
 
-            <a href="../../login/logout.php" class="flex items-center gap-2 bg-red-500 hover:bg-red-600 p-2 rounded-lg mt-4">
+            <a href="../../login/logout.php" class="flex items-center gap-2 bg-white/20 hover:bg-white/30 p-2 rounded-lg">
                 <span class="material-symbols-outlined">logout</span> Sair da Conta
             </a>
         </nav>
