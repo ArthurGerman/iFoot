@@ -12,10 +12,12 @@
             QUADRAS.CIDADE_QUAD,
             QUADRAS.PRECO_HORA_QUAD,
             UF.NOME_UF,
+            IMAGEM.PATH,
             MODALIDADES.NOME_MODAL
 
         FROM QUADRAS
         INNER JOIN UF ON QUADRAS.ID_UF = UF.ID_UF
+        INNER JOIN IMAGEM ON QUADRAS.ID_IMAGEM = IMAGEM.ID_IMAGEM
         INNER JOIN MODALIDADES ON QUADRAS.ID_MODAL = MODALIDADES.ID_MODAL
         WHERE QUADRAS.STATUS_QUAD = 1
     
@@ -35,10 +37,12 @@
                 QUADRAS.CIDADE_QUAD,
                 QUADRAS.PRECO_HORA_QUAD,
                 UF.NOME_UF,
+                IMAGEM.PATH,
                 MODALIDADES.NOME_MODAL
 
             FROM QUADRAS
             INNER JOIN UF ON QUADRAS.ID_UF = UF.ID_UF
+            INNER JOIN IMAGEM ON QUADRAS.ID_IMAGEM = IMAGEM.ID_IMAGEM
             INNER JOIN MODALIDADES ON QUADRAS.ID_MODAL = MODALIDADES.ID_MODAL
             WHERE QUADRAS.STATUS_QUAD = 1
         ";
@@ -247,7 +251,7 @@
 
                         <!-- Imagem / placeholder -->
                         <div class="w-[400px] bg-gray-300 flex items-center justify-center">
-                            <span class="text-gray-500">Imagem</span>
+                            <img src="../../../../../storage/<?= $quadra['PATH'] ?>" alt="" class="w-full h-full object-cover">
                         </div>
 
                         <!-- Conteúdo -->

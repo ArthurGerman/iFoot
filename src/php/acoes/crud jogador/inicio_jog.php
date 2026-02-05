@@ -14,6 +14,7 @@
             PARTIDAS.PRECO_TOTAL_PTD,
             QUADRAS.ENDERECO_QUAD,
             QUADRAS.CIDADE_QUAD,
+            IMAGEM.PATH,
             UF.NOME_UF,
             MODALIDADES.NOME_MODAL,
             MODALIDADES.QTD_MAX_JOG,
@@ -21,6 +22,7 @@
 
         FROM PARTIDAS
         INNER JOIN QUADRAS ON PARTIDAS.ID_QUAD = QUADRAS.ID_QUAD
+        INNER JOIN IMAGEM ON QUADRAS.ID_IMAGEM = IMAGEM.ID_IMAGEM
         INNER JOIN UF ON QUADRAS.ID_UF = UF.ID_UF
         INNER JOIN MODALIDADES ON QUADRAS.ID_MODAL = MODALIDADES.ID_MODAL
         INNER JOIN JOGADOR_PARTIDA ON PARTIDAS.ID_PTD = JOGADOR_PARTIDA.ID_PTD
@@ -64,6 +66,7 @@
                 PARTIDAS.PRECO_TOTAL_PTD,
                 QUADRAS.ENDERECO_QUAD,
                 QUADRAS.CIDADE_QUAD,
+                IMAGEM.PATH,
                 UF.NOME_UF,
                 MODALIDADES.NOME_MODAL,
                 MODALIDADES.QTD_MAX_JOG,
@@ -71,6 +74,7 @@
 
             FROM PARTIDAS
             INNER JOIN QUADRAS ON PARTIDAS.ID_QUAD = QUADRAS.ID_QUAD
+            INNER JOIN IMAGEM ON QUADRAS.ID_IMAGEM = IMAGEM.ID_IMAGEM
             INNER JOIN UF ON QUADRAS.ID_UF = UF.ID_UF
             INNER JOIN MODALIDADES ON QUADRAS.ID_MODAL = MODALIDADES.ID_MODAL
             INNER JOIN JOGADOR_PARTIDA ON PARTIDAS.ID_PTD = JOGADOR_PARTIDA.ID_PTD
@@ -320,7 +324,7 @@
 
                         <!-- Imagem / placeholder -->
                         <div class="w-[400px] bg-gray-300 flex items-center justify-center">
-                            <span class="text-gray-500">Imagem da quadra</span>
+                            <img src="../../../../../storage/<?= $partida['PATH'] ?>" alt="" class="w-full h-full object-cover">
                         </div>
 
                         <!-- Conteúdo -->

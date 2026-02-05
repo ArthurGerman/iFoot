@@ -17,6 +17,7 @@
         QUADRAS.CIDADE_QUAD,
         QUADRAS.ENDERECO_QUAD,
         QUADRAS.PRECO_HORA_QUAD,
+        IMAGEM.PATH,
         MODALIDADES.NOME_MODAL,
         MODALIDADES.QTD_MAX_JOG,
         UF.NOME_UF,
@@ -30,6 +31,7 @@
         FROM JOGADOR_PARTIDA
         INNER JOIN PARTIDAS ON JOGADOR_PARTIDA.ID_PTD = PARTIDAS.ID_PTD
         INNER JOIN QUADRAS ON PARTIDAS.ID_QUAD = QUADRAS.ID_QUAD
+        INNER JOIN IMAGEM ON QUADRAS.ID_IMAGEM = IMAGEM.ID_IMAGEM
         INNER JOIN MODALIDADES ON QUADRAS.ID_MODAL = MODALIDADES.ID_MODAL
         INNER JOIN UF ON QUADRAS.ID_UF = UF.ID_UF
         WHERE JOGADOR_PARTIDA.ID_JOG = ?
@@ -89,7 +91,7 @@
 
                         <!-- Imagem / placeholder -->
                         <div class="w-[400px] bg-gray-300 flex items-center justify-center">
-                            <span class="text-gray-500">Imagem da quadra</span>
+                            <img src="../../../../../storage/<?= $partida['PATH'] ?>" alt="" class="w-full h-full object-cover">
                         </div>
 
                         <!-- Conteúdo -->

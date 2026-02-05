@@ -18,12 +18,14 @@
         QUADRAS.PRECO_HORA_QUAD,
         MODALIDADES.NOME_MODAL,
         MODALIDADES.QTD_MAX_JOG,
+        IMAGEM.PATH,
         UF.NOME_UF,
         COUNT(JOGADOR_PARTIDA.ID_JOG) AS QTD_JOGADORES_ATUAIS
 
         FROM PARTIDAS
         LEFT JOIN JOGADOR_PARTIDA ON JOGADOR_PARTIDA.ID_PTD = PARTIDAS.ID_PTD
         INNER JOIN QUADRAS ON PARTIDAS.ID_QUAD = QUADRAS.ID_QUAD
+        INNER JOIN IMAGEM ON QUADRAS.ID_IMAGEM = IMAGEM.ID_IMAGEM
         INNER JOIN MODALIDADES ON QUADRAS.ID_MODAL = MODALIDADES.ID_MODAL
         INNER JOIN UF ON QUADRAS.ID_UF = UF.ID_UF
         WHERE PARTIDAS.ID_CRIADOR = ?
@@ -85,7 +87,7 @@
 
                         <!-- Imagem / placeholder -->
                         <div class="w-[400px] bg-gray-300 flex items-center justify-center">
-                            <span class="text-gray-500">Imagem da quadra</span>
+                            <img src="../../../../../storage/<?= $partida['PATH'] ?>" alt="" class="w-full h-full object-cover">
                         </div>
 
                         <!-- Conteúdo -->
