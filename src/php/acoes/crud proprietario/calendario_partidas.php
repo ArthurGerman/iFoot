@@ -59,8 +59,10 @@
     <div class="bg-[#F0F0F0] w-full h-full min-h-screen overflow-x-hidden flex flex-col">
 
         <!-- Nav -->
-        <div class="flex bg-gradient-to-b from-[#4ad658] to-green-500 h-20">
+        <div class="flex bg-gradient-to-b from-[#4ad658] to-green-500 h-20 items-center">
             <img src="/static/ifoot.png" alt="" class="h-20">
+
+            <a href="./cadastra_quadra.php" class="text-white ml-16 hover:text-gray-200">Cadastrar nova quadra</a>
         </div>
     
     
@@ -131,14 +133,15 @@
                         if ($data_completa === $data_hoje) {
                             $classes[] = 'bg-yellow-300 font-bold';
                         }
-    
-                        if ($dia_semana == 0) {
-                            $classes[] = 'text-red-500 font-semibold';
-                        }
 
                         if ($tem_partida) {
                             $classes[] = 'text-blue-600 font-bold hover:bg-blue-100';
                         }
+    
+                        elseif ($dia_semana == 0) {
+                            $classes[] = 'text-red-500 font-semibold';
+                        }
+
     
                         $class_attr = !empty($classes) ? " class='" . implode(' ', $classes) . "'" : ""; // Linha que faz a concatenação das classes hoje/domingo para imprimir junto com o <td>. Isso serve para deixar os dias de domingo marcados de vermelho
                         echo "<td$class_attr>"; // Impressão dos dias
@@ -148,7 +151,7 @@
     
     
                         if ($tem_partida) {
-                            echo "<a href='./dia_partida.php?data=$data_completa'>$dia</a>";
+                            echo "<a class='flex justify-center items-center w-full h-full' href='./dia_partida.php?data=$data_completa'>$dia</a>";
                         } else {
                             echo $dia;
                         }

@@ -159,14 +159,26 @@
 
         <!-- Nav -->
         <div class="flex bg-gradient-to-b from-[#4ad658] to-green-500 h-20">
-            <div class="w-1/2">
+            <div class="w-1/2 flex flex-row items-center">
                 <img src="/static/ifoot.png" alt="" class="h-20">
+
+                <a href="./lista_quadra.php" class="text-white ml-16 hover:text-gray-200">Criar partida</a>
+                <a href="./lista_partida.php" class="text-white ml-6 hover:text-gray-200">Partidas criadas por mim</a>
+                <a href="./partidas_marcadas.php" class="text-white ml-6 hover:text-gray-200">Partidas marcadas</a>
             </div>
 
             <div class="flex w-1/2 h-20 items-center justify-end">
-                <span id="btnMenu" class="material-symbols-outlined text-white text-[36px] mr-10 cursor-pointer">
-                    menu
-                </span>
+
+                <div class="flex h-12 w-12 rounded-full items-center justify-center overflow-hidden mr-10 border-2">
+                    <?php if (!empty($imagem)): ?>
+                        <img id="btnMenu" src="../../../../../storage/<?= $imagem['PATH'] ?>" alt="" class="w-full h-full object-cover cursor-pointer">
+                    <?php else: ?>
+                        <span id="btnMenu" class="text-white material-symbols-outlined text-[36px] cursor-pointer">
+                            person
+                        </span>
+                    <?php endif?>
+                </div>
+
             </div>
         </div>
 
@@ -422,30 +434,13 @@
         </div>
 
         <!-- Opções -->
-        <nav class="flex flex-col gap-3 px-4 text-sm">
+        <nav class="flex flex-col gap-3 px-4 text-sm mt-6">
+            
+            <p>Olá <?= $_SESSION['name_jog'] ?></p>
+
             <a href="./update_jogador.php" class="flex items-center gap-2 bg-white/20 hover:bg-white/30 p-2 rounded-lg">
                 <span class="material-symbols-outlined">person</span> Perfil
             </a>
-
-            <a href="./lista_quadra.php" class="flex items-center gap-2 bg-white/20 hover:bg-white/30 p-2 rounded-lg">
-                <span class="material-symbols-outlined">add_circle</span> Criar Partida
-            </a>
-
-            <a href="./lista_partida.php" class="flex items-center gap-2 bg-white/20 hover:bg-white/30 p-2 rounded-lg">
-                <span class="material-symbols-outlined">sports_soccer</span> Partidas criadas por mim
-            </a>
-
-            <a href="./partidas_marcadas.php" class="flex items-center gap-2 bg-white/20 hover:bg-white/30 p-2 rounded-lg">
-                <span class="material-symbols-outlined">event</span> Partidas Marcadas
-            </a>
-
-            <a href="" class="flex items-center gap-2 bg-white/20 hover:bg-white/30 p-2 rounded-lg">
-                <span class="material-symbols-outlined">help</span> Como usar
-            </a>
-
-            <!--<a href="" class="flex items-center gap-2 bg-white/20 hover:bg-white/30 p-2 rounded-lg">
-                <span class="material-symbols-outlined">settings</span> Configurações
-            </a>-->
 
             <a href="../../login/logout.php" class="flex items-center gap-2 bg-white/20 hover:bg-white/30 p-2 rounded-lg">
                 <span class="material-symbols-outlined">logout</span> Sair da Conta

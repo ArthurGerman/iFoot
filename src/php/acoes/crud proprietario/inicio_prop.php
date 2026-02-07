@@ -55,14 +55,25 @@
 
         <!-- Nav -->
         <div class="flex bg-gradient-to-b from-[#4ad658] to-green-500 h-20">
-            <div class="w-1/2">
+            <div class="w-1/2 flex flex-row items-center">
                 <img src="/static/ifoot.png" alt="" class="h-20">
+
+                <a href="./cadastra_quadra.php" class="text-white ml-16 hover:text-gray-200">Cadastrar nova quadra</a>
+                <a href="./calendario_partidas.php" class="text-white ml-6 hover:text-gray-200">Ver agenda de partidas</a>
             </div>
 
             <div class="flex w-1/2 h-20 items-center justify-end">
-                <span id="btnMenu" class="material-symbols-outlined text-white text-[36px] mr-10 cursor-pointer">
-                    menu
-                </span>
+
+                <div class="flex h-12 w-12 rounded-full items-center justify-center overflow-hidden mr-10 border-2">
+                    <?php if (!empty($imagem)): ?>
+                        <img id="btnMenu" src="../../../../../storage/<?= $imagem['PATH'] ?>" alt="" class="w-full h-full object-cover cursor-pointer">
+                    <?php else: ?>
+                        <span id="btnMenu" class="text-white material-symbols-outlined text-[36px] cursor-pointer">
+                            person
+                        </span>
+                    <?php endif?>
+                </div>
+
             </div>
         </div>
 
@@ -167,23 +178,12 @@
         </div>
 
         <!-- Opções -->
-        <nav class="flex flex-col gap-3 px-4 text-sm">
+        <nav class="flex flex-col gap-3 px-4 text-sm mt-6">
 
+            <p>Olá <?= $_SESSION['name_prop'] ?></p>
+            
             <a href="./update_prop.php" class="flex items-center gap-2 bg-white/20 hover:bg-white/30 p-2 rounded-lg">
                 <span class="material-symbols-outlined">person</span> Perfil
-            </a>
-
-            <a href="./cadastra_quadra.php" class="flex items-center gap-2 bg-white/20 hover:bg-white/30 p-2 rounded-lg">
-                <span class="material-symbols-outlined">add_circle</span> Cadastrar nova quadra
-            </a>
-
-
-            <a href="./calendario_partidas.php" class="flex items-center gap-2 bg-white/20 hover:bg-white/30 p-2 rounded-lg">
-                <span class="material-symbols-outlined">event</span> Ver agenda de partidas
-            </a>
-
-            <a href="" class="flex items-center gap-2 bg-white/20 hover:bg-white/30 p-2 rounded-lg">
-                <span class="material-symbols-outlined">help</span> Como usar
             </a>
 
             <a href="../../login/logout.php" class="flex items-center gap-2 bg-white/20 hover:bg-white/30 p-2 rounded-lg">

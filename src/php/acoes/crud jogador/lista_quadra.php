@@ -101,8 +101,11 @@
 
 
         <!-- Nav -->
-        <div class="flex bg-gradient-to-b from-[#4ad658] to-green-500 h-20">    
+        <div class="flex bg-gradient-to-b from-[#4ad658] to-green-500 h-20 items-center">
             <img src="/static/ifoot.png" alt="" class="h-20">
+
+            <a href="./lista_partida.php" class="text-white ml-16 hover:text-gray-200">Partidas criadas por mim</a>
+            <a href="./partidas_marcadas.php" class="text-white ml-6 hover:text-gray-200">Partidas marcadas</a>
         </div>
 
     

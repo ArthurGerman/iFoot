@@ -17,10 +17,12 @@
             PARTIDAS.ID_PTD,
             QUADRAS.ID_QUAD,
             QUADRAS.ENDERECO_QUAD,
-            QUADRAS.CIDADE_QUAD
+            QUADRAS.CIDADE_QUAD,
+            IMAGEM.PATH
 
         FROM PARTIDAS
         INNER JOIN QUADRAS ON PARTIDAS.ID_QUAD = QUADRAS.ID_QUAD
+        INNER JOIN IMAGEM ON QUADRAS.ID_IMAGEM = IMAGEM.ID_IMAGEM
         INNER JOIN PROPRIETARIOS ON QUADRAS.ID_PROP = PROPRIETARIOS.ID_PROP
         WHERE PARTIDAS.DATA_PTD = ?
         AND QUADRAS.ID_PROP = ?
@@ -46,8 +48,11 @@
     <div class="bg-[#F0F0F0] w-full h-full min-h-screen overflow-x-hidden flex flex-col">
         
         <!-- Nav -->
-        <div class="flex bg-gradient-to-b from-[#4ad658] to-green-500 h-20">
+        <div class="flex bg-gradient-to-b from-[#4ad658] to-green-500 h-20 items-center">
             <img src="/static/ifoot.png" alt="" class="h-20">
+
+            <a href="./cadastra_quadra.php" class="text-white ml-16 hover:text-gray-200">Cadastrar nova quadra</a>
+            <a href="./calendario_partidas.php" class="text-white ml-6 hover:text-gray-200">Ver agenda de partidas</a>
         </div>
     
     
@@ -90,7 +95,7 @@
 
                     <!-- Imagem / placeholder -->
                     <div class="w-[400px] bg-gray-300 flex items-center justify-center">
-                        <span class="text-gray-500">Imagem da quadra</span>
+                        <img src="../../../../../storage/<?= $partida['PATH'] ?>" alt="" class="w-full h-full object-cover">
                     </div>
 
                     <!-- Conteúdo -->
