@@ -93,12 +93,12 @@
 
     <div class="bg-gradient-to-b from-[#2ba438] to-[#14551a] w-screen h-screen flex">
 
-    <a href="../../../index.php">
-        <img src="/static/ifoot.png" alt="" class="h-20">
-    </a>
 
-    <!-- DIV COM A FOTO DE PERFIL -->
-        <div class="w-1/2 flex flex-col items-center justify-center">
+        <!-- DIV COM A FOTO DE PERFIL -->
+        <div class="w-1/2 flex flex-col items-center justify-center relative">
+
+            <img src="/static/ifoot.png" alt="" class="h-36 absolute top-10">
+
             <div class="w-72 h-72 rounded-full bg-gray-300 flex items-center justify-center overflow-hidden relative">
                 
                 <span id="icone-person" class="material-symbols-outlined text-[80px] text-white absolute">
@@ -124,9 +124,9 @@
 
         <div class="w-1/2 flex items-center justify-center">
 
-    <!-- Seção do Formulário -->
+            <!-- Seção do Formulário -->
 
-            <div class="bg-gradient-to-b from-[#4ad658] to-green-500 h-[700px] ml-20 p-10 rounded-2xl">
+            <div class="bg-gradient-to-b from-[#4ad658] to-green-500 h-[700px] mr-54 p-10 rounded-2xl">
     
                 <h1 class="text-[28px]">
                     Faça seu cadastro de jogador aqui
