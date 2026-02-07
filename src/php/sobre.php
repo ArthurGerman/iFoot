@@ -12,24 +12,26 @@
 
     <div class=" w-screen h-screen flex flex-col">
 
-        <div class=" bg-gradient-to-b from-[#4ad658] to-green-500 flex flex-row items-center h-20 pl-24">
+        <!-- Nav -->
+        <div class="flex bg-gradient-to-b from-[#4ad658] to-green-500 h-20">
 
-            <img src="/static/ifoot.png" alt="" id="ifoot-logo" class=" h-28">
-            
-            <a href="" id="funcionamento" class=" no-underline text-white p-24 -ml-10">Como funciona</a>
+            <div class="w-1/2 flex flex-row items-center">
 
-            <div class=" flex gap-7 pr-12 ml-auto">
-
-                <a href="../php/login/login_jog.php" 
-                class="flex p-5 border-2 border-solid border-white rounded-2xl h-10 items-center hover:bg-white hover:text-[#4ad658]"
-                >Entrar como jogador</a>
-
-                <a href="../php/login/login_prop.php" 
-                class="flex p-5 border-2 border-solid border-white rounded-2xl h-10 items-center hover:bg-white hover:text-[#4ad658]"
-                >Entrar como proprietário</a>
+                <img src="/static/ifoot.png" alt="" class="h-20 ml-20">
 
             </div>
-            
+
+            <div class="flex w-1/2 h-20 pr-20 gap-7 items-center justify-end">
+
+                <a href="/src/php/login/login_jog.php" 
+                class="flex p-5 border-2 border-solid border-white rounded-2xl h-10 items-center hover:bg-white hover:text-[#4ad658]"
+                >Entrar como jogador</a>
+                
+                <a href="/src/php/login/login_prop.php" 
+                class="flex p-5 border-2 border-solid border-white rounded-2xl h-10 items-center hover:bg-white hover:text-[#4ad658]"
+                >Entrar como proprietário</a>
+                
+            </div>
         </div>
 
         <!-- bg-[url(/static/img_background.jpeg)] esse é outro metodo de colocar uma imagem com tailwind ou criando pelo config mesmo como esta abaixo bg-hero -->
@@ -52,9 +54,9 @@
                     </div>
                         
                     <p class=" text-center">Liguagens e ferramentas utilizadas: MySQL, PHP, JavaScript, Css, 
-                        HTML, Copilot (integrado ao Visual Code), ChatGPT.</p>
+                        HTML, Copilot (integrado ao Visual Code), ChatGPT.
+                    </p>
                         
-                    <div><h2>imagens</h2></div>
                 </div>
     
                 <a href="/index.php" class=" w-1/6 h-1/12 flex flex-col p-1 border-2 border-solid border-white rounded-2xl  items-center bg-white text-[#4ad658]">Voltar</a>
