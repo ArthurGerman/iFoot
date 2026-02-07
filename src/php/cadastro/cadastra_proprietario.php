@@ -77,6 +77,32 @@
 <body class="font-outfit font-medium not-italic text-white">
 
     <div class="bg-gradient-to-b from-[#2ba438] to-[#14551a] w-screen h-screen flex">
+    
+        <a href="../../../index.php">
+            <img src="/static/ifoot.png" alt="" class="h-20">
+        </a>
+
+        <!-- DIV COM A FOTO DE PERFIL -->
+        <div class="w-1/2 flex flex-col items-center justify-center">
+            <div class="w-72 h-72 rounded-full bg-gray-300 flex items-center justify-center overflow-hidden relative">
+                <span id="icone-person" class="material-symbols-outlined text-[80px] text-white absolute">
+                    person
+                </span>
+
+                <img id="preview-imagem" class="hidden w-full h-full object-cover">
+            </div>
+            
+            <label for="imagem" class="mt-4 bg-white hover:bg-gray-300 text-green-600 px-5 py-2 rounded-full cursor-pointer transition font-semibold">
+                Adicionar imagem
+            </label>
+            <input 
+                type="file" 
+                id="imagem" 
+                form="form_cadastro_prop" 
+                name="imagem" accept="image/*" 
+                class="hidden"
+            >
+        </div>
 
         <!-- Seção do Formulário -->
         <div class="w-1/2 flex items-center justify-center">
@@ -198,32 +224,6 @@
                     <p class="text-red-600 flex p-2 mb-1 justify-center mt-2"><?= $mensagem_erro ?></p>
                 <?php endif;?>
             </div>
-        </div>
-
-
-
-        <!-- DIV COM A FOTO DE PERFIL -->
-        <div class="w-1/2 flex flex-col items-center justify-center">
-            <div class="w-72 h-72 rounded-full bg-gray-300 flex items-center justify-center overflow-hidden relative">
-                <span id="icone-person" class="material-symbols-outlined text-[80px] text-white absolute">
-                    person
-                </span>
-
-                <img id="preview-imagem" class="hidden w-full h-full object-cover">
-            </div>
-            
-
-
-            <label for="imagem" class="mt-4 bg-white hover:bg-gray-300 text-green-600 px-5 py-2 rounded-full cursor-pointer transition font-semibold">
-                Adicionar imagem
-            </label>
-            <input 
-                type="file" 
-                id="imagem" 
-                form="form_cadastro_prop" 
-                name="imagem" accept="image/*" 
-                class="hidden"
-            >
         </div>
 
     </div>
