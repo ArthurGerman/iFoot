@@ -107,7 +107,7 @@
                 </form>
             
                 <?php if ($erro): ?>
-                    <p class="text-red-600 flex p-2 mt-2 justify-center"><?php echo $erro; ?></p>
+                    <p id="msg" class="text-red-600 flex p-2 mt-2 justify-center"><?php echo $erro; ?></p>
                 <?php endif; ?>
 
             </div>
@@ -123,5 +123,6 @@
 
 
     <script src="/src/js/tratamento-erros-login_jog.js"></script>
+    <script src="/src/js/some_mensagem.js"></script>
 </body>
 </html>

@@ -221,7 +221,7 @@
                 </form>
     
                 <?php if (!empty($mensagem_erro)) :?>
-                    <p class="text-red-600 flex p-2 mb-1 justify-center mt-2"><?= $mensagem_erro ?></p>
+                    <p id="msg" class="text-red-600 flex p-2 mb-1 justify-center mt-2"><?= $mensagem_erro ?></p>
                 <?php endif;?>
             </div>
         </div>
@@ -231,5 +231,6 @@
 
     <script src="/src/js/tratamento-erros_prop.js"></script>
     <script src="/src/js/troca_icone_imagem.js"></script>
+    <script src="/src/js/some_mensagem.js"></script>
 </body>
 </html>
