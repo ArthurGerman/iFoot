@@ -27,7 +27,13 @@
 
 
         if ($data_original_partida < $data_hora_agora) { // Se a data que a partida foi cadastrada já passou, não tem como editar mais os dados
-            $mensagem = "❌ Esta partida já ocorreu e não pode mais ser editada.";
+            $mensagem = "❌ Esta partida já ocorreu e não pode <br> mais ser editada.";
+
+            $_SESSION['mensagem_update_partida'] = $mensagem;
+            $_SESSION['partida_erro'] = $ID_PTD;
+
+            header("Location: ./lista_partida.php");
+            exit;
         }
 
 
@@ -39,11 +45,11 @@
     
     
                 if ($data_hora_partida < $data_hora_agora ) { // Testa se o usuário está tentando atualizar em uma data/horário que já passou
-                    $mensagem = "❌ Não é permitido atualizar partidas em datas ou horários que já passaram.<br>";
+                    $mensagem = "❌ Não é permitido atualizar partidas <br> em datas ou horários que já passaram.";
                 }
     
-                if ($HORARIO_FIM_PTD <= $HORARIO_INICIO_PTD) { // Testa se o usuário está colocando o horário de fim antes do horário de início da partida
-                    $mensagem .= "❌ O horário final deve ser maior que o horário inicial.";
+                elseif ($HORARIO_FIM_PTD <= $HORARIO_INICIO_PTD) { // Testa se o usuário está colocando o horário de fim antes do horário de início da partida
+                    $mensagem = "❌ O horário final deve ser maior que <br> o horário inicial.";
                 }
     
     
@@ -126,12 +132,24 @@
         
                 } else{
                     if($conflict && empty($mensagem)){
-                        $mensagem = "❌ Horário indisponível. Já existe uma partida nesse período.";
+                        $mensagem = "❌ Horário indisponível. Já existe uma <br> partida nesse período.";
                     }
+
+                    $_SESSION['mensagem_update_partida'] = $mensagem;
+                    $_SESSION['partida_erro'] = $ID_PTD;
+
+                    header("Location: ./lista_partida.php");
+                    exit;
                 }
     
             } else{
                 $mensagem = "⚠️ Nenhuma informação foi alterada.";
+
+                $_SESSION['mensagem_update_partida'] = $mensagem;
+                $_SESSION['partida_erro'] = $ID_PTD;
+
+                header("Location: ./lista_partida.php");
+                exit;
             }
         }
 

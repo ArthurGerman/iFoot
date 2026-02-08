@@ -20,11 +20,11 @@
         $data_hora_partida = new DateTime($DATA_PTD . ' ' . $HORARIO_INICIO_PTD);
 
         if ($data_hora_partida < $data_hora_agora ) { // Testa se o usuário está tentando cadastrar em uma data/horário que já passou
-            $mensagem = "❌ Não é permitido cadastrar partidas em datas ou horários que já passaram.</br>";
+            $mensagem = "❌ Não é permitido cadastrar <br> partidas em datas que já passaram.";
         }
 
-        if ($HORARIO_FIM_PTD <= $HORARIO_INICIO_PTD) { // Testa se o usuário está colocando o horário de fim antes do horário de início da partida
-            $mensagem .= "❌ O horário final deve ser maior que o horário inicial.";
+        elseif ($HORARIO_FIM_PTD <= $HORARIO_INICIO_PTD) { // Testa se o usuário está colocando o horário de fim antes do horário de início da partida
+            $mensagem = "❌ O horário final deve ser maior que <br> o horário inicial.";
         }
 
         $stmt = $pdo->prepare("SELECT HORARIO_INICIO_PTD, HORARIO_FIM_PTD FROM PARTIDAS WHERE ID_QUAD = ? AND DATA_PTD = ?");
@@ -90,11 +90,18 @@
 
             //Onde vai mostrar as informções da partida
             header('Location: ./lista_partida.php');
+            exit;
             
         } else {
             if($conflict && empty($mensagem)){
-                $mensagem = "❌ Horário indisponível. Já existe uma partida nesse período.";
+                $mensagem = "❌ Horário indisponível. <br> Já existe uma partida nesse período.";
             }
+
+            $_SESSION['mensagem_cad_partida'] = $mensagem;
+            $_SESSION['quadra_erro'] = $ID_QUAD;
+
+            header("Location: ./lista_quadra.php");
+            exit;
         };
 
     }

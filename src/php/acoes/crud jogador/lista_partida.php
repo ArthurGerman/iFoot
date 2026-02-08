@@ -3,6 +3,10 @@
 require_once '../../config.php';
 require_once '../../authenticate_jog.php';
 
+$mensagem = $_SESSION['mensagem_update_partida'] ?? null;
+$partida_erro = $_SESSION['partida_erro'] ?? null;
+unset($_SESSION['mensagem_update_partida'], $_SESSION['partida_erro']);
+
 $ID_JOG = $_SESSION['id_jog'];
 
 // Consulta que junta a tabela intermediária com a tabela de partidas, quadras e modalidades
@@ -153,24 +157,24 @@ $partidas = $query->fetchAll(PDO::FETCH_ASSOC);
                         </div>
 
                         <!-- modal para edição de partida -->
-                        <dialog id='myReservEdit-<?= $partida['ID_PTD'] ?>' class=" font-outfit font-medium not-italic w-1/4 text-white rounded-2xl">
+                        <dialog id='myReservEdit-<?= $partida['ID_PTD'] ?>' class=" font-outfit font-medium not-italic text-white rounded-2xl w-[370px]">
                             <div class="bg-gradient-to-b from-[#4ad658] to-green-500 h-fit p-10 rounded-2xl">
                                 <h1 class="text-[28px]">
                                     Ediçao da partida
                                 </h1>
 
 
-                                <form action="./edita_partida.php?id=<?= $partida['ID_PTD'] ?>" method="post">
+                                <form action="./edita_partida.php?id=<?= $partida['ID_PTD'] ?>" method="post" class="form_partida">
 
                                     <div class="flex flex-col mt-2">
-                                        <label for="DATA_PTD">Data: </label>
-                                        <input type="date" name="DATA_PTD" id="DATA_PTD" value="<?= $partida['DATA_PTD'] ?>" class="text-[#6b6b6b] h-9 px-3 rounded-md border border-gray-300 outline-none mb-3">
+                                        <label>Data: </label>
+                                        <input type="date" name="DATA_PTD" value="<?= $partida['DATA_PTD'] ?>" class="text-[#6b6b6b] h-9 px-3 rounded-md border border-gray-300 outline-none mb-3" required>
 
-                                        <label for="HORARIO_INICIO_PTD">Início da Partida: </label>
-                                        <input type="time" name="HORARIO_INICIO_PTD" id="HORARIO_INICIO_PTD" value="<?= $partida['HORARIO_INICIO_PTD'] ?>" class="text-[#6b6b6b] h-9 px-3 rounded-md border border-gray-300 outline-none mb-3">
+                                        <label>Início da Partida: </label>
+                                        <input type="time" name="HORARIO_INICIO_PTD" value="<?= $partida['HORARIO_INICIO_PTD'] ?>" class="text-[#6b6b6b] h-9 px-3 rounded-md border border-gray-300 outline-none mb-3" required>
 
-                                        <label for="HORARIO_FIM_PTD">Fim da Partida: </label>
-                                        <input type="time" name="HORARIO_FIM_PTD" id="HORARIO_FIM_PTD" value="<?= $partida['HORARIO_FIM_PTD'] ?>" class="text-[#6b6b6b] h-9 px-3 rounded-md border border-gray-300 outline-none mb-3">
+                                        <label>Fim da Partida: </label>
+                                        <input type="time" name="HORARIO_FIM_PTD" value="<?= $partida['HORARIO_FIM_PTD'] ?>" class="text-[#6b6b6b] h-9 px-3 rounded-md border border-gray-300 outline-none mb-3" required>
                                     </div>
 
                                     <div class="flex flex-row gap-4 mt-4">
@@ -179,11 +183,10 @@ $partidas = $query->fetchAll(PDO::FETCH_ASSOC);
                                     </div>
                                 </form>
 
-                                <div class="h-12 flex items-center justify-center mt-4">
-                                    <?php if (!empty($mensagem)) : ?>
-                                        <p id="msg" class="text-red-400"><?= $mensagem ?></p>
-                                    <?php endif ?>
-                                </div>
+                                <?php if (!empty($mensagem) && $partida_erro == $partida['ID_PTD']) : ?>
+                                    <p id="msg" class="text-red-600 mt-4"><?= $mensagem ?></p>
+                                <?php endif ?>
+                                
                             </div>
 
                         </dialog>
@@ -213,8 +216,16 @@ $partidas = $query->fetchAll(PDO::FETCH_ASSOC);
         <?php endif; ?>
     </div>
 
-
-
+    
+    <?php if (!empty($partida_erro)): ?>
+        <script>
+            window.addEventListener("load", () => {
+                setTimeout(() => {
+                    showModal("myReservEdit-<?= $partida_erro ?>");
+                }, 50);
+            });
+        </script>
+    <?php endif; ?>
 </body>
 
 </html>

@@ -3,6 +3,10 @@
 require_once '../../config.php';
 require_once '../../authenticate_jog.php';
 
+$mensagem = $_SESSION['mensagem_cad_partida'] ?? null;
+$quadra_erro = $_SESSION['quadra_erro'] ?? null;
+unset($_SESSION['mensagem_cad_partida'], $_SESSION['quadra_erro']);
+
 $ID_JOG = $_SESSION['id_jog'];
 
 
@@ -284,17 +288,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             </h1>
 
 
-                            <form action="./cadastro_partida.php?id=<?= $quadra['ID_QUAD'] ?>" method="post">
+                            <form action="./cadastro_partida.php?id=<?= $quadra['ID_QUAD'] ?>" method="post" class="form_partida">
 
                                 <div class="flex flex-col mt-2">
-                                    <label for="DATA_PTD">Data: </label>
-                                    <input type="date" name="DATA_PTD" id="DATA_PTD" class="text-[#6b6b6b] h-9 px-3 rounded-md border border-gray-300 outline-none mb-3">
+                                    <label>Data: </label>
+                                    <input type="date" name="DATA_PTD" class="text-[#6b6b6b] h-9 px-3 rounded-md border border-gray-300 outline-none mb-3" required>
 
-                                    <label for="HORARIO_INICIO_PTD">Início da Partida: </label>
-                                    <input type="time" name="HORARIO_INICIO_PTD" id="HORARIO_INICIO_PTD" class="text-[#6b6b6b] h-9 px-3 rounded-md border border-gray-300 outline-none mb-3">
+                                    <label>Início da Partida: </label>
+                                    <input type="time" name="HORARIO_INICIO_PTD" class="text-[#6b6b6b] h-9 px-3 rounded-md border border-gray-300 outline-none mb-3" required>
 
-                                    <label for="HORARIO_FIM_PTD">Fim da Partida: </label>
-                                    <input type="time" name="HORARIO_FIM_PTD" id="HORARIO_FIM_PTD" class="text-[#6b6b6b] h-9 px-3 rounded-md border border-gray-300 outline-none mb-3">
+                                    <label>Fim da Partida: </label>
+                                    <input type="time" name="HORARIO_FIM_PTD" class="text-[#6b6b6b] h-9 px-3 rounded-md border border-gray-300 outline-none mb-3" required>
                                 </div>
 
 
@@ -304,11 +308,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 </div>
                             </form>
 
-                            <div class="h-12 flex items-center justify-center mt-4">
-                                <?php if (!empty($mensagem)) : ?>
-                                    <p id="msg" class="text-red-400"><?= $mensagem ?></p>
-                                <?php endif ?>
-                            </div>
+                            <?php if (!empty($mensagem) && $quadra_erro == $quadra['ID_QUAD']) : ?>
+                                <p id="msg" class="text-red-600 mt-4"><?= $mensagem ?></p>
+                            <?php endif ?>
+                            
                         </div>
 
                     </dialog>
@@ -326,6 +329,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     <script src="/src/js/formata_preco_quadra.js"></script>
     <script src="/src/js/filtro.js"></script>
+
+
+
+    <?php if (!empty($quadra_erro)) : ?>
+        <script>
+            window.addEventListener("load", () => {
+                const modal = document.getElementById("myReserv-<?= $quadra_erro ?>");
+                if(modal) modal.showModal();
+            });
+        </script>
+    <?php endif; ?>
 </body>
 
 </html>
