@@ -23,18 +23,18 @@ session_start();
 
                 <img src="/static/ifoot.png" alt="" class="h-20 ml-20">
 
-                <a href="./src/php/sobre.php" class="ml-10" id="sobre">Sobre</a>
+                <a href="./src/php/sobre.php" class="ml-10 hover:text-gray-200" id="sobre">Sobre</a>
             </div>
 
             <div class="flex w-1/2 h-20 pr-20 gap-7 items-center justify-end">
 
                 <a href="./src/php/login/login_jog.php" 
-                class="flex p-5 border-2 border-solid border-white rounded-2xl h-10 items-center hover:bg-white hover:text-[#4ad658]"
-                >Entrar como jogador</a>
+                class="flex p-5 border-2 border-solid border-white rounded-2xl h-10 items-center hover:bg-white hover:text-green-600
+                ">Entrar como jogador</a>
                 
                 <a href="./src/php/login/login_prop.php" 
-                class="flex p-5 border-2 border-solid border-white rounded-2xl h-10 items-center hover:bg-white hover:text-[#4ad658]"
-                >Entrar como proprietário</a>
+                class="flex p-5 border-2 border-solid border-white rounded-2xl h-10 items-center hover:bg-white hover:text-green-600
+                ">Entrar como proprietário</a>
                 
             </div>
         </div>
@@ -70,7 +70,7 @@ session_start();
                         Registre sua conta de <br> jogador
                     </h2>
     
-                    <a href="./src/php/cadastro/cadastra_jogador.php" class="flex justify-center items-center h-[50px] w-[300px] text-[#4ad658] bg-white hover:bg-[#4ad658] hover:text-white rounded-2xl text-[16px] mt-12">Registrar-se</a>
+                    <a href="./src/php/cadastro/cadastra_jogador.php" class="flex justify-center items-center h-[50px] w-[300px] text-green-600 bg-white hover:bg-[#4ad658] hover:text-white rounded-2xl text-[16px] mt-12">Registrar-se</a>
     
                 </div>
             
@@ -80,7 +80,7 @@ session_start();
                         Registre sua conta de <br> proprietário
                     </h2>
     
-                    <a href="./src/php/cadastro/cadastra_proprietario.php" class="flex justify-center items-center h-[50px] w-[300px] text-[#4ad658] bg-white hover:bg-[#4ad658] hover:text-white rounded-2xl text-[16px] mt-12">Registrar-se</a>
+                    <a href="./src/php/cadastro/cadastra_proprietario.php" class="flex justify-center items-center h-[50px] w-[300px] text-green-600 bg-white hover:bg-[#4ad658] hover:text-white rounded-2xl text-[16px] mt-12">Registrar-se</a>
     
                 </div>
             </div>

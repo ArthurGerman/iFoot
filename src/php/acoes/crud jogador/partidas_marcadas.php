@@ -141,13 +141,9 @@
 
                             <div class="flex flex-row gap-2">
                                 <?php if ($partida['ID_CRIADOR'] == $ID_JOG): ?>
-
-                                    <a href="./edita_partida.php?id=<?= $partida['ID_PTD'] ?>" class="bg-white text-green-600 text-center py-2 rounded-md font-semibold hover:bg-gray-200 transition mt-2 w-1/2">
-                                        Editar
-                                    </a>
-
-                                    <a href="./excluir_partida.php?id=<?= $partida['ID_PTD'] ?>" class="bg-white text-green-600 text-center py-2 rounded-md font-semibold hover:bg-gray-200 transition mt-2 w-1/2">
-                                        Excluir
+                                    
+                                    <a href="./lista_partida.php" class="bg-white text-green-600 text-center py-2 rounded-md font-semibold hover:bg-gray-200 transition mt-2 w-full">
+                                        Ver minhas partidas
                                     </a>
                                 <?php else: ?>
 
