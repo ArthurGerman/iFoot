@@ -1,11 +1,20 @@
-<?php 
+<?php
 
-    require_once "../../config.php";
-    require_once '../../authenticate_prop.php';
+require_once "../../config.php";
+require_once '../../authenticate_prop.php';
 
-    $ID_PROP = $_SESSION['id_prop'];
+$ID_PROP = $_SESSION['id_prop'];
 
-    $query = $pdo->prepare("
+if (isset($_SESSION['show_modal'])) {
+    echo '<script type="text/javascript">
+            document.addEventListener("DOMContentLoaded", function() {
+                showModal("myReservErr");
+            });
+          </script>';
+    unset($_SESSION['show_modal']);
+};
+
+$query = $pdo->prepare("
         SELECT QUADRAS.ID_QUAD, 
             QUADRAS.PRECO_HORA_QUAD, 
             QUADRAS.ENDERECO_QUAD, 
@@ -22,24 +31,23 @@
         WHERE QUADRAS.ID_PROP = ?
         ORDER BY QUADRAS.ID_QUAD ASC
     ");
-    $query->execute([$ID_PROP]);
-    $quadras = $query->fetchAll(PDO::FETCH_ASSOC);
+$query->execute([$ID_PROP]);
+$quadras = $query->fetchAll(PDO::FETCH_ASSOC);
 
-
-    $query2 = $pdo->prepare("
+$query2 = $pdo->prepare("
         SELECT IMAGEM.PATH
         FROM PROPRIETARIOS
         INNER JOIN IMAGEM ON PROPRIETARIOS.ID_IMAGEM = IMAGEM.ID_IMAGEM
         WHERE ID_PROP = ?
     ");
-    $query2->execute([$ID_PROP]);
-    $imagem = $query2->fetch(PDO::FETCH_ASSOC);
-
+$query2->execute([$ID_PROP]);
+$imagem = $query2->fetch(PDO::FETCH_ASSOC);
 
 ?>
 
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -48,6 +56,7 @@
     <link rel="stylesheet" href="/src/styles/global.css">
     <title>Início</title>
 </head>
+
 <body class=" font-outfit font-medium not-italic text-[#6b6b6b]">
 
     <div class="bg-[#F0F0F0] w-full h-full min-h-screen overflow-x-hidden flex flex-col">
@@ -71,7 +80,7 @@
                         <span id="btnMenu" class="text-white material-symbols-outlined text-[36px] cursor-pointer">
                             person
                         </span>
-                    <?php endif?>
+                    <?php endif ?>
                 </div>
 
             </div>
@@ -90,7 +99,7 @@
             </h1>
         </div>
 
-        
+
         <?php if (empty($quadras)): ?>
             <p class="ml-12 mt-2">Não existem quadras cadastradas.</p>
         <?php else: ?>
@@ -98,17 +107,17 @@
             <!-- CARDS QUE MOSTRAM AS PARTIDAS DISPONÍVEIS-->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8 px-12 pb-20">
                 <?php foreach ($quadras as $quadra): ?>
-                    
+
                     <div class="flex bg-white rounded-xl shadow-md overflow-hidden h-60 w-[700px]">
 
                         <!-- Imagem / placeholder -->
                         <div class="w-[400px] bg-gray-300 flex items-center justify-center">
-                            <img src="../../../../../storage/<?= $quadra['PATH'] ?>" alt="" class="w-full h-full object-cover">
+                            <img src="./../../../../storage/<?= $quadra['PATH'] ?>" alt="" class="w-full h-full object-cover">
                         </div>
 
                         <!-- Conteúdo -->
                         <div class="w-[300px] bg-gradient-to-b from-[#4ad658] to-green-500 p-4 text-white flex flex-col justify-between">
-                            
+
                             <div class="text-sm space-y-1 gap-10">
                                 <p><strong>Estado:</strong> <?= $quadra['NOME_UF'] ?></p>
                                 <p><strong>Cidade:</strong> <?= $quadra['CIDADE_QUAD'] ?></p>
@@ -123,9 +132,9 @@
                                     Editar
                                 </a>
 
-                                <a href="./exclui_quadra.php?id=<?= $quadra['ID_QUAD'] ?>" class="bg-white text-green-600 text-center py-2 rounded-md font-semibold hover:bg-gray-200 transition mt-2 w-1/3">
+                                <button onclick="showModal('myReservDel-<?= $quadra['ID_QUAD'] ?>')" class="bg-white text-green-600 text-center py-2 rounded-md font-semibold hover:bg-gray-200 transition mt-2 w-1/3">
                                     Excluir
-                                </a>
+                                </button>
 
                                 <a href="./historico_quadra.php?id=<?= $quadra['ID_QUAD'] ?>" class="bg-white text-green-600 text-center py-2 rounded-md font-semibold hover:bg-gray-200 transition mt-2 w-1/3">
                                     Histórico
@@ -134,23 +143,28 @@
 
 
                         </div>
+
+                        <dialog id='myReservDel-<?= $quadra['ID_QUAD'] ?>' class=" font-outfit font-medium not-italic w-1/4 text-white rounded-2xl">
+                            <div class="bg-gradient-to-b from-[#4ad658] to-green-500 h-fit p-10 rounded-2xl">
+                                <h1 class="text-2xl mb-12">
+                                    Realmente Deseja Excluir esta Quadra?
+                                </h1>
+
+                                <div class="flex flex-row gap-4 mt-4">
+                                    <button onclick="closeModal('myReservDel-<?= $quadra['ID_QUAD'] ?>')" type="button" class="flex w-3/5 h-14 bg-white text-xl text-green-600 hover:bg-gray-200 justify-center items-center rounded-xl">Cancelar</button>
+                                    <a href="./exclui_quadra.php?id=<?= $quadra['ID_QUAD'] ?>" class="flex w-3/5 h-14 bg-white text-xl text-green-600 hover:bg-gray-200 justify-center items-center rounded-xl"><button type="submit">Confirmar</button></a>
+                                </div>
+                            </div>
+                        </dialog>
                     </div>
 
-                <?php endforeach?>
+                <?php endforeach ?>
             </div>
-        
-        <?php endif?>
+
+        <?php endif ?>
+
+        <script src="/src/js/reserva_modal.js"></script>
     </div>
-    
-
-
-
-
-
-
-    
-
-
 
     <!-- Menu lateral flutuante-->
 
@@ -173,7 +187,7 @@
                     <span class="material-symbols-outlined text-[64px]">
                         person
                     </span>
-                <?php endif?>
+                <?php endif ?>
             </div>
         </div>
 
@@ -181,7 +195,7 @@
         <nav class="flex flex-col gap-3 px-4 text-sm mt-6">
 
             <p>Olá <?= $_SESSION['name_prop'] ?></p>
-            
+
             <a href="./update_prop.php" class="flex items-center gap-2 bg-white/20 hover:bg-white/30 p-2 rounded-lg">
                 <span class="material-symbols-outlined">person</span> Perfil
             </a>
@@ -192,8 +206,20 @@
         </nav>
     </aside>
 
+    <dialog id='myReservErr' class=" font-outfit font-medium not-italic w-1/4 text-white rounded-2xl">
+        <div class="bg-gradient-to-b from-[#4ad658] to-green-500 h-60 p-6 rounded-2xl">
+            <div class="flex w-full h-fit justify-end border-collapse">
+                <button onclick="closeModal('myReservErr')" class="text-2xl text-black ">&#10006;</button>
+            </div>
+
+            <h1 class="text-2xl mt-10 text-justify">
+                Não é possível excluir esta quadra, pois existem partidas cadastradas nela.
+            </h1>
+        </div>
+    </dialog>
 
     <script src="/src/js/menu_lateral.js"></script>
 
 </body>
+
 </html>

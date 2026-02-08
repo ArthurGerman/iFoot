@@ -1,12 +1,12 @@
 <?php
 
-    require_once '../../config.php';
-    require_once '../../authenticate_jog.php';
+require_once '../../config.php';
+require_once '../../authenticate_jog.php';
 
-    $ID_JOG = $_SESSION['id_jog'];
+$ID_JOG = $_SESSION['id_jog'];
 
 
-    $query = $pdo->prepare("
+$query = $pdo->prepare("
         SELECT QUADRAS.ID_QUAD,
             QUADRAS.ENDERECO_QUAD,
             QUADRAS.CIDADE_QUAD,
@@ -23,15 +23,15 @@
     
     ");
 
-    $query->execute();
-    $quadras = $query->fetchAll(PDO::FETCH_ASSOC);
+$query->execute();
+$quadras = $query->fetchAll(PDO::FETCH_ASSOC);
 
 
 
-    // --------------- FILTRO ---------------
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+// --------------- FILTRO ---------------
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-        $sql = "
+    $sql = "
             SELECT QUADRAS.ID_QUAD,
                 QUADRAS.ENDERECO_QUAD,
                 QUADRAS.CIDADE_QUAD,
@@ -47,39 +47,39 @@
             WHERE QUADRAS.STATUS_QUAD = 1
         ";
 
-        $parametros = []; // Array que serve para juntar todos os dados que o usuário colocar no filtro. Pois o usuário pode não preencher completamente o filtro. Caso o usuário não preencha nenhum campo do filtro, o sistema retorna todas as quadras ativas.
+    $parametros = []; // Array que serve para juntar todos os dados que o usuário colocar no filtro. Pois o usuário pode não preencher completamente o filtro. Caso o usuário não preencha nenhum campo do filtro, o sistema retorna todas as quadras ativas.
 
-        if (!empty($_POST['UF'])) {
-            $sql .= " AND UF.SIGLA_UF = ?";
-            $parametros[] = $_POST['UF'];
-        }
-
-        if (!empty($_POST['CIDADE_QUAD'])) {
-            $sql .= " AND QUADRAS.CIDADE_QUAD LIKE ?";
-            $parametros[] = '%' . $_POST['CIDADE_QUAD'] . '%';
-        }
-
-        if (!empty($_POST['NOME_MODAL'])) {
-            $sql .= " AND MODALIDADES.NOME_MODAL = ?";
-            $parametros[] = $_POST['NOME_MODAL'];
-        }
-
-        if (!empty($_POST['PRECO_HORA_QUAD_MIN'])) {
-            $PRECO_HORA_QUAD_MIN = str_replace(',', '.', $_POST['PRECO_HORA_QUAD_MIN']);
-            $sql .= " AND QUADRAS.PRECO_HORA_QUAD >= ?";
-            $parametros[] = (float) $PRECO_HORA_QUAD_MIN;
-        }
-
-        if (!empty($_POST['PRECO_HORA_QUAD_MAX']) && $_POST['PRECO_HORA_QUAD_MAX'] !== '0,00') {
-            $PRECO_HORA_QUAD_MAX = str_replace(',', '.', $_POST['PRECO_HORA_QUAD_MAX']);
-            $sql .= " AND QUADRAS.PRECO_HORA_QUAD <= ?";
-            $parametros[] = (float) $PRECO_HORA_QUAD_MAX;
-        }
-
-        $query = $pdo->prepare($sql);
-        $query->execute($parametros);
-        $quadras = $query->fetchAll(PDO::FETCH_ASSOC);
+    if (!empty($_POST['UF'])) {
+        $sql .= " AND UF.SIGLA_UF = ?";
+        $parametros[] = $_POST['UF'];
     }
+
+    if (!empty($_POST['CIDADE_QUAD'])) {
+        $sql .= " AND QUADRAS.CIDADE_QUAD LIKE ?";
+        $parametros[] = '%' . $_POST['CIDADE_QUAD'] . '%';
+    }
+
+    if (!empty($_POST['NOME_MODAL'])) {
+        $sql .= " AND MODALIDADES.NOME_MODAL = ?";
+        $parametros[] = $_POST['NOME_MODAL'];
+    }
+
+    if (!empty($_POST['PRECO_HORA_QUAD_MIN'])) {
+        $PRECO_HORA_QUAD_MIN = str_replace(',', '.', $_POST['PRECO_HORA_QUAD_MIN']);
+        $sql .= " AND QUADRAS.PRECO_HORA_QUAD >= ?";
+        $parametros[] = (float) $PRECO_HORA_QUAD_MIN;
+    }
+
+    if (!empty($_POST['PRECO_HORA_QUAD_MAX']) && $_POST['PRECO_HORA_QUAD_MAX'] !== '0,00') {
+        $PRECO_HORA_QUAD_MAX = str_replace(',', '.', $_POST['PRECO_HORA_QUAD_MAX']);
+        $sql .= " AND QUADRAS.PRECO_HORA_QUAD <= ?";
+        $parametros[] = (float) $PRECO_HORA_QUAD_MAX;
+    }
+
+    $query = $pdo->prepare($sql);
+    $query->execute($parametros);
+    $quadras = $query->fetchAll(PDO::FETCH_ASSOC);
+}
 
 ?>
 
@@ -108,17 +108,17 @@
             <a href="./partidas_marcadas.php" class="text-white ml-6 hover:text-gray-200">Partidas marcadas</a>
         </div>
 
-    
-        
+
+
 
         <span class="material-symbols-outlined w-10 h-10 flex items-center justify-center rounded-xl bg-gray-300 hover:bg-gray-400 transition mt-4 ml-4">
             <a href="./inicio_jog.php" class="w-10 h-10 flex items-center justify-center rounded-xl">
                 reply
             </a>
         </span>
-    
-        
-    
+
+
+
         <div class="flex flex-row mt-6 pl-6">
 
             <div class="w-1/2">
@@ -150,16 +150,16 @@
                 <button id="fecharFiltro" class="text-gray-500 hover:text-gray-700">✕</button>
             </div>
 
-            
-            
+
+
             <form action="" method="post">
-                
+
                 <!-- Conteúdo do filtro-->
                 <div class="p-4 space-y-4 text-sm text-gray-700">
-                    
+
                     <div>
                         <p class="font-semibold mb-2">Local</p>
-                        
+
                         <label for="UF" class="block mb-1">Estado</label>
                         <select id="UF" name="UF" class="w-full border rounded px-2 py-1">
                             <option value="" disabled selected>Selecione</option>
@@ -191,14 +191,14 @@
                             <option value="SE" <?= (isset($_POST['UF']) && $_POST['UF'] === 'SE') ? 'selected' : '' ?>>Sergipe</option>
                             <option value="TO" <?= (isset($_POST['UF']) && $_POST['UF'] === 'TO') ? 'selected' : '' ?>>Tocantins</option>
                         </select>
-                        
+
                         <label for="CIDADE_QUAD" class="block mt-2 mb-1">Cidade</label>
                         <input type="text" id="CIDADE_QUAD" name="CIDADE_QUAD" placeholder="Digite o nome da cidade" class="w-full border rounded px-2 py-1" value="<?= $_POST['CIDADE_QUAD'] ?? '' ?>">
                     </div>
-                    
+
                     <div>
                         <p class="font-semibold mb-2">Tipo de modalidade</p>
-                        
+
                         <select name="NOME_MODAL" id="NOME_MODAL">
                             <option value="" disabled selected>Selecione</option>
                             <option value="CAMPO" <?= (isset($_POST['NOME_MODAL']) && $_POST['NOME_MODAL'] === 'CAMPO') ? 'selected' : '' ?>>Campo</option>
@@ -206,10 +206,10 @@
                             <option value="QUADRA" <?= (isset($_POST['NOME_MODAL']) && $_POST['NOME_MODAL'] === 'QUADRA') ? 'selected' : '' ?>>Quadra</option>
                         </select><br>
                     </div>
-                    
+
                     <div class="flex flex-col">
                         <p class="font-semibold mb-2">Preço</p>
-                        
+
                         <div>
                             <label for="PRECO_HORA_QUAD_MIN" class="ml-2">Min:</label>
                             <input type="text" id="PRECO_HORA_QUAD_MIN" name="PRECO_HORA_QUAD_MIN" placeholder="0,00" class="w-1/2 border rounded px-2 py-1 ml-2" value="<?= $_POST['PRECO_HORA_QUAD_MIN'] ?? '0,00' ?>" oninput="formatarMoeda(this)">
@@ -220,22 +220,22 @@
                             <input type="text" id="PRECO_HORA_QUAD_MAX" name="PRECO_HORA_QUAD_MAX" placeholder="0,00" class="w-1/2 border rounded px-2 py-1 ml-1" value="<?= $_POST['PRECO_HORA_QUAD_MAX'] ?? '0,00' ?>" oninput="formatarMoeda(this)">
                         </div>
                     </div>
-                    
+
                     <div class="flex justify-between pt-2">
                         <button type="button" id="limparFiltro" class="border px-4 py-1 rounded">Limpar</button>
                         <button type="submit" class="bg-green-500 text-white px-4 py-1 rounded">Aplicar</button>
                     </div>
-                    
+
                 </div>
             </form>
-            
+
         </div>
-        
-        
-        
-        
-        
-        
+
+
+
+
+
+
         <!-- Mensagem de erro caso não existam quadras com os filtros que o jogador definiu-->
         <?php if (empty($quadras)): ?>
             <p class="ml-12 mt-2">Não existem quadras disponíveis para os filtros que você aplicou.</p>
@@ -249,7 +249,7 @@
             <!-- CARDS QUE MOSTRAM AS QUADRAS DISPONÍVEIS-->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8 px-12 pb-20">
                 <?php foreach ($quadras as $quadra): ?>
-                    
+
                     <div class="flex bg-white rounded-xl shadow-md overflow-hidden h-52 w-[700px]">
 
                         <!-- Imagem / placeholder -->
@@ -259,7 +259,7 @@
 
                         <!-- Conteúdo -->
                         <div class="w-[300px] bg-gradient-to-b from-[#4ad658] to-green-500 p-4 text-white flex flex-col justify-between">
-                            
+
                             <div class="text-sm space-y-1 gap-10">
                                 <p class="text-[22px] mb-2"><strong>Modalidade:</strong> <?= $quadra['NOME_MODAL'] ?></p>
                                 <p><strong>Estado:</strong> <?= $quadra['NOME_UF'] ?></p>
@@ -268,28 +268,64 @@
                                 <p><strong>Preço:</strong> R$ <?= $quadra['PRECO_HORA_QUAD'] ?>/h</p>
                             </div>
 
-                            <a href="./cadastro_partida.php?id=<?= $quadra['ID_QUAD'] ?>" class="bg-white text-green-600 text-center py-2 rounded-md font-semibold hover:bg-gray-200 transition mt-2">
+                            <button onclick="showModal('myReserv-<?= $quadra['ID_QUAD'] ?>')" class="bg-white text-green-600 text-center py-2 rounded-md font-semibold hover:bg-gray-200 transition mt-2">
                                 Reservar
-                            </a>
+                            </button>
 
                         </div>
                     </div>
+
+                    <!-- modal editar reserva -->
+                    <dialog id="myReserv-<?= $quadra['ID_QUAD'] ?>" class=" font-outfit font-medium not-italic text-white rounded-2xl">
+
+                        <div class="bg-gradient-to-b from-[#4ad658] to-green-500 h-fit  p-10">
+                            <h1 class="text-[28px]">
+                                Cadastro da partida
+                            </h1>
+
+
+                            <form action="./cadastro_partida.php?id=<?= $quadra['ID_QUAD'] ?>" method="post">
+
+                                <div class="flex flex-col mt-2">
+                                    <label for="DATA_PTD">Data: </label>
+                                    <input type="date" name="DATA_PTD" id="DATA_PTD" class="text-[#6b6b6b] h-9 px-3 rounded-md border border-gray-300 outline-none mb-3">
+
+                                    <label for="HORARIO_INICIO_PTD">Início da Partida: </label>
+                                    <input type="time" name="HORARIO_INICIO_PTD" id="HORARIO_INICIO_PTD" class="text-[#6b6b6b] h-9 px-3 rounded-md border border-gray-300 outline-none mb-3">
+
+                                    <label for="HORARIO_FIM_PTD">Fim da Partida: </label>
+                                    <input type="time" name="HORARIO_FIM_PTD" id="HORARIO_FIM_PTD" class="text-[#6b6b6b] h-9 px-3 rounded-md border border-gray-300 outline-none mb-3">
+                                </div>
+
+
+                                <div class="flex flex-row gap-4 mt-4">
+                                    <button onclick="closeModal('myReserv-<?= $quadra['ID_QUAD'] ?>')" type="button" class="flex w-1/2 h-10 bg-white text-green-600 hover:bg-gray-200 justify-center items-center rounded-xl">Voltar</button>
+                                    <button type="submit" class="flex cursor-pointer w-1/2 h-10 bg-white text-green-600 hover:bg-gray-200 justify-center items-center rounded-xl">Cadastrar</button>
+                                </div>
+                            </form>
+
+                            <div class="h-12 flex items-center justify-center mt-4">
+                                <?php if (!empty($mensagem)) : ?>
+                                    <p id="msg" class="text-red-400"><?= $mensagem ?></p>
+                                <?php endif ?>
+                            </div>
+                        </div>
+
+                    </dialog>
 
                 <?php endforeach; ?>
             </div>
 
         <?php endif; ?>
 
+        <script src="/src/js/tratamento-erros_partida.js"></script>
+        <script src="/src/js/some_mensagem.js"></script>
+        <script src="/src/js/reserva_modal.js"></script>
 
     </div>
 
-
-
-
-
-
-    
     <script src="/src/js/formata_preco_quadra.js"></script>
     <script src="/src/js/filtro.js"></script>
 </body>
+
 </html>

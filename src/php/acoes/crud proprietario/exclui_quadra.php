@@ -11,8 +11,10 @@
     $partida = $query1->fetch();
 
     if ($partida) {
-        echo 'Não é possível excluir a quadra, pois existem partidas cadastradas nela. <br>';
-        echo '<button><a href="./inicio_prop.php">Voltar</a></button>';
+        // echo 'Não é possível excluir a quadra, pois existem partidas cadastradas nela. <br>';
+        // echo '<button><a href="./inicio_prop.php">Voltar</a></button>';
+        $_SESSION['show_modal'] = 'myReservErr';
+        header("Location: ./inicio_prop.php");
     } else{
 
         // Se não houver partidas, exclui a quadra

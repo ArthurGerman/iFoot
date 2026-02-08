@@ -12,19 +12,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $ID_PROP = $_SESSION['id_prop'];
 
-
-
     // Verificar se foi enviada uma imagem
     if (!empty($_FILES['imagem']['name'])) {
         $extensao = pathinfo($_FILES['imagem']['name'], PATHINFO_EXTENSION);
         $novoNome = uniqid() . '.' . $extensao;
-        $caminho = __DIR__ . '../../../../../storage/' . $novoNome;
+        $dir = __DIR__ . '../../../../../storage/';
 
-        // Mover o arquivo para a pasta storage
+        if (!file_exists($dir)) {
+            mkdir($dir);
+        }
+
+        $caminho = $dir . $novoNome;
+
         if (move_uploaded_file($_FILES['imagem']['tmp_name'], $caminho)) {
             // Inserir o caminho da imagem na tabela imagens
-            $query = $pdo->prepare("INSERT INTO IMAGEM (path) VALUES (?)");
-            $query->execute([$novoNome]);
+            $stmt = $pdo->prepare("INSERT INTO imagem (path) VALUES (?)");
+            $stmt->execute([$novoNome]);
             $ID_IMAGEM = $pdo->lastInsertId();
         }
     } else {
@@ -102,7 +105,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <div class="flex mt-6 w-screen">
 
             <div class="w-1/2 flex">
-                
+
                 <form action="" method="post" id="form_cadastro_quadra" class="" enctype="multipart/form-data">
 
                     <div class="space-y-4 w-96 ml-28">
@@ -117,7 +120,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 <input type="text" name="ENDERECO_QUAD" id="ENDERECO_QUAD" class="w-full h-9 px-3 rounded-md border border-gray-300 outline-none">
                             </div>
                         </div>
-            
+
                         <div class="flex flex-row w-full gap-2">
                             <div class="w-[100px] flex items-center">
                                 <label for="CIDADE_QUAD">Cidade: </label>
@@ -127,7 +130,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 <input type="text" name="CIDADE_QUAD" id="CIDADE_QUAD" class="w-full h-9 px-3 rounded-md border border-gray-300 outline-none">
                             </div>
                         </div>
-            
+
                         <div class="flex flex-row w-full gap-2">
                             <div class="w-[100px] flex items-center">
                                 <label for="UF">UF: </label>
@@ -166,7 +169,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 </select>
                             </div>
                         </div>
-            
+
                         <div class="flex flex-row w-full gap-2">
                             <div class="w-[100px] flex items-center">
                                 <label for="NOME_MODAL">Modalidade: </label>
@@ -181,7 +184,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 </select>
                             </div>
                         </div>
-            
+
                         <div class="flex flex-row w-full gap-2">
                             <div class="w-[100px] flex items-center">
                                 <label for="PRECO_HORA_QUAD">Preço (R$/h): </label>
@@ -194,7 +197,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                         </div>
 
-                       <div class="flex justify-end mr-10">
+                        <div class="flex justify-end mr-10">
                             <input type="submit" value="Salvar" class="bg-green-500 text-white px-4 py-1 rounded cursor-pointer">
                         </div>
 
@@ -207,7 +210,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 
 
-            
+
             <!-- DIV COM A FOTO DA QUADRA -->
             <div class="w-1/2 flex flex-col items-center justify-center">
                 <div class="w-72 h-72 rounded-full bg-gray-300 flex items-center justify-center overflow-hidden relative">
@@ -218,27 +221,27 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                     <img id="preview-imagem" class="hidden w-full h-full object-cover">
                 </div>
-                
+
 
                 <label for="imagem" class="mt-4 bg-white hover:bg-gray-300 text-green-500 px-5 py-2 rounded-full cursor-pointer transition font-semibold">
                     Adicionar imagem
                 </label>
-                <input 
-                    type="file" 
-                    id="imagem" 
-                    form="form_cadastro_quadra" 
-                    name="imagem" accept="image/*" 
-                    class="hidden"
-                >
+                <input
+                    type="file"
+                    id="imagem"
+                    form="form_cadastro_quadra"
+                    name="imagem" accept="image/*"
+                    class="hidden">
             </div>
 
         </div>
 
     </div>
-        
-    
+
+
     <script src="/src/js/formata_preco_quadra.js"></script>
     <script src="/src/js/tratamento-erros_cad-quadra.js"></script>
     <script src="/src/js/troca_icone_imagem.js"></script>
 </body>
+
 </html>
