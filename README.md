@@ -1,6 +1,6 @@
 # iFoot
 
-É um projeto colaborativo que tem como objetivo proporcionar funcionalidades interessantes para jogadores de futebol amador, como marcação de partidas, encontro de jogadores próximos, reserva de quadras, entre outras funções.
+O ifoot é um sistema que permite usuários de diferentes localidades criarem partidas de futebol entre si de maneira fácil e acessível. Também permite que os proprietários possam cadastrar quadras que serão acessadas pelos jogadores para cadastrarem partidas. O ifoot possibilita que os jogadores tenham acesso a pesquisa de várias quadras de maneira acessível, sem que eles precisem pesquisar local e preço presencialmente.
 
 ## Funcionalidades
 
