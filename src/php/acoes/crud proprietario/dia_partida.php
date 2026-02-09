@@ -49,7 +49,9 @@
         
         <!-- Nav -->
         <div class="flex bg-gradient-to-b from-[#4ad658] to-green-500 h-20 items-center">
-            <img src="/static/ifoot.png" alt="" class="h-20">
+            <a href="./inicio_prop.php">
+                <img src="/static/ifoot.png" alt="" class="h-20">
+            </a>
 
             <a href="./cadastra_quadra.php" class="text-white ml-16 hover:text-gray-200">Cadastrar nova quadra</a>
             <a href="./calendario_partidas.php" class="text-white ml-6 hover:text-gray-200">Ver agenda de partidas</a>
