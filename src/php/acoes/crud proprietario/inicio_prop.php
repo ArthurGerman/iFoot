@@ -147,9 +147,9 @@ $imagem = $query2->fetch(PDO::FETCH_ASSOC);
                         </div>
 
                         <dialog id='myReservDel-<?= $quadra['ID_QUAD'] ?>' class=" font-outfit font-medium not-italic w-1/4 text-white rounded-2xl">
-                            <div class="bg-gradient-to-b from-[#4ad658] to-green-500 h-fit p-10 rounded-2xl">
+                            <div class="bg-gradient-to-b from-[#4ad658] to-green-500 border-2 border-white h-fit p-10 rounded-2xl">
                                 <h1 class="text-2xl mb-12">
-                                    Realmente Deseja Excluir esta Quadra?
+                                    Realmente deseja excluir esta quadra?
                                 </h1>
 
                                 <div class="flex flex-row gap-4 mt-4">
@@ -209,7 +209,7 @@ $imagem = $query2->fetch(PDO::FETCH_ASSOC);
     </aside>
 
     <dialog id='myReservErr' class=" font-outfit font-medium not-italic w-1/4 text-white rounded-2xl">
-        <div class="bg-gradient-to-b from-[#4ad658] to-green-500 h-60 p-6 rounded-2xl">
+        <div class="bg-gradient-to-b from-[#4ad658] to-green-500 border-2 border-white h-60 p-6 rounded-2xl">
             <div class="flex w-full h-fit justify-end border-collapse">
                 <button onclick="closeModal('myReservErr')" class="text-2xl text-black ">&#10006;</button>
             </div>

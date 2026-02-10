@@ -284,7 +284,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <!-- modal editar reserva -->
                     <dialog id="myReserv-<?= $quadra['ID_QUAD'] ?>" class=" font-outfit font-medium not-italic text-white rounded-2xl">
 
-                        <div class="bg-gradient-to-b from-[#4ad658] to-green-500 h-fit  p-10">
+                        <div class="bg-gradient-to-b from-[#4ad658] to-green-500 border-2 border-white h-fit  p-10">
                             <h1 class="text-[28px]">
                                 Cadastro da partida
                             </h1>

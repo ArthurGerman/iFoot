@@ -160,7 +160,7 @@ $partidas = $query->fetchAll(PDO::FETCH_ASSOC);
 
                         <!-- modal para edição de partida -->
                         <dialog id='myReservEdit-<?= $partida['ID_PTD'] ?>' class=" font-outfit font-medium not-italic text-white rounded-2xl w-[370px]">
-                            <div class="bg-gradient-to-b from-[#4ad658] to-green-500 h-fit p-10 rounded-2xl">
+                            <div class="bg-gradient-to-b from-[#4ad658] to-green-500 border-2 border-white h-fit p-10 rounded-2xl">
                                 <h1 class="text-[28px]">
                                     Ediçao da partida
                                 </h1>
@@ -195,9 +195,9 @@ $partidas = $query->fetchAll(PDO::FETCH_ASSOC);
 
                         <!-- modal para exclusão de partida -->
                         <dialog id='myReservDel-<?= $partida['ID_PTD'] ?>' class=" font-outfit font-medium not-italic w-1/4 text-white rounded-2xl">
-                            <div class="bg-gradient-to-b from-[#4ad658] to-green-500 h-fit p-10 rounded-2xl">
+                            <div class="bg-gradient-to-b from-[#4ad658] to-green-500 border-2 border-white h-fit p-10 rounded-2xl">
                                 <h1 class="text-2xl mb-12">
-                                    Realmente Deseja Excluir esta Partida?
+                                    Realmente deseja excluir esta partida?
                                 </h1>
 
                                 <div class="flex flex-row gap-4 mt-4">
